@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Customer
@@ -25,6 +26,7 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
+     *
      */
     private $lastname;
 
@@ -32,6 +34,7 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
+     *
      */
     private $firstname;
 
@@ -39,6 +42,7 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     *
      */
     private $email;
 
@@ -46,6 +50,7 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="adress", type="string", length=255)
+     *
      */
     private $adress;
 
@@ -53,6 +58,7 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="postCode", type="string", length=255)
+     *
      */
     private $postCode;
 
@@ -60,6 +66,7 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
+     *
      */
     private $city;
 
@@ -67,6 +74,7 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=255)
+     *
      */
     private $country;
 
