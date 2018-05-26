@@ -2,34 +2,41 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Tests\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class VisitController extends Controller
 {
-    /*
-     * page 1 presentation
+    /**
+     * @Route("/", name="homepage")
      *
-     * @Route("/")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
-        //
+        return $this->render('Visit/index.html.twig');
     }
 
 
-    /*
-     * page 2 choix des billets
+    /**
+     * page 2 choix des tickets - Initialisation de la visite
      *
      * @Route("/order")
      */
-    public function orderAction()
+    public function orderAction(Request $request)
     {
         //
+        $visit = $request->getSession()->get('visit');
+        //
+
+
     }
 
 
-    /*
+    /**
      * page 3 identification des visiteurs
      *
      * @Route("/identification")
@@ -40,7 +47,7 @@ class VisitController extends Controller
     }
 
 
-    /*
+    /**
      * page 4 coordonnees de l'acheteur
      *
      * @Route("/customer")
@@ -51,7 +58,7 @@ class VisitController extends Controller
     }
 
 
-    /*
+    /**
      * page 5 paiement
      *
      * @Route("/pay")
@@ -62,7 +69,7 @@ class VisitController extends Controller
     }
 
 
-    /*
+    /**
      * page 6 confirmation
      *
      * @Route("/confirmation")
