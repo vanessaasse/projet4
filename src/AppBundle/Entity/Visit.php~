@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Visit
@@ -32,6 +33,7 @@ class Visit
      * @var \DateTime
      *
      * @ORM\Column(name="visitDate", type="date")
+     *
      */
     private $visitDate;
 
@@ -39,6 +41,7 @@ class Visit
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255)
+     *
      */
     private $type;
 
@@ -223,5 +226,29 @@ class Visit
     public function getBookingCode()
     {
         return $this->bookingCode;
+    }
+
+    /**
+     * Set customer.
+     *
+     * @param \AppBundle\Entity\Customer $customer
+     *
+     * @return Visit
+     */
+    public function setCustomer(\AppBundle\Entity\Customer $customer)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer.
+     *
+     * @return \AppBundle\Entity\Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }

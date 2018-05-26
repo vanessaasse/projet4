@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Ticket
+ * Customer
  *
- * @ORM\Table(name="ticket")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\TicketRepository")
+ * @ORM\Table(name="customer")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CustomerRepository")
  */
-class Ticket
+class Customer
 {
     /**
      * @var int
@@ -41,40 +41,42 @@ class Ticket
     /**
      * @var string
      *
+     * @ORM\Column(name="email", type="string", length=255)
+     *
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adress", type="string", length=255)
+     *
+     */
+    private $adress;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="postCode", type="string", length=255)
+     *
+     */
+    private $postCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255)
+     *
+     */
+    private $city;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="country", type="string", length=255)
      *
      */
     private $country;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="birthday", type="date")
-     *
-     */
-    private $birthday;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="discount", type="boolean")
-     */
-    private $discount;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="price", type="integer")
-     */
-    private $price;
-
-
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Visit")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $visit;
 
 
     /**
@@ -92,7 +94,7 @@ class Ticket
      *
      * @param string $lastname
      *
-     * @return Ticket
+     * @return Customer
      */
     public function setLastname($lastname)
     {
@@ -116,7 +118,7 @@ class Ticket
      *
      * @param string $firstname
      *
-     * @return Ticket
+     * @return Customer
      */
     public function setFirstname($firstname)
     {
@@ -136,11 +138,107 @@ class Ticket
     }
 
     /**
+     * Set email.
+     *
+     * @param string $email
+     *
+     * @return Customer
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email.
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set adress.
+     *
+     * @param string $adress
+     *
+     * @return Customer
+     */
+    public function setAdress($adress)
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Get adress.
+     *
+     * @return string
+     */
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * Set postCode.
+     *
+     * @param string $postCode
+     *
+     * @return Customer
+     */
+    public function setPostCode($postCode)
+    {
+        $this->postCode = $postCode;
+
+        return $this;
+    }
+
+    /**
+     * Get postCode.
+     *
+     * @return string
+     */
+    public function getPostCode()
+    {
+        return $this->postCode;
+    }
+
+    /**
+     * Set city.
+     *
+     * @param string $city
+     *
+     * @return Customer
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city.
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
      * Set country.
      *
      * @param string $country
      *
-     * @return Ticket
+     * @return Customer
      */
     public function setCountry($country)
     {
@@ -157,101 +255,5 @@ class Ticket
     public function getCountry()
     {
         return $this->country;
-    }
-
-    /**
-     * Set birthday.
-     *
-     * @param \DateTime $birthday
-     *
-     * @return Ticket
-     */
-    public function setBirthday($birthday)
-    {
-        $this->birthday = $birthday;
-
-        return $this;
-    }
-
-    /**
-     * Get birthday.
-     *
-     * @return \DateTime
-     */
-    public function getBirthday()
-    {
-        return $this->birthday;
-    }
-
-    /**
-     * Set discount.
-     *
-     * @param bool $discount
-     *
-     * @return Ticket
-     */
-    public function setDiscount($discount)
-    {
-        $this->discount = $discount;
-
-        return $this;
-    }
-
-    /**
-     * Get discount.
-     *
-     * @return bool
-     */
-    public function getDiscount()
-    {
-        return $this->discount;
-    }
-
-    /**
-     * Set price.
-     *
-     * @param int $price
-     *
-     * @return Ticket
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price.
-     *
-     * @return int
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * Set visit.
-     *
-     * @param \AppBundle\Entity\Visit $visit
-     *
-     * @return Ticket
-     */
-    public function setVisit(\AppBundle\Entity\Visit $visit)
-    {
-        $this->visit = $visit;
-
-        return $this;
-    }
-
-    /**
-     * Get visit.
-     *
-     * @return \AppBundle\Entity\Visit
-     */
-    public function getVisit()
-    {
-        return $this->visit;
     }
 }
