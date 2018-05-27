@@ -1,0 +1,45 @@
+{# src/AppBundle/Resources/views/Visit/order.html.twig#}
+
+{% extends "layout.html.twig" %}
+
+    {% block title %}
+        Choix des billets - {{ parent() }}
+    {% endblock %}
+
+
+    {% block body %}
+
+       {# {{ form(form) }} #}
+
+        {{ form_start(form) }}
+
+        <div id="content" class="col-lg-7">
+        {{ form_label(form.visitDate, "Date de la visite*") }}
+        {{ form_widget(form.visitDate) }}
+        {{ form_errors(form.visitDate) }}<br/>
+
+        {{ form_label(form.type, "Type de billets*") }}
+        {{ form_widget(form.type) }}
+        {{ form_errors(form.type) }}<br/>
+
+        {{ form_label(form.nbTicket, "Nombre de billets*") }}
+        {{ form_widget(form.nbTicket) }}
+        {{ form_errors(form.nbTicket) }}<br/>
+
+
+        {{ form_widget(form.save, { 'label': 'Validez' }) }}
+        </div>
+        {{ form_end(form) }}
+
+        <script>
+            $(document).ready(function() {
+                // you may need to change this code if you are not using Bootstrap Datepicker
+                $('.js-datepicker').datepicker({
+                    format: 'yyyy-mm-dd'
+                });
+            });
+        </script>
+
+    {% endblock %}
+
+
