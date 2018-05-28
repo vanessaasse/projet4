@@ -2,13 +2,16 @@
 
 
 /* TODO 1
-* Télécharger la dépendance jqery pour Bootstrap
-*/
-
-/*
- * Le bouton pour le langage est un dropdown Button dans Bootstrap
- * https://getbootstrap.com/docs/4.0/components/dropdowns/
+ * Voir le fichier config/packages/maker.yml
+ * Il me semble que j'ai mal paramétré le fichier
+ * les commandes make:form ne fonctionnent pas.
  */
 
-
+/* TODO 2
+ * VisitController :
+ * //$em = $this->getDoctrine()->getManager();
+                //$em->persist();
+                //$em->flush();
+ * sont à mettre dans le dernier formulaire ?
+ */
 
