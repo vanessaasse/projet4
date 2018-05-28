@@ -12,12 +12,9 @@
     <title>{% block title %}Billetterie du Musée du Louvre{% endblock %}</title>
 
     {% block stylesheets %}
-        {# On charge le CSS de bootstrap depuis le site directement #}
         <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}" >
-        <script src="{{ asset('assets/jquery-3.2.1.slim_.min_.js') }}"></script>
-        <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.fr.min.js"></script>
     {% endblock %}
+
 
 </head>
 <body>
@@ -63,7 +60,14 @@
         <p>Paiement 100% sécurisé | <a href="https://www.louvre.fr/" target="_blank">Site officiel du musée du Louvre</a> | Contact |</p>
     </footer>
 
+    {% block javas %}
+        <script src="{{ asset('assets/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/bootstrap-datepicker-master/js/bootstrap-datepicker.js') }}"></script>
+    {% endblock %}
+
 </div>
+
 
 </body>
 </html>
