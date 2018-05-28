@@ -50,8 +50,6 @@ class Visit
      * @var int
      *
      *
-     * @Assert\Range(min="1", max="20")
-     *
      * @ORM\Column(name="nbTicket", type="integer")
      */
     private $nbTicket;
