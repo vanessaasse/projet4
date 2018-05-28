@@ -2,7 +2,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Customer;
 use AppBundle\Entity\Visit;
+use AppBundle\Entity\Ticket;
+use AppBundle\Form\CustomerType;
+use AppBundle\Form\TicketType;
 use AppBundle\Form\VisitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +35,7 @@ class VisitController extends Controller
     public function orderAction(Request $request)
     {
         //On crée un nouvel objet Visit
-        $visit = new visit;
+        $visit = new Visit;
 
         //On appelle le formulaire VisitType
         $formBuilder = $this->get('form.factory')->createBuilder(VisitType::class, $visit);
@@ -77,9 +81,41 @@ class VisitController extends Controller
      *
      * @Route("/identification")
      */
-    public function identifyAction()
+    public function identifyAction(Request $request)
     {
-        //
+        //On crée un nouvel objet Ticket
+        $ticket = new Ticket;
+
+        //On appelle le formulaire TicketType
+        $formBuilder = $this->get('form.factory')->createBuilder(TicketType::class, $ticket);
+
+        //A partir du formulaire, on le génère
+        $formTicket = $formBuilder->getForm();
+
+        //Si la requête est en POST
+        if($request->isMethod('POST'))
+        {
+            //On fait le lien requête->formulaire
+            // Désormais, la variable $ticket contient les valeurs entrées par le visiteur
+            $formTicket->handleRequest($request);
+
+            //On vérifie que les données entrées sont valides
+            if($formTicket->isValid())
+            {
+                //$em = $this->getDoctrine()->getManager();
+                //$em->persist();
+                //$em->flush();
+
+                $request->getSession()->get('ticket');
+
+                //On redirige l'acheteur vers la page 4 - coordonnées de l'acheteur
+                return $this->redirectToRoute('app_visit_customer');
+            }
+        }
+
+        //On est en GET. On affiche le formulaire
+        return $this->render('Visit/identify.html.twig', array('form'=>$formTicket->createView()));
+
     }
 
 
@@ -88,9 +124,40 @@ class VisitController extends Controller
      *
      * @Route("/customer")
      */
-    public function customerAction()
+    public function customerAction(Request $request)
     {
-        //
+        //On crée un nouvel objet Customer
+        $customer = new Customer;
+
+        //On appelle le formulaire CustomerType
+        $formBuilder = $this->get('form.factory')->createBuilder(CustomerType::class, $customer);
+
+        //A partir du formulaire, on le génère
+        $formCustomer = $formBuilder->getForm();
+
+        //Si la requête est en POST
+        if($request->isMethod('POST'))
+        {
+            //On fait le lien requête->formulaire
+            // Désormais, la variable $ticket contient les valeurs entrées par le visiteur
+            $formCustomer->handleRequest($request);
+
+            //On vérifie que les données entrées sont valides
+            if($formCustomer->isValid())
+            {
+                //$em = $this->getDoctrine()->getManager();
+                //$em->persist();
+                //$em->flush();
+
+                $request->getSession()->get('customer');
+
+                //On redirige l'acheteur vers la page 5 - paiement
+                return $this->redirectToRoute('app_visit_pay');
+            }
+        }
+
+        //On est en GET. On affiche le formulaire
+        return $this->render('Visit/customer.html.twig', array('form'=>$formCustomer->createView()));
     }
 
 
