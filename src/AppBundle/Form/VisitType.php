@@ -49,7 +49,7 @@ class VisitType extends AbstractType
                     'max' => '20'
                 )
             ))
-            ->add('save', SubmitType::class);
+            ->add('save', SubmitType::class, array('label'=> 'Validez'));
     }
 
 
