@@ -30,7 +30,7 @@ class Visit
     private $invoiceDate;
 
     /**
-     * @var \DateTime
+     *
      *
      * @ORM\Column(name="visitDate", type="date")
      *
@@ -40,6 +40,7 @@ class Visit
     /**
      * @var string
      *
+     *
      * @ORM\Column(name="type", type="string", length=255)
      *
      */
@@ -47,6 +48,9 @@ class Visit
 
     /**
      * @var int
+     *
+     *
+     * @Assert\Range(min="1", max="20")
      *
      * @ORM\Column(name="nbTicket", type="integer")
      */
