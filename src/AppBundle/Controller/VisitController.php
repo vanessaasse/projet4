@@ -42,6 +42,8 @@ class VisitController extends Controller
         //Si la requête est en POST
         if($request->isMethod('POST'))
         {
+            $visit->setInvoiceDate(new \DateTime());
+
             //On fait le lien requête->formulaire
             // Désormais, la variable $visit contient les valeurs entrées par le visiteur
             $form->handleRequest($request);
@@ -49,11 +51,11 @@ class VisitController extends Controller
             //On vérifie que les données entrées sont valides
             if($form->isValid())
             {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist();
-                $em->flush();
+                //$em = $this->getDoctrine()->getManager();
+                //$em->persist();
+                //$em->flush();
 
-                $request->getSession();
+                $request->getSession()->get('visit');
 
                 //On redirige l'acheteur vers la page 3 - identification des visiteurs
                 return $this->redirectToRoute('app_visit_identify');
