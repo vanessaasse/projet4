@@ -3,74 +3,115 @@
 
 <!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>{% block title %}Billetterie du Musée du Louvre{% endblock %}</title>
+    <head>
 
-    {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('assets/bootstrap/dist/css/bootstrap.css') }}">
-        <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
-        <script src="{{ asset('assets/bootstrap/dist/js/bootstrap.bundle.js') }}"></script>
-        <!--<script src="{{ asset('assets/bootstrap-datepicker-master/js/bootstrap-datepicker.js') }}"></script>-->
-    {% endblock %}
+        <meta charset="UTF-8">
 
+        <!-- balise pour adapter le contenu aux différents supports
+         width=device-width : largeur de la fenêtre
+         initial-scale=1.0 : niveau de zoom initial
+         user-scalable=yes zoom autorisé
+         shrink-to-fit=no pour iOS9-->
+        <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-</head>
-<body>
+        <title>{% block title %}Billetterie du Musée du Louvre{% endblock %}</title>
 
-<div class="container">
+        {% block stylesheets %}
+            <!-- Bootstrap core CSS -->
+            <link href="{{ asset('assets/template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <div id="header">
+            <!-- Custom fonts for this template -->
+            <link href="{{ asset('assets/template/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+            <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+            <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-            <ul class="nav nav-pills">
-                <li class="active"><a href="#">Accueil </a></li>
-                <li><a href="#">Contact </a></li>
+            <!-- Plugin CSS -->
+            <link href="{{ asset('assets/template/vendor/magnific-popup/magnific-popup.css') }}" rel="stylesheet">
 
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Languages </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Français </a></li>
-                        <li><a href="#">English </a></li>
-                    </ul>
-                </li>
-            </ul>
-
-
-        <div class="jumbotron">
-
-        <h1>Bienvenue sur la billeterie du musée du Louvre</h1>
-
-        </div>
-
-    </div>
-
-
-    <div class="row">
-
-        <div id="content" class="col-lg-9">
-        {% block body %}
-
+            <!-- Custom styles for this template -->
+            <link href="{{ asset('assets/template/css/creative.css') }}" rel="stylesheet">
         {% endblock %}
-        </div>
 
+    </head>
+
+    <body>
+
+
+    <div class="container-fluid bg-light">
+        <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="navbar-brand">Billetterie du Musée du Louvre</div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Accueil </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Languages
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Français</a>
+                            <a class="dropdown-item" href="#">English</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        </div>
     </div>
 
-    <hr>
+
+        {% block body %}
+        {% endblock %}
+
 
     <footer>
-        <p>Paiement 100% sécurisé | <a href="https://www.louvre.fr/" target="_blank">Site officiel du musée du Louvre</a> | Contact |</p>
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-1">
+                </div>
+
+
+                <div class="col-lg-11">
+                    <div class="container">
+                        <hr/>
+                        <div class="footer-text">
+                            <p>Paiement 100% sécurisé | <a href="https://www.louvre.fr/" target="_blank">Site officiel du musée du Louvre</a> | Contact |<br/>
+                                © 2018 - Vanessa Asse - <a href="https://openclassrooms.com/paths/chef-de-projet-multimedia-developpement" target="blank">
+                                    Projet 4 dans la cadre de la formation "Chef de projet multimédia - spécialité Développement"<br/>avec Openclassrooms</a></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </footer>
 
-    {% block javas %}
 
-    {% endblock %}
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ asset('assets/template/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('assets/template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-</div>
+    <!-- Plugin JavaScript -->
+    <script src="{{ asset('assets/template/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('assets/template/vendor/scrollreveal/scrollreveal.min.js') }}"></script>
+    <script src="{{ asset('assets/template/vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
 
+    <!-- Custom scripts for this template -->
+    <script src="{{ asset('assets/template/js/creative.min.js') }}"></script>
 
 </body>
 </html>
