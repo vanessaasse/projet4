@@ -32,7 +32,7 @@ class VisitType extends AbstractType
                     'Billet demi-journée (à partir de 14h)' => 1
                 ),
                 'label' => 'Types de billets :',
-                'expanded' => false,
+                'expanded' => true,
                 'multiple' => false,
                 'required' => true
             ))
