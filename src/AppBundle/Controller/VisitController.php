@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class VisitController extends Controller
 {
+
     /**
      * @Route("/", name="homepage")
      *
@@ -35,35 +36,30 @@ class VisitController extends Controller
     public function orderAction(Request $request)
     {
         //On crée un nouvel objet Visit
-        $visit = new Visit;
+        $visit = new Visit();
+        $visit->setInvoiceDate(new \DateTime());
 
-        //On appelle le formulaire VisitType
-        $formBuilder = $this->get('form.factory')->createBuilder(VisitType::class, $visit);
+        //On crée le formulaire VisitType
+        $form = $this->createForm(VisitType::class, $visit);
 
-        //A partir du formulaire, on le génère
-        $form = $formBuilder->getForm();
+        // On hydrate les données à partir de la requête
+        $form->handleRequest($request);
 
-        //Si la requête est en POST
-        if($request->isMethod('POST'))
+        if ($form->isSubmitted() && $form->isValid())
         {
-            $visit->setInvoiceDate(new \DateTime());
+            // On récupère l'Entity Manager
+            $em = $this->getDoctrine()->getManager();
 
-            //On fait le lien requête->formulaire
-            // Désormais, la variable $visit contient les valeurs entrées par le visiteur
-            $form->handleRequest($request);
+            // On persiste l'entité
+            $em->persist($visit);
 
-            //On vérifie que les données entrées sont valides
-            if($form->isValid())
-            {
-                //$em = $this->getDoctrine()->getManager();
-                //$em->persist();
-                //$em->flush();
+            $visit->setVisitDate(new \DateTime())->setType($type)->setNbTicket($nbTicket);
 
-                $request->getSession()->get('visit');
 
-                //On redirige l'acheteur vers la page 3 - identification des visiteurs
-                return $this->redirectToRoute('app_visit_identify');
-            }
+            //$visit->getNbTicket() => $visit->addTicket(new Ticket());
+            $request->getSession()->set('visit', $visit);
+            return $this->redirect($this->generateUrl('app_visit_identify'));
+
         }
 
         //On est en GET. On affiche le formulaire
@@ -83,11 +79,11 @@ class VisitController extends Controller
      */
     public function identifyAction(Request $request)
     {
-        //On crée un nouvel objet Ticket
-        $ticket = new Ticket;
+        $visit = $request->getSession()->get('visit');
+
 
         //On appelle le formulaire TicketType
-        $formBuilder = $this->get('form.factory')->createBuilder(TicketType::class, $ticket);
+        $formBuilder = $this->get('form.factory')->createBuilder(VisitTicketsType::class, $visit);
 
         //A partir du formulaire, on le génère
         $formTicket = $formBuilder->getForm();
@@ -183,7 +179,7 @@ class VisitController extends Controller
     }
 
 
-    /*
+    /**
      * page contact
      *
      * @Route("/contact")
