@@ -18,11 +18,15 @@
                 <div class="col-lg-11 section-progress">
                     <div class="container">
 
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 40%;
-                            " aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Identification des visiteurs</div>
-                        </div>
-
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active">Choix des billets</li>
+                                <li class="breadcrumb-item text-success font-weight-bold" style="text-decoration:underline;">IDENTIFICATION</li>
+                                <li class="breadcrumb-item active">Coordonnées</li>
+                                <li class="breadcrumb-item active">Paiement</li>
+                                <li class="breadcrumb-item active">Confirmation</li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
 
@@ -44,20 +48,15 @@
 
                 {{ form_start(form) }}
 
-                {{ form_row(form.lastname) }}
-                {{ form_errors(form.lastname) }}<br/>
+                {{ form_row(form.lastname) }}<br/>
 
-                {{ form_row(form.firstname) }}
-                {{ form_errors(form.firstname) }}<br/>
+                {{ form_row(form.firstname) }}<br/>
 
-                {{ form_row(form.country) }}
-                {{ form_errors(form.country) }}<br/>
+                {{ form_row(form.country) }}<br/>
 
-                {{ form_row(form.birthday) }}
-                {{ form_errors(form.birthday) }}<br/>
+                {{ form_row(form.birthday) }}<br/>
 
-                {{ form_row(form.discount) }}
-                {{ form_errors(form.discount) }}<br/>
+                {{ form_row(form.discount) }}<br/>
 
                     <div class="row">
                         <div class="col-sm-1">
