@@ -18,13 +18,17 @@
                 <div class="col-lg-11 section-progress">
                     <div class="container">
 
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 20%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Choix des billets</div>
-                    </div>
-
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item text-success font-weight-bold" style="text-decoration:underline;">CHOIX DES BILLETS</li>
+                                <li class="breadcrumb-item active">Identification</li>
+                                <li class="breadcrumb-item active">Coordonnées</li>
+                                <li class="breadcrumb-item active">Paiement</li>
+                                <li class="breadcrumb-item active">Confirmation</li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -45,14 +49,11 @@
 
                     {{ form_start(form) }}
 
-                    {{ form_row(form.visitDate) }}
-                    {{ form_errors(form.visitDate) }}<br/>
+                    {{ form_row(form.visitDate) }}<br/>
 
-                    {{ form_row(form.type, {label_attr: {class: 'radio-custom'} }) }}
-                    {{ form_errors(form.type) }}<br/>
+                    {{ form_row(form.type, {label_attr: {class: 'radio-custom'} }) }}<br/>
 
-                    {{ form_row(form.nbTicket) }}
-                    {{ form_errors(form.nbTicket) }}<br/>
+                    {{ form_row(form.nbTicket) }}<br/>
 
 
                     <div class="row">
@@ -60,22 +61,9 @@
                         </div>
 
                         <div class="col-sm-11">
-                            {{ form_widget(form.save, {attr: {class: "btn btn-success"}}) }}
+                            {{ form_widget(form.save, {'label': 'Validez', attr: {class: "btn btn-success"}}) }}
                         </div>
                     </div>
-
-
-
-                        <script>
-                            $(document).ready(function() {
-                                $('.datepicker').datepicker({
-                                    format: 'dd-MM-yyyy',
-                                    autoclose: true,
-                                    daysOfWeekDisabled: '2'
-                                });
-                            });
-
-                        </script>
 
                     {{ form_end(form) }}
 
@@ -90,4 +78,26 @@
 
     {% endblock %}
 
+{% block stylesheets %}
 
+    {{ parent() }}
+    <link href="{{ asset('assets/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.standalone.css') }}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="{{ asset('assets/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            daysOfWeekDisabled: '2'
+        });
+    });
+
+</script>
+
+{% endblock %}
