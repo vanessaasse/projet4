@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -30,7 +31,7 @@ class Visit
     private $invoiceDate;
 
     /**
-     * @var \DateTime
+     *
      *
      * @ORM\Column(name="visitDate", type="date")
      *
@@ -40,6 +41,7 @@ class Visit
     /**
      * @var string
      *
+     *
      * @ORM\Column(name="type", type="string", length=255)
      *
      */
@@ -48,7 +50,9 @@ class Visit
     /**
      * @var int
      *
+     *
      * @ORM\Column(name="nbTicket", type="integer")
+     * @Assert\Range(min="1", max="20")
      */
     private $nbTicket;
 
@@ -72,6 +76,19 @@ class Visit
      * @ORM\JoinColumn(nullable=false)
      */
     private $customer;
+
+
+    /**
+     * @var Ticket[]|ArrayCollection     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ticket", mappedBy="visit")
+     */
+    private $tickets;
+
+
+    public function __construct()
+    {
+        $this->setInvoiceDate(new \DateTime());
+    }
 
 
     /**

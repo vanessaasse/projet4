@@ -20,7 +20,6 @@ class VisitType extends AbstractType
     {
         $builder->add('visitDate', DateType::class, array(
             'label' => 'Date de votre visite :',
-
             'widget' => 'single_text',
             'attr' => ['class' => 'datepicker'],
             'required' => true
@@ -43,13 +42,9 @@ class VisitType extends AbstractType
                     '19' => 18, '20' => 19
                 ),
                 'label' => 'Nombre de billets :',
-                'required' => true,
-                'constraints' => array(
-                    'min' => '1',
-                    'max' => '20'
-                )
+                'required' => true
             ))
-            ->add('save', SubmitType::class, array('label'=> 'Validez'));
+            ->add('save', SubmitType::class);
     }
 
 

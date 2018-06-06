@@ -34,4 +34,5 @@
  * TODO 5
  * Page identify.html.twig
  * Comment modifier la date d'anniversaire par défaut ?
+ * Comment mettre France comme pays par défaut
  */

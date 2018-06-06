@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -33,6 +34,7 @@ class Visit
      *
      *
      * @ORM\Column(name="visitDate", type="date")
+     * @Assert\GreaterThanOrEqual("today")
      *
      */
     private $visitDate;
@@ -74,6 +76,20 @@ class Visit
      * @ORM\JoinColumn(nullable=false)
      */
     private $customer;
+
+
+    /**
+     * @var Ticket[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ticket", mappedBy="visit")
+     */
+    private $tickets;
+
+
+    public function __construct()
+    {
+        $this->setInvoiceDate(new \DateTime());
+        $this->tickets = new ArrayCollection();
+    }
 
 
     /**
@@ -252,5 +268,41 @@ class Visit
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    /**
+     * Add ticket.
+     *
+     * @param \AppBundle\Entity\Ticket $ticket
+     *
+     * @return Visit
+     */
+    public function addTicket(\AppBundle\Entity\Ticket $ticket)
+    {
+        $this->tickets[] = $ticket;
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket.
+     *
+     * @param \AppBundle\Entity\Ticket $ticket
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeTicket(\AppBundle\Entity\Ticket $ticket)
+    {
+        return $this->tickets->removeElement($ticket);
+    }
+
+    /**
+     * Get tickets.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
     }
 }
