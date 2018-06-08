@@ -85,10 +85,14 @@ class Visit
     private $tickets;
 
 
+    /**
+     * Visit constructor.
+     */
     public function __construct()
     {
         $this->setInvoiceDate(new \DateTime());
         $this->tickets = new ArrayCollection();
+        $this->visitDate = (new \DateTime());
     }
 
 
