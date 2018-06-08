@@ -316,5 +316,14 @@ header.masthead p {
   padding-top: 30px;
 }
 
+.num-billet{
+  font-size: 20px;
+  font-weight: bold;
+  color: #F05F40;
+}
 
+.star{
+  color: grey;
+  font-size: 11px;
+}
 
