@@ -20,7 +20,9 @@
 
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item text-success font-weight-bold" style="text-decoration:underline;">CHOIX DES BILLETS</li>
+                                <li class="breadcrumb-item text-success font-weight-bold"
+                                    style="text-decoration:underline;">CHOIX DES BILLETS
+                                </li>
                                 <li class="breadcrumb-item active">Identification</li>
                                 <li class="breadcrumb-item active">Coordonnées</li>
                                 <li class="breadcrumb-item active">Paiement</li>
@@ -32,7 +34,7 @@
             </div>
         </div>
 
-       {# {{ form(form) }} #}
+        {# {{ form(form) }} #}
 
 
         <section>
@@ -47,25 +49,27 @@
                         <div class="container">
                             <div class="form-group">
 
-                    {{ form_start(form) }}
+                                {{ form_start(form) }}
 
-                    {{ form_row(form.visitDate) }}<br/>
+                                {{ form_row(form.visitDate) }}<br/>
 
-                    {{ form_row(form.type, {label_attr: {class: 'radio-custom'} }) }}<br/>
+                                {{ form_row(form.type, {label_attr: {class: 'radio-custom'} }) }}<br/>
 
-                    {{ form_row(form.nbTicket) }}<br/>
+                                {{ form_row(form.nbTicket) }}<br/>
 
 
-                    <div class="row">
-                        <div class="col-sm-1">
-                        </div>
+                                <div class="row">
+                                    <div class="col-sm-1">
+                                    </div>
 
-                        <div class="col-sm-11">
-                            {{ form_widget(form.save, {'label': 'Validez', attr: {class: "btn btn-success"}}) }}
-                        </div>
-                    </div>
+                                    <div class="col-sm-11">
+                                        <button type="submit" class="btn btn-success">Validez</button>
+                                    </div>
+                                </div>
 
-                    {{ form_end(form) }}
+                                {{ form_end(form) }}<br/>
+
+                                <div class="star">(*) champs obligatoires</div>
 
                             </div>
                         </div>
@@ -81,7 +85,8 @@
 {% block stylesheets %}
 
     {{ parent() }}
-    <link href="{{ asset('assets/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.standalone.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.standalone.css') }}"
+          rel="stylesheet">
 
 {% endblock %}
 
@@ -89,15 +94,15 @@
 {% block javascripts %}
     <script src="{{ asset('assets/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js') }}"></script>
 
-<script>
-    $(document).ready(function() {
-        $('.datepicker').datepicker({
-            format: "yyyy-mm-dd",
-            autoclose: true,
-            daysOfWeekDisabled: '2'
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                autoclose: true,
+                daysOfWeekDisabled: '2'
+            });
         });
-    });
 
-</script>
+    </script>
 
 {% endblock %}
