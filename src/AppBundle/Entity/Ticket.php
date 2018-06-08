@@ -71,11 +71,19 @@ class Ticket
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Visit")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Visit", inversedBy="tickets")
      * @ORM\JoinColumn(nullable=false)
      */
     private $visit;
 
+
+    /**
+     * Ticket constructor.
+     */
+    public function __construct()
+    {
+        $this->birthday = (new \Datetime('2000-01-01'));
+    }
 
     /**
      * Get id.
