@@ -7,7 +7,10 @@ use AppBundle\Entity\Visit;
 use AppBundle\Entity\Ticket;
 use AppBundle\Form\CustomerType;
 use AppBundle\Form\TicketType;
+use AppBundle\Form\VisitTicketsType;
 use AppBundle\Form\VisitType;
+use AppBundle\Manager\CustomerManager;
+use AppBundle\Manager\VisitManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,42 +36,23 @@ class VisitController extends Controller
      *
      * @Route("/order")
      */
-    public function orderAction(Request $request)
+    public function orderAction(Request $request, VisitManager $visitManager)
     {
-        //On crée un nouvel objet Visit
-        $visit = new Visit();
-        $visit->setInvoiceDate(new \DateTime());
+        $visit = $visitManager->initVisit();
 
-        //On crée le formulaire VisitType
-        $form = $this->createForm(VisitType::class, $visit);
+        $form = $this->createForm(VisitType::class,$visit);
 
-        // On hydrate les données à partir de la requête
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            // On récupère l'Entity Manager
-            $em = $this->getDoctrine()->getManager();
+            $visitManager->generateTickets($visit);
 
-            // On persiste l'entité
-            $em->persist($visit);
-
-            $visit->setVisitDate(new \DateTime())->setType($type)->setNbTicket($nbTicket);
-
-
-            //$visit->getNbTicket() => $visit->addTicket(new Ticket());
-            $request->getSession()->set('visit', $visit);
             return $this->redirect($this->generateUrl('app_visit_identify'));
-
         }
 
         //On est en GET. On affiche le formulaire
         return $this->render('Visit/order.html.twig', array('form'=>$form->createView()));
-
-        //
-        //$visit = $request->getSession()->get('visit');
-        //
-
     }
 
 
@@ -76,86 +60,54 @@ class VisitController extends Controller
      * page 3 identification des visiteurs
      *
      * @Route("/identification")
+     * @throws \Exception
      */
-    public function identifyAction(Request $request)
+    public function identifyAction(Request $request, VisitManager $visitManager)
     {
-        $visit = $request->getSession()->get('visit');
+        $visit = $visitManager->getCurrentVisit();
 
+        $form = $this->createForm(VisitTicketsType::class, $visit);
 
-        //On appelle le formulaire TicketType
-        $formBuilder = $this->get('form.factory')->createBuilder(VisitTicketsType::class, $visit);
+        $form->handleRequest($request);
 
-        //A partir du formulaire, on le génère
-        $formTicket = $formBuilder->getForm();
+        if($form->isSubmitted() && $form->isValid()) {
 
-        //Si la requête est en POST
-        if($request->isMethod('POST'))
-        {
-            //On fait le lien requête->formulaire
-            // Désormais, la variable $ticket contient les valeurs entrées par le visiteur
-            $formTicket->handleRequest($request);
+            return $this->redirect($this->generateUrl('app_visit_customer'));
 
-            //On vérifie que les données entrées sont valides
-            if($formTicket->isValid())
-            {
-                //$em = $this->getDoctrine()->getManager();
-                //$em->persist();
-                //$em->flush();
-
-                $request->getSession()->get('ticket');
-
-                //On redirige l'acheteur vers la page 4 - coordonnées de l'acheteur
-                return $this->redirectToRoute('app_visit_customer');
-            }
         }
-
         //On est en GET. On affiche le formulaire
-        return $this->render('Visit/identify.html.twig', array('form'=>$formTicket->createView()));
-
+        return $this->render('Visit/identify.html.twig', array('form'=>$form->createView()));
     }
 
 
     /**
-     * page 4 coordonnees de l'acheteur
+     * page 4 coordonnées de l'acheteur
      *
      * @Route("/customer")
+     *
+     * @throws \AppBundle\Exception\InvalidVisitSessionException
      */
-    public function customerAction(Request $request)
+    public function customerAction(Request $request, VisitManager $visitManager, CustomerManager $customerManager)
     {
-        //On crée un nouvel objet Customer
-        $customer = new Customer;
+        //On initialise un nouveau client
+        $customer = $customerManager->initCustomer();
 
-        //On appelle le formulaire CustomerType
-        $formBuilder = $this->get('form.factory')->createBuilder(CustomerType::class, $customer);
+        // on récupère la session en cours
+        $visit = $visitManager->getCurrentVisit();
 
-        //A partir du formulaire, on le génère
-        $formCustomer = $formBuilder->getForm();
+        $form = $this->createForm(CustomerType::class, $customer);
 
-        //Si la requête est en POST
-        if($request->isMethod('POST'))
-        {
-            //On fait le lien requête->formulaire
-            // Désormais, la variable $ticket contient les valeurs entrées par le visiteur
-            $formCustomer->handleRequest($request);
+        $form->handleRequest($request);
 
-            //On vérifie que les données entrées sont valides
-            if($formCustomer->isValid())
-            {
-                //$em = $this->getDoctrine()->getManager();
-                //$em->persist();
-                //$em->flush();
+        if($form->isSubmitted() && $form->isValid()) {
 
-                $request->getSession()->get('customer');
+            return $this->redirect($this->generateUrl('app_visit_pay'));
 
-                //On redirige l'acheteur vers la page 5 - paiement
-                return $this->redirectToRoute('app_visit_pay');
-            }
         }
 
-        //On est en GET. On affiche le formulaire
-        return $this->render('Visit/customer.html.twig', array('form'=>$formCustomer->createView()));
-    }
+        return $this->render('Visit/customer.html.twig', array('form'=>$form->createView(), 'visit'=> $visit));
 
+    }
 
     /**
      * page 5 paiement
