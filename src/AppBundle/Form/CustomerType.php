@@ -18,14 +18,33 @@ class CustomerType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('lastname', TextType::class, array('label' => 'Nom :'))
-            ->add('firstname', TextType::class, array('label' => 'Prénom :'))
-            ->add('email', EmailType::class, array('label' => 'Email :'))
-            ->add('adress', TextType::class, array('label' => 'Adresse :'))
-            ->add('postCode', TextType::class, array('label' => 'Code Postal'))
-            ->add('city', TextType::class, array('label' => 'Ville'))
-            ->add('country', CountryType::class, array('label' => 'Pays'))
-            ->add('save', SubmitType::class, array('label' => 'Validez'));
+        $builder->add('lastname', TextType::class, array(
+            'label' => 'Nom*',
+            'required' => true))
+
+            ->add('firstname', TextType::class, array(
+                'label' => 'Prénom*',
+                'required' => true))
+
+            ->add('email', EmailType::class, array(
+                'label' => 'Email*',
+                'required' => true))
+
+            ->add('adress', TextType::class, array(
+                'label' => 'Adresse',
+                'required' => false))
+
+            ->add('postCode', TextType::class, array(
+                'label' => 'Code Postal',
+                'required' => false))
+
+            ->add('city', TextType::class, array(
+                'label' => 'Ville',
+                'required' => false))
+
+            ->add('country', CountryType::class, array(
+                'label' => 'Pays',
+                'preferred_choices' => array('FR')));
     }
 
     /**
