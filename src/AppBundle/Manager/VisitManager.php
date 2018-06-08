@@ -53,6 +53,7 @@ class VisitManager
         $visit = $this->session->get(self::SESSION_ID_CURRENT_VISIT);
         if(!$visit)
         {
+            // TODO Créer la méthode associée
             throw new InvalidVisitSessionException();
         }
         return $visit;
