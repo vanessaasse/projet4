@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Ticket;
 use AppBundle\Entity\Visit;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -19,7 +20,10 @@ class VisitTicketsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('tickets',CollectionType::class );
+        $builder->add('tickets',CollectionType::class, array(
+            'entry_type' => TicketType::class,
+            'allow_add' => true
+            ));
     }
 
 
@@ -35,11 +39,11 @@ class VisitTicketsType extends AbstractType
 
     /**
      * {@inheritdoc}
-     */
+
     public function getBlockPrefix()
     {
         return 'appbundle_visit';
-    }
+    } */
 
 
 }
