@@ -39,6 +39,7 @@ class VisitController extends Controller
     public function orderAction(Request $request, VisitManager $visitManager)
     {
         $visit = $visitManager->initVisit();
+        dump($visit);
 
         $form = $this->createForm(VisitType::class,$visit);
 
@@ -65,10 +66,12 @@ class VisitController extends Controller
     public function identifyAction(Request $request, VisitManager $visitManager)
     {
         $visit = $visitManager->getCurrentVisit();
+        dump($visit);
 
         $form = $this->createForm(VisitTicketsType::class, $visit);
 
         $form->handleRequest($request);
+        dump($visit);
 
         if($form->isSubmitted() && $form->isValid()) {
 
@@ -89,15 +92,18 @@ class VisitController extends Controller
      */
     public function customerAction(Request $request, VisitManager $visitManager, CustomerManager $customerManager)
     {
-        //On initialise un nouveau client
-        $customer = $customerManager->initCustomer();
-
         // on récupère la session en cours
         $visit = $visitManager->getCurrentVisit();
+        dump($visit);
+
+        //On initialise un nouveau client
+        $customer = $customerManager->initCustomer();
+        dump($customer);
 
         $form = $this->createForm(CustomerType::class, $customer);
 
         $form->handleRequest($request);
+        dump($customer);
 
         if($form->isSubmitted() && $form->isValid()) {
 
@@ -105,7 +111,7 @@ class VisitController extends Controller
 
         }
 
-        return $this->render('Visit/customer.html.twig', array('form'=>$form->createView(), 'visit'=> $visit));
+        return $this->render('Visit/customer.html.twig', array('form'=>$form->createView(), 'visit'=> $visit, 'customer' => $customer));
 
     }
 
@@ -113,10 +119,18 @@ class VisitController extends Controller
      * page 5 paiement
      *
      * @Route("/pay")
+     * @throws \AppBundle\Exception\InvalidVisitSessionException
+     *
      */
-    public function payAction()
+    public function payAction(/*Request $request,*/ VisitManager $visitManager)
     {
-        //
+        // on récupère la session en cours
+        $visit = $visitManager->getCurrentVisit();
+        dump($visit);
+
+
+
+        return $this->render('Visit/pay.html.twig') ;
     }
 
 
