@@ -1,0 +1,77 @@
+{# src/AppBundle/Resources/views/Visit/customer.html.twig#}
+
+{% extends "layout.html.twig" %}
+
+    {% block title %}
+        Paiement de la commande - {{ parent() }}
+    {% endblock %}
+
+
+    {% block body %}
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-1">
+                </div>
+
+                <div class="col-lg-11 section-progress">
+                    <div class="container">
+
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active">Choix des billets</li>
+                                <li class="breadcrumb-item active">Identification</li>
+                                <li class="breadcrumb-item active">Coordonnées</li>
+                                <li class="breadcrumb-item text-success font-weight-bold" style="text-decoration:underline;">PAIEMENT</li>
+                                <li class="breadcrumb-item active">Confirmation</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <section>
+
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-1">
+                    </div>
+
+
+                    <div class="col-lg-11">
+                        <div class="container">
+                            <div class="form-group">
+
+                                <form method="post" action="confirmation.html.twig">
+
+                                <label>Nom du titulaire de la carte :</label> <input type="text" name="nom" /><br />
+                                <label>Numéro de la carte :</label> <input type="text" name="numero" /><br />
+                                <label>Date de validalité :</label> <input type="text" name="validite" /><br />
+                                <label>Cryptogramme :</label> <input type="text" name="cryptogramme" /><br />
+
+                                <div class="row">
+                                    <div class="col-sm-1">
+                                    </div>
+
+                                    <div class="col-sm-11">
+                                        <button type="submit" class="btn btn-success">Validez</button>
+                                    </div>
+                                </div>
+
+                                </form>
+
+                                <div class="star">(*) champs obligatoires</div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    {% endblock %}
