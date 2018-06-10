@@ -58,4 +58,5 @@ class VisitManager
         }
         return $visit;
     }
+
 }
