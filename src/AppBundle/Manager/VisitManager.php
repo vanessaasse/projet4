@@ -5,6 +5,7 @@ namespace AppBundle\Manager;
 
 use AppBundle\Entity\Ticket;
 use AppBundle\Entity\Visit;
+use AppBundle\Entity\Customer;
 use AppBundle\Exception\InvalidVisitSessionException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -34,17 +35,6 @@ class VisitManager
     }
 
     /**
-     * @param Visit $visit
-     */
-    public function generateTickets(Visit $visit)
-    {
-        for($i=0; $i<=$visit->getNbTicket(); $i++)
-        {
-            $visit->addTicket(new Ticket());
-        }
-    }
-
-    /**
      * @return mixed
      * @throws InvalidVisitSessionException
      */
@@ -57,6 +47,39 @@ class VisitManager
             throw new InvalidVisitSessionException();
         }
         return $visit;
+    }
+
+
+    /**
+     * @param Visit $visit
+     */
+    public function generateTickets(Visit $visit)
+    {
+        for($i=0; $i<=$visit->getNbTicket(); $i++)
+        {
+            $visit->addTicket(new Ticket());
+        }
+    }
+
+
+    /**
+     * @param Visit $visit
+     *
+     */
+    public function createTickets(Visit $visit)
+    {
+        $visit->getTickets();
+    }
+
+
+    /**
+     * @param Visit $visit
+     */
+    public function createCustomer(Visit $visit)
+    {
+        $customer = new Customer;
+
+        $visit->setCustomer($customer);
     }
 
 }
