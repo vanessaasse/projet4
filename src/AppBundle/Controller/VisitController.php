@@ -7,10 +7,11 @@ use AppBundle\Entity\Visit;
 use AppBundle\Entity\Ticket;
 use AppBundle\Form\CustomerType;
 use AppBundle\Form\TicketType;
+use AppBundle\Form\VisitCustomerType;
 use AppBundle\Form\VisitTicketsType;
 use AppBundle\Form\VisitType;
-use AppBundle\Manager\CustomerManager;
 use AppBundle\Manager\VisitManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,10 +32,13 @@ class VisitController extends Controller
 
 
     /**
-     * Initialisation de la visite
-     * page 2 choix des tickets
-     *
+     * Page 2 - Initialisation de la visite - choix de la date / du type de billet / du nb de billets
      * @Route("/order")
+     *
+     * @param Request $request
+     * @param VisitManager $visitManager
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function orderAction(Request $request, VisitManager $visitManager)
     {
@@ -58,15 +62,18 @@ class VisitController extends Controller
 
 
     /**
-     * page 3 identification des visiteurs
-     *
+     * page 3 - Identification des visiteurs - création des billets
      * @Route("/identification")
-     * @throws \Exception
+     *
+     * @param Request $request
+     * @param VisitManager $visitManager
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \AppBundle\Exception\InvalidVisitSessionException
      */
     public function identifyAction(Request $request, VisitManager $visitManager)
     {
         $visit = $visitManager->getCurrentVisit();
-        dump($visit);
 
         $form = $this->createForm(VisitTicketsType::class, $visit);
 
@@ -74,6 +81,8 @@ class VisitController extends Controller
         dump($visit);
 
         if($form->isSubmitted() && $form->isValid()) {
+
+            $visitManager->createTickets($visit);
 
             return $this->redirect($this->generateUrl('app_visit_customer'));
 
@@ -84,34 +93,35 @@ class VisitController extends Controller
 
 
     /**
-     * page 4 coordonnées de l'acheteur
-     *
+     * page 4 - Coordonnées de l'acheteur - création du customer
      * @Route("/customer")
      *
+     * @param Request $request
+     * @param VisitManager $visitManager
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \AppBundle\Exception\InvalidVisitSessionException
+     *
      */
-    public function customerAction(Request $request, VisitManager $visitManager, CustomerManager $customerManager)
+    public function customerAction(Request $request, VisitManager $visitManager)
     {
         // on récupère la session en cours
         $visit = $visitManager->getCurrentVisit();
-        dump($visit);
 
-        //On initialise un nouveau client
-        $customer = $customerManager->initCustomer();
-        dump($customer);
-
-        $form = $this->createForm(CustomerType::class, $customer);
+        $form = $this->createForm(VisitCustomerType::class, $visit);
 
         $form->handleRequest($request);
-        dump($customer);
+        dump($visit);
 
         if($form->isSubmitted() && $form->isValid()) {
+
+            $visitManager->createCustomer($visit);
 
             return $this->redirect($this->generateUrl('app_visit_pay'));
 
         }
 
-        return $this->render('Visit/customer.html.twig', array('form'=>$form->createView(), 'visit'=> $visit, 'customer' => $customer));
+        return $this->render('Visit/customer.html.twig', array('form'=>$form->createView()));
 
     }
 
