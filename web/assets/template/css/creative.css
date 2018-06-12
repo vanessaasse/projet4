@@ -324,6 +324,40 @@ header.masthead p {
 
 .star{
   color: grey;
-  font-size: 11px;
+  font-size: 12px;
+  padding-top: 3px;
 }
 
+table
+{
+  width: 100%;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+td, th /* Mettre une bordure sur les td ET les th */
+{
+  border: 1px solid black;
+  padding-left: 10px;
+}
+
+th {
+  color:#F05F40;
+  background-color: lightgray;
+}
+
+.boutonbuy {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.infospratiques {
+  padding-left: 9px;
+  border-left-color: #F05F40;
+
+
+}
+
+.titleinfospratiques {
+  color:#F05F40;
+}
