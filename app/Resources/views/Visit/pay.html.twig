@@ -1,4 +1,4 @@
-{# src/AppBundle/Resources/views/Visit/customer.html.twig#}
+{# src/AppBundle/Resources/views/Visit/pay.html.twig#}
 
 {% extends "layout.html.twig" %}
 
@@ -21,10 +21,10 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active">Choix des billets</li>
-                                <li class="breadcrumb-item active">Identification</li>
-                                <li class="breadcrumb-item active">Coordonnées</li>
+                                <li class="breadcrumb-item active">Identification des visiteurs</li>
+                                <li class="breadcrumb-item active">Coordonnées de l'acheteur</li>
                                 <li class="breadcrumb-item text-success font-weight-bold" style="text-decoration:underline;">PAIEMENT</li>
-                                <li class="breadcrumb-item active">Confirmation</li>
+                                <li class="breadcrumb-item active">Confirmation de la commande</li>
                             </ol>
                         </nav>
                     </div>
@@ -36,6 +36,46 @@
         <section>
 
             <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+
+                    <div class="col-lg-6">
+
+                        {% if visit is defined %}
+
+                        Récapitulatif de votre commande :<br/>
+
+                        Date de la visite : {{ visit.visitDate | date('d/m/Y') }}<br/>
+                        Type de billet : {{ visit.type }}<br/>
+
+                            {% for ticket in visit.tickets %}
+
+                                Billet n° {{ loop.index }} : {{ ticket.lastname }} {{ ticket.firstname }} <br/>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                        no visit
+
+                        {% endif %}<br/><br/>
+
+                    </div>
+
+
+                    <div class="col-lg-5">
+                        Coordonnées de l'acheteur :<br/>
+                        Nom : {{ visit.customer.lastname }}<br/>
+                        Prénom : {{ visit.customer.firstname }}<br/>
+                        Email : {{ visit.customer.email }}
+                    </div>
+
+                </div>
+
+
+
                 <div class="row">
 
                     <div class="col-lg-1">
@@ -58,11 +98,27 @@
                                     </div>
 
                                     <div class="col-sm-11">
-                                        <button type="submit" class="btn btn-success">Validez</button>
+                                        <button type="submit" class="btn btn-light"><a href="{{ path('app_visit_confirmation') }}">Validez</a></button>
                                     </div>
                                 </div>
 
+
                                 </form>
+
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <form action="" method="POST">
+                                        <script
+                                                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                                data-key="pk_test_HxZzNHy8LImKK9LDtgMDRBwd"
+                                                data-amount="999"
+                                                data-name="Dollar Shear Club"
+                                                data-description="Widget"
+                                                data-image="/img/documentation/checkout/marketplace.png"
+                                                data-locale="auto">
+                                        </script>
+                                    </form>
+                                </div>
 
                                 <div class="star">(*) champs obligatoires</div>
 
