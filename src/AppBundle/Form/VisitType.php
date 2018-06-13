@@ -34,7 +34,7 @@ class VisitType extends AbstractType
                 'label' => 'Types de billets*',
                 'expanded' => true,
                 'multiple' => false,
-                'required' => true
+
             ))
 
             ->add('nbTicket', ChoiceType::class, array(

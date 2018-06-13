@@ -34,7 +34,7 @@ class Visit
      *
      *
      * @ORM\Column(name="visitDate", type="date")
-     * @Assert\GreaterThanOrEqual("today")
+     * @Assert\GreaterThan("today", message="Vous devez choisir une date de visite supérieure à la date du jour.")
      *
      */
     private $visitDate;
@@ -42,8 +42,8 @@ class Visit
     /**
      * @var string
      *
-     *
      * @ORM\Column(name="type", type="string", length=255)
+     * @Assert\NotNull(message="Vous devez choisir un type de billet.")
      *
      */
     private $type;
@@ -92,7 +92,7 @@ class Visit
     {
         $this->setInvoiceDate(new \DateTime());
         $this->tickets = new ArrayCollection();
-        $this->visitDate = (new \DateTime());
+        $this->visitDate = (new \DateTime())->modify('+1 day');
     }
 
 
