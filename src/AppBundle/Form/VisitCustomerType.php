@@ -17,10 +17,8 @@ class VisitCustomerType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('customer',EntityType::class, array(
-            'class' => Customer::class,
-            'choice_label' => 'customer',
-        ));
+        $builder->add('customer', CustomerType::class
+        );
     }
 
     /**
