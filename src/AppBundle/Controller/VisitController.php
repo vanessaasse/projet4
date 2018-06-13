@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Customer;
 use AppBundle\Entity\Visit;
 use AppBundle\Entity\Ticket;
+use AppBundle\Exception\InvalidVisitSessionException;
 use AppBundle\Form\CustomerType;
 use AppBundle\Form\TicketType;
 use AppBundle\Form\VisitCustomerType;
@@ -68,10 +69,11 @@ class VisitController extends Controller
      * @param Request $request
      * @param VisitManager $visitManager
      *
+     * @ParamConverter("ticket", class="AppBundle\Entity\Ticket")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @throws \AppBundle\Exception\InvalidVisitSessionException
+     * @throws InvalidVisitSessionException
      */
-    public function identifyAction(Request $request, VisitManager $visitManager)
+    public function identifyAction(Request $request, VisitManager $visitManager, Ticket $ticket)
     {
         $visit = $visitManager->getCurrentVisit();
 
@@ -83,6 +85,8 @@ class VisitController extends Controller
         if($form->isSubmitted() && $form->isValid()) {
 
             $visitManager->createTickets($visit);
+            $visitManager->priceTicket($visit, $ticket);
+            dump($ticket);
 
             return $this->redirect($this->generateUrl('app_visit_customer'));
 
@@ -100,7 +104,7 @@ class VisitController extends Controller
      * @param VisitManager $visitManager
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @throws \AppBundle\Exception\InvalidVisitSessionException
+     * @throws InvalidVisitSessionException
      *
      */
     public function customerAction(Request $request, VisitManager $visitManager)
@@ -129,18 +133,35 @@ class VisitController extends Controller
      * page 5 paiement
      *
      * @Route("/pay")
-     * @throws \AppBundle\Exception\InvalidVisitSessionException
+     * @param Request $request
+     * @param VisitManager $visitManager
      *
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws InvalidVisitSessionException
      */
-    public function payAction(/*Request $request,*/ VisitManager $visitManager)
+    public function payAction(Request $request, VisitManager $visitManager)
     {
         // on récupère la session en cours
         $visit = $visitManager->getCurrentVisit();
         dump($visit);
 
+        // On récupère les données de la session avec la méthode getSession()
+        $session = $request->getSession();
+        dump($session);
+
+        // On récupère un attribut fixé par un autre contrôleur dans une autre requête
+        $session->get('visitDate');
+        $session->get('type');
+        $session->get('customer');
+        $session->get('tickets');
 
 
-        return $this->render('Visit/pay.html.twig') ;
+        // Création de la partie validation de la visite
+        $visitManager->createValidation($visit);
+
+
+        return $this->render('Visit/pay.html.twig', array('visit' => $visit));
     }
 
 
@@ -151,7 +172,7 @@ class VisitController extends Controller
      */
     public function confirmationAction()
     {
-        //
+        return $this->render('Visit/confirmation.html.twig');
     }
 
 
@@ -162,7 +183,7 @@ class VisitController extends Controller
      */
     public function contactAction()
     {
-        //
+        return $this->render('Visit/contact.html.twig');
     }
 
 }
