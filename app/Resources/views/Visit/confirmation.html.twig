@@ -1,0 +1,62 @@
+{# src/AppBundle/Resources/views/Visit/confirmation.html.twig#}
+
+{% extends "layout.html.twig" %}
+
+    {% block title %}
+        Confirmation de la commande - {{ parent() }}
+    {% endblock %}
+
+
+    {% block body %}
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-1">
+                </div>
+
+                <div class="col-lg-11 section-progress">
+                    <div class="container">
+
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active">Choix des billets</li>
+                                <li class="breadcrumb-item active">Identification des visiteurs</li>
+                                <li class="breadcrumb-item active">Coordonnées de l'acheteur</li>
+                                <li class="breadcrumb-item active">Paiement</li>
+                                <li class="breadcrumb-item text-success font-weight-bold" style="text-decoration:underline;">CONFIRMATION DE LA COMMANDE</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <section>
+
+            <div class="container">
+
+                <div class="row">
+            <div class="col-lg-4">
+            </div>
+
+
+            <div class="col-lg-4">
+
+                Votre commande a bien été prise en compte.
+                Vous allez recevoir à l'adresse XXX la confirmation de votre paiement ainsi que votre code de réservation.
+            </div>
+
+
+            <div class="col-lg-4">
+            </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    {% endblock %}
