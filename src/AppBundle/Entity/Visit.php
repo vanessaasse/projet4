@@ -34,7 +34,8 @@ class Visit
      *
      *
      * @ORM\Column(name="visitDate", type="date")
-     * @Assert\GreaterThan("today", message="Vous devez choisir une date de visite supérieure à la date du jour.")
+     * @Assert\GreaterThanOrEqual("today", message="Vous devez choisir une date de visite supérieure ou égale à la date du jour.")
+     *
      *
      */
     private $visitDate;
@@ -81,6 +82,7 @@ class Visit
     /**
      * @var Ticket[]|ArrayCollection
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ticket", mappedBy="visit")
+     * @Assert\Valid()
      */
     private $tickets;
 
@@ -92,7 +94,8 @@ class Visit
     {
         $this->setInvoiceDate(new \DateTime());
         $this->tickets = new ArrayCollection();
-        $this->visitDate = (new \DateTime())->modify('+1 day');
+        //$this->visitDate = (new \DateTime())/*->modify('+1 day')*/;
+
     }
 
 
@@ -303,7 +306,7 @@ class Visit
     /**
      * Get tickets.
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Ticket[]|\Doctrine\Common\Collections\Collection
      */
     public function getTickets()
     {
