@@ -26,6 +26,9 @@ class Ticket
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez saisir votre nom de famille.")
+     * @Assert\Type(type="alpha", message="Le nom saisi est incorrect.")
+     *
      *
      */
     private $lastname;
@@ -34,6 +37,8 @@ class Ticket
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez saisir un prénom.")
+     * @Assert\Type(type="alpha", message="Le prénom saisi est incorrect.")
      *
      */
     private $firstname;
