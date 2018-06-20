@@ -41,11 +41,11 @@
                     <div class="col-lg-1">
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
 
                         {% if visit is defined %}
 
-                        Récapitulatif de votre commande :<br/>
+                        <div class="num-billet">Récapitulatif de votre commande :</div><br/>
 
                         Date de la visite : {{ visit.visitDate | date('d/m/Y') }}<br/>
                         Type de billet : {{ visit.type }}<br/>
@@ -65,11 +65,18 @@
                     </div>
 
 
-                    <div class="col-lg-5">
-                        Coordonnées de l'acheteur :<br/>
+                    <div class="col-lg-4">
+                        <div class="num-billet">Coordonnées de l'acheteur :</div><br/>
                         Nom : {{ visit.customer.lastname }}<br/>
                         Prénom : {{ visit.customer.firstname }}<br/>
-                        Email : {{ visit.customer.email }}
+                        Email : {{ visit.customer.email }}<br/><br/>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="num-billet">Adresse de facturation :</div><br/>
+                        Adresse : {{ visit.customer.adress }}<br/>
+                        Code postal : {{ visit.customer.postCode }}<br/>
+                        Ville : {{ visit.customer.city }} - {{ visit.customer.country }}<br/><br/>
                     </div>
 
                 </div>
