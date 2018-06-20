@@ -75,6 +75,7 @@ class Visit
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $customer;
 
