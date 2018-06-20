@@ -13,6 +13,12 @@ class VisitManager
 {
     const SESSION_ID_CURRENT_VISIT = "visit";
 
+    private $visitDate;
+
+
+
+
+
     /**
      * @var SessionInterface
      */
@@ -21,21 +27,29 @@ class VisitManager
     public function __construct(SessionInterface $session)
     {
         $this->session = $session;
+
     }
 
 
     /**
+     * Initialisation de la visite et de la session
+     * Création de l'objet Visit
+     *
      * @return Visit
      */
     public function initVisit()
     {
         $visit = new Visit();
         $this->session->set(self::SESSION_ID_CURRENT_VISIT,$visit);
+
         return $visit;
     }
 
+
     /**
-     * @return mixed
+     * Retourne la visite en cours dans la session
+     *
+     * @return Visit
      * @throws InvalidVisitSessionException
      */
     public function getCurrentVisit()
@@ -51,6 +65,8 @@ class VisitManager
 
 
     /**
+     * Retourne le nombre de tickets en fonction du $nbticket demandé en page 2 "order"
+     *
      * @param Visit $visit
      */
     public function generateTickets(Visit $visit)
@@ -63,37 +79,36 @@ class VisitManager
 
 
     /**
-     * @param Visit $visit
+     * Affichage du datepicker sur la page Order
      *
-     */
-    public function createTickets(Visit $visit)
-    {
-        $visit->getTickets();
-    }
-
-
-    /**
      * @param Visit $visit
      */
-    public function createCustomer(Visit $visit)
+    public function whichVisitDay(Visit $visit)
     {
-        $visit->getCustomer();
+        // TODO Ajouter les jours fériés
+        // TODO Rajouter la contrainte de validation passée 16h
+        date_default_timezone_set('Europe/Paris');
+        $hour = date("H:i");
+        $today = date("w");
+        $tomorrow = date('w', strtotime('+1 day'));
+
+        if($hour > "16:00" || $today == 0 || $today == 2) {
+
+            $visitDate = (new \DateTime())->modify('+ 1 days');
+
+            if($tomorrow  == 0 || $tomorrow == 2)
+            {
+                $visitDate = (new \DateTime())->modify('+ 2 days');
+            }
+        }
+        else {
+
+            $visitDate = (new \DateTime());
+        }
+
+        $visit->setVisitDate($visitDate);
     }
 
-
-    /**
-     * @param Visit $visit
-     *
-     */
-    public function createValidation(Visit $visit)
-    {
-        $visit->getVisitDate();
-        $visit->getType();
-        $visit->getCustomer();
-        $visit->getNbTicket();
-        $visit->getTickets();
-
-    }
 
 
     /**
@@ -101,52 +116,68 @@ class VisitManager
      * @param Ticket $ticket
      * @return int
      */
-    public function priceTicket(Visit $visit, Ticket $ticket)
+    public function computeTicketPrice(Ticket $ticket, Visit $visit)
     {
         $birthday = $ticket->getBirthday();
         $today = new \DateTime();
-        $age = date_diff($birthday, $today);
-        $age->format('%R%y years');
+        $age = date_diff($birthday, $today)->y;
 
-        if ($visit->getType() == 'Billet journée')
-        {
-            if ($age >= '12y' || $age < '60y') {
+        if ($visit->getType() == 'Billet journée') {
+            if ($age >= 12 && $age < 60) {
                 $price = 16;
-            } elseif ($age >= '60y') {
+            } elseif ($age >= 60) {
                 $price = 12;
-            } elseif ($age >= '4y' && $age < '12y') {
+            } elseif ($age >= 4 && $age < 12) {
                 $price = 8;
             } else {
                 $price = 0;
             }
-
-            return $price;
-        }
-
-        else {
-
-            // si le billet est sur une demi-journée
-
-            if ($age >= '12y' || $age < '60y') {
+        } elseif ($visit->getType() == 'Billet demi-journée (à partir de 14h)') {
+            if ($age >= 12 && $age < 60) {
                 $price = 8;
-            } elseif ($age >= '60y') {
+            } elseif ($age >= 60) {
                 $price = 6;
-            } elseif ($age >= '4y' && $age < '12y') {
+            } elseif ($age >= 4 && $age < 12) {
                 $price = 4;
             } else {
                 $price = 0;
             }
-
-            return $price;
         }
+
+        $ticket->setPrice($price);
+        return $price;
     }
 
 
-    public function totalPriceVisit(Visit $visit)
+    /**
+     * @param Visit $visit
+     */
+    public function computePrice(Visit $visit)
     {
+        $totalAmount = 0;
+
+        foreach ($visit->getTickets() as $ticket) {
+
+            $priceTicket = $this->computeTicketPrice($ticket, $visit);
+
+            $totalAmount += $priceTicket;
+
+        }
+
+        $visit->setTotalAmount($totalAmount);
+        return $totalAmount;
 
     }
 
 
+
+    public function paiement()
+    {
+        return true;
+    }
+
+
+
+    //TODO méthode pour empêcher la résa de billets au dela de 1000 billets réservés
 
 }
