@@ -44,61 +44,61 @@ class VisitController extends Controller
     public function orderAction(Request $request, VisitManager $visitManager)
     {
         $visit = $visitManager->initVisit();
+
+        $visitManager->whichVisitDay($visit);
         dump($visit);
 
-        $form = $this->createForm(VisitType::class,$visit);
+        $form = $this->createForm(VisitType::class, $visit);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $visitManager->generateTickets($visit);
 
             return $this->redirect($this->generateUrl('app_visit_identify'));
         }
 
         //On est en GET. On affiche le formulaire
-        return $this->render('Visit/order.html.twig', array('form'=>$form->createView()));
+        return $this->render('Visit/order.html.twig', array('form' => $form->createView()));
     }
 
 
     /**
      * page 3 - Identification des visiteurs - création des billets
-     * @Route("/identification")
+     * @Route("/identification", name="app_visit_identify")
      *
      * @param Request $request
      * @param VisitManager $visitManager
      *
-     * @ParamConverter("ticket", class="AppBundle\Entity\Ticket")
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws InvalidVisitSessionException
      */
-    public function identifyAction(Request $request, VisitManager $visitManager, Ticket $ticket)
+    public function identifyAction(Request $request, VisitManager $visitManager)
     {
         $visit = $visitManager->getCurrentVisit();
+        dump($visit);
 
         $form = $this->createForm(VisitTicketsType::class, $visit);
 
         $form->handleRequest($request);
-        dump($visit);
 
         if($form->isSubmitted() && $form->isValid()) {
+            dump($visit);
 
-            $visitManager->createTickets($visit);
-            $visitManager->priceTicket($visit, $ticket);
-            dump($ticket);
+            $visitManager->computePrice($visit);
 
             return $this->redirect($this->generateUrl('app_visit_customer'));
 
         }
         //On est en GET. On affiche le formulaire
-        return $this->render('Visit/identify.html.twig', array('form'=>$form->createView()));
+        return $this->render('Visit/identify.html.twig', array('form'=>$form->createView(), 'visit' => $visit,));
     }
 
 
     /**
      * page 4 - Coordonnées de l'acheteur - création du customer
-     * @Route("/customer")
+     * @Route("/customer", name="app_visit_customer")
      *
      * @param Request $request
      * @param VisitManager $visitManager
@@ -111,6 +111,7 @@ class VisitController extends Controller
     {
         // on récupère la session en cours
         $visit = $visitManager->getCurrentVisit();
+        dump($visit);
 
         $form = $this->createForm(VisitCustomerType::class, $visit);
 
@@ -119,20 +120,18 @@ class VisitController extends Controller
 
         if($form->isSubmitted() && $form->isValid()) {
 
-            $visitManager->createCustomer($visit);
-
             return $this->redirect($this->generateUrl('app_visit_pay'));
 
         }
 
-        return $this->render('Visit/customer.html.twig', array('form'=>$form->createView()));
+        return $this->render('Visit/customer.html.twig', array('form'=>$form->createView(), 'visit' => $visit));
 
     }
 
     /**
      * page 5 paiement
      *
-     * @Route("/pay")
+     * @Route("/pay", name="app_visit_pay")
      * @param Request $request
      * @param VisitManager $visitManager
      *
@@ -145,21 +144,22 @@ class VisitController extends Controller
         // on récupère la session en cours
         $visit = $visitManager->getCurrentVisit();
         dump($visit);
+        if($request->getMethod() === "POST")
+        {
+            if($visitManager->paiement())
+            {
 
-        // On récupère les données de la session avec la méthode getSession()
-        $session = $request->getSession();
-        dump($session);
+              //TODO enregistrement dans la base
 
-        // On récupère un attribut fixé par un autre contrôleur dans une autre requête
-        $session->get('visitDate');
-        $session->get('type');
-        $session->get('customer');
-        $session->get('tickets');
+             // TODO envoi du mail de rservation
 
+                // redirection to route confirmation
+            }
 
-        // Création de la partie validation de la visite
-        $visitManager->createValidation($visit);
-
+            else{
+                // TODO flash, il y a eu un pb avec stripe
+            }
+        }
 
         return $this->render('Visit/pay.html.twig', array('visit' => $visit));
     }
