@@ -122,9 +122,17 @@ class VisitManager
         $today = new \DateTime();
         $age = date_diff($birthday, $today)->y;
 
-        if ($visit->getType() == 'Billet journée') {
+        $discount = $ticket->getDiscount();
+
+        if ($visit->getType() == 'Billet journée')
+        {
             if ($age >= 12 && $age < 60) {
                 $price = 16;
+
+                if ($age >= 12 && $age < 60 && $discount == true){
+                    $price = 10;
+                }
+
             } elseif ($age >= 60) {
                 $price = 12;
             } elseif ($age >= 4 && $age < 12) {
@@ -132,9 +140,17 @@ class VisitManager
             } else {
                 $price = 0;
             }
-        } elseif ($visit->getType() == 'Billet demi-journée (à partir de 14h)') {
+        }
+
+        elseif ($visit->getType() == 'Billet demi-journée (à partir de 14h)')
+        {
             if ($age >= 12 && $age < 60) {
                 $price = 8;
+
+                if ($age >= 12 && $age < 60 && $discount == true){
+                    $price = 5;
+                }
+
             } elseif ($age >= 60) {
                 $price = 6;
             } elseif ($age >= 4 && $age < 12) {
@@ -170,10 +186,15 @@ class VisitManager
     }
 
 
-
-    public function paiement()
+    /**
+     * @param Visit $visit
+     */
+    public function getBookingCode(Visit $visit)
     {
-        return true;
+        $bookingCode = uniqid();
+
+        $visit->setBookingCode($bookingCode);
+
     }
 
 
