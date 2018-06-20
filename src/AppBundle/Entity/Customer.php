@@ -26,6 +26,8 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez saisir un nom de famille.")
+     * @Assert\Type(type="alpha", message="Le nom saisi est incorrect.")
      *
      */
     private $lastname;
@@ -34,6 +36,8 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez saisir un prénom.")
+     * @Assert\Type(type="alpha", message="Le prénom saisi est incorrect.")
      *
      */
     private $firstname;
@@ -42,6 +46,9 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\Email(
+     *     strict=true,
+     *     message="L'email saisi n'est pas une adresse valide.")
      *
      */
     private $email;
@@ -50,6 +57,7 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="adress", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez saisir votre adresse postale.")
      *
      */
     private $adress;
@@ -58,6 +66,7 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="postCode", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez saisir le code postal de votre ville.")
      *
      */
     private $postCode;
@@ -66,6 +75,7 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez saisir le nom de votre ville.")
      *
      */
     private $city;
