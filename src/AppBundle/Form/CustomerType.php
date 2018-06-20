@@ -31,16 +31,16 @@ class CustomerType extends AbstractType
                 'required' => true))
 
             ->add('adress', TextType::class, array(
-                'label' => 'Adresse',
-                'required' => false))
+                'label' => 'Adresse*',
+                'required' => true))
 
             ->add('postCode', TextType::class, array(
-                'label' => 'Code Postal',
-                'required' => false))
+                'label' => 'Code Postal*',
+                'required' => true))
 
             ->add('city', TextType::class, array(
-                'label' => 'Ville',
-                'required' => false))
+                'label' => 'Ville*',
+                'required' => true))
 
             ->add('country', CountryType::class, array(
                 'label' => 'Pays',
