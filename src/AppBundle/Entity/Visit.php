@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as LouvreAssert;
 
 /**
  * Visit
@@ -35,7 +36,9 @@ class Visit
      *
      * @ORM\Column(name="visitDate", type="date")
      * @Assert\GreaterThanOrEqual("today", message="Vous devez choisir une date de visite supérieure ou égale à la date du jour.")
-     *
+     * @LouvreAssert\ToLateForToday(hour=16)
+     * @LouvreAssert\NoReservationOnTuesday(day=2)
+     * @LouvreAssert\NoReservationOnSunday(day=0)
      *
      */
     private $visitDate;
