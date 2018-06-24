@@ -41,43 +41,36 @@
                     <div class="col-lg-1">
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
 
-                        {% if visit is defined %}
-
-                        <div class="num-billet">Récapitulatif de votre commande :</div><br/>
+                        <div class="num-billet">Récapitulatif de votre commande :</div>
 
                         Date de la visite : {{ visit.visitDate | date('d/m/Y') }}<br/>
                         Type de billet : {{ visit.type }}<br/>
 
                             {% for ticket in visit.tickets %}
 
-                                Billet n° {{ loop.index }} : {{ ticket.lastname }} {{ ticket.firstname }} <br/>
+                                Billet n° {{ loop.index }} : {{ ticket.lastname }} {{ ticket.firstname }} - {{ ticket.price }} euros <br/>
 
                             {% endfor %}
-
-                        {% else %}
-
-                        no visit
-
-                        {% endif %}<br/><br/>
+                        Total de la commande : {{ visit.totalAmount }} euros
 
                     </div>
 
 
-                    <div class="col-lg-4">
-                        <div class="num-billet">Coordonnées de l'acheteur :</div><br/>
+                    <div class="col-lg-5">
+                        <div class="num-billet">Coordonnées de l'acheteur :</div>
                         Nom : {{ visit.customer.lastname }}<br/>
                         Prénom : {{ visit.customer.firstname }}<br/>
                         Email : {{ visit.customer.email }}<br/><br/>
-                    </div>
 
-                    <div class="col-lg-3">
-                        <div class="num-billet">Adresse de facturation :</div><br/>
+                        <div class="num-billet">Adresse de facturation :</div>
                         Adresse : {{ visit.customer.adress }}<br/>
                         Code postal : {{ visit.customer.postCode }}<br/>
                         Ville : {{ visit.customer.city }} - {{ visit.customer.country }}<br/><br/>
                     </div>
+
+
 
                 </div>
 
@@ -96,25 +89,24 @@
                                 <form method="post">
 
                                     <div class="col-sm-11">
-                                        <button type="submit" class="btn btn-light">Validez</button>
+                                        <form action="" method="POST">
+                                            <script
+                                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                                    data-key="pk_test_1UTDqeBhaz9wN1ejB82UEBcf"
+                                                    data-amount="{{ visit.totalAmount * 100 }}"
+                                                    data-email="{{ visit.customer.email }}"
+                                                    data-name="Musée du Louvre"
+                                                    data-description="Billeterie"
+                                                    data-locale="auto"
+                                                    data-currency="eur"
+                                                    data-zip-code="true"
+                                                    data-allow-remember-me="false">
+                                            </script>
+                                        </form>
                                     </div>
 
                                 </form>
 
-
-                                <div class="col-xs-12 col-sm-6">
-                                    <form action="" method="POST">
-                                        <script
-                                                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                                data-key="pk_test_HxZzNHy8LImKK9LDtgMDRBwd"
-                                                data-amount="999"
-                                                data-name="Dollar Shear Club"
-                                                data-description="Widget"
-                                                data-image="/img/documentation/checkout/marketplace.png"
-                                                data-locale="auto">
-                                        </script>
-                                    </form>
-                                </div>
 
                                 <div class="star">(*) champs obligatoires</div>
 
