@@ -44,8 +44,6 @@ class VisitController extends Controller
     public function orderAction(Request $request, VisitManager $visitManager)
     {
         $visit = $visitManager->initVisit();
-
-        $visitManager->whichVisitDay($visit);
         dump($visit);
 
         $form = $this->createForm(VisitType::class, $visit);
@@ -54,12 +52,15 @@ class VisitController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $visitManager->generateTickets($visit);
+            dump($visit);
 
             return $this->redirect($this->generateUrl('app_visit_identify'));
         }
 
         //On est en GET. On affiche le formulaire
-        return $this->render('Visit/order.html.twig', array('form' => $form->createView()));
+        return $this->render('Visit/order.html.twig', array('form' => $form->createView(), 'publicHolidays' => [
+            '2018/07/14', '2018/08/15', '2018/11/11'
+        ]));
     }
 
 
@@ -84,7 +85,6 @@ class VisitController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            dump($visit);
 
             $visitManager->computePrice($visit);
 
@@ -109,14 +109,12 @@ class VisitController extends Controller
      */
     public function customerAction(Request $request, VisitManager $visitManager)
     {
-        // on récupère la session en cours
         $visit = $visitManager->getCurrentVisit();
         dump($visit);
 
         $form = $this->createForm(VisitCustomerType::class, $visit);
 
         $form->handleRequest($request);
-        dump($visit);
 
         if($form->isSubmitted() && $form->isValid()) {
 
@@ -141,24 +139,37 @@ class VisitController extends Controller
      */
     public function payAction(Request $request, VisitManager $visitManager)
     {
-        // on récupère la session en cours
         $visit = $visitManager->getCurrentVisit();
         dump($visit);
+
         if($request->getMethod() === "POST")
         {
-            if($visitManager->paiement())
+            if($visitManager->getBookingCode($visit))
             {
 
               //TODO enregistrement dans la base
+                /*
+                 $em = $this->getDoctrine()->getManager();
+                $em->persist($visit);
+                $em->flush();
+                */
 
              // TODO envoi du mail de rservation
 
-                // redirection to route confirmation
+                $token = $request->request->get('stripeToken');
+
+
+                return $this->redirect($this->generateUrl('app_visit_confirmation'));
             }
 
             else{
-                // TODO flash, il y a eu un pb avec stripe
+
+                //TODO Comment savoir si le message flash est OK
+                $this->get('session')->getFlashBag()->add('notice', 'Le paiement a échoué.');
+                return $this->redirectToRoute('app_visit_pay');
             }
+
+
         }
 
         return $this->render('Visit/pay.html.twig', array('visit' => $visit));
