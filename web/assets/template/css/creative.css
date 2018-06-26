@@ -352,3 +352,7 @@ th {
 }
 
 
+a.breadcrumb-item
+{
+  color: grey;
+}
