@@ -39,6 +39,7 @@ class Visit
      * @LouvreAssert\ToLateForToday(hour=16)
      * @LouvreAssert\NoReservationOnTuesday(day=2)
      * @LouvreAssert\NoReservationOnSunday(day=0)
+     * @LouvreAssert\NoReservationOnPublicHolidays(publicHolidays="")
      *
      */
     private $visitDate;

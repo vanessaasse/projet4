@@ -13,7 +13,7 @@ class VisitManager
 {
     const SESSION_ID_CURRENT_VISIT = "visit";
 
-    private $visitDate;
+    //private $visitDate;
 
 
 
@@ -42,6 +42,8 @@ class VisitManager
         $visit = new Visit();
         $this->whichVisitDay($visit);
         $this->session->set(self::SESSION_ID_CURRENT_VISIT,$visit);
+
+
 
         return $visit;
     }

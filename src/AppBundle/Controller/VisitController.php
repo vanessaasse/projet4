@@ -44,23 +44,21 @@ class VisitController extends Controller
     public function orderAction(Request $request, VisitManager $visitManager)
     {
         $visit = $visitManager->initVisit();
-        dump($visit);
+        $publicHolidays = $visitManager->publicHolidays($year = null);
 
         $form = $this->createForm(VisitType::class, $visit);
 
         $form->handleRequest($request);
+        dump($visit);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $visitManager->generateTickets($visit);
-            dump($visit);
 
             return $this->redirect($this->generateUrl('app_visit_identify'));
         }
 
         //On est en GET. On affiche le formulaire
-        return $this->render('Visit/order.html.twig', array('form' => $form->createView(), 'publicHolidays' => [
-            '2018/07/14', '2018/08/15', '2018/11/11'
-        ]));
+        return $this->render('Visit/order.html.twig', array('form' => $form->createView(), 'publicHolidays' => $publicHolidays));
     }
 
 
