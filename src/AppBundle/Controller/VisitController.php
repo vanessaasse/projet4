@@ -44,7 +44,6 @@ class VisitController extends Controller
     public function orderAction(Request $request, VisitManager $visitManager)
     {
         $visit = $visitManager->initVisit();
-        $publicHolidays = $visitManager->publicHolidays($year = null);
 
         $form = $this->createForm(VisitType::class, $visit);
 
@@ -58,7 +57,7 @@ class VisitController extends Controller
         }
 
         //On est en GET. On affiche le formulaire
-        return $this->render('Visit/order.html.twig', array('form' => $form->createView(), 'publicHolidays' => $publicHolidays));
+        return $this->render('Visit/order.html.twig', array('form' => $form->createView()));
     }
 
 
