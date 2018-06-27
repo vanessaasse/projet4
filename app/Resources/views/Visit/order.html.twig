@@ -51,7 +51,7 @@
 
                                 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
-                                {{ form_row(form.visitDate,  {'attr': {'data-dates-disabled': publicHolidays |json_encode() }}) }}<br/>
+                                {{ form_row(form.visitDate) }}<br/>
 
                                 {{ form_row(form.type, {label_attr: {class: 'radio-custom'} }) }}<br/>
 
