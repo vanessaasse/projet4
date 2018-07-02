@@ -40,6 +40,7 @@ class Visit
      * @LouvreAssert\NoReservationOnTuesday(day=2)
      * @LouvreAssert\NoReservationOnSunday(day=0)
      * @LouvreAssert\NoReservationOnPublicHolidays(publicHolidays="")
+     * @Assert\Range(max="+1 year")
      *
      */
     private $visitDate;
