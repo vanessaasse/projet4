@@ -35,12 +35,13 @@ class Visit
      *
      *
      * @ORM\Column(name="visitDate", type="date")
-     * @Assert\GreaterThanOrEqual("today", message="Vous devez choisir une date de visite supérieure ou égale à la date du jour.")
-     * @LouvreAssert\ToLateForToday(hour=16)
-     * @LouvreAssert\NoReservationOnTuesday(day=2)
-     * @LouvreAssert\NoReservationOnSunday(day=0)
-     * @LouvreAssert\NoReservationOnPublicHolidays(publicHolidays="")
-     * @Assert\Range(max="+1 year")
+     * @Assert\GreaterThanOrEqual("today", message="Vous devez choisir une date de visite supérieure ou égale à la date du jour.",
+     *     groups={"order_registration"})
+     * @LouvreAssert\ToLateForToday(hour=16, groups={"order_registration"})
+     * @LouvreAssert\NoReservationOnTuesday(day=2, groups={"order_registration"})
+     * @LouvreAssert\NoReservationOnSunday(day=0, groups={"order_registration"})
+     * @LouvreAssert\NoReservationOnPublicHolidays(publicHolidays="",groups={"order_registration"})
+     * @Assert\Range(max="+1 year", groups={"order_registration"})
      *
      */
     private $visitDate;
@@ -59,6 +60,7 @@ class Visit
      *
      *
      * @ORM\Column(name="nbTicket", type="integer")
+     *
      */
     private $nbTicket;
 
