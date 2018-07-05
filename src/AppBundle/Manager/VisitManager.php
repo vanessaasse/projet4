@@ -7,31 +7,36 @@ use AppBundle\Entity\Ticket;
 use AppBundle\Entity\Visit;
 use AppBundle\Entity\Customer;
 use AppBundle\Exception\InvalidVisitSessionException;
+use AppBundle\Service\PublicHolidaysService;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+
+/**
+ * Class VisitManager
+ * @package AppBundle\Manager
+ */
 class VisitManager
 {
     const SESSION_ID_CURRENT_VISIT = "visit";
-
-    //private $visitDate;
-
-
-
-
 
     /**
      * @var SessionInterface
      */
     private $session;
 
-    public function __construct(SessionInterface $session)
+    private $publicHolidaysService;
+
+    public function __construct(SessionInterface $session, PublicHolidaysService $publicHolidaysService)
     {
         $this->session = $session;
+        $this->publicHolidaysService = $publicHolidaysService;
 
     }
 
 
     /**
+     * Page 2 - Order
      * Initialisation de la visite et de la session
      * Création de l'objet Visit
      *
@@ -43,13 +48,12 @@ class VisitManager
         $this->whichVisitDay($visit);
         $this->session->set(self::SESSION_ID_CURRENT_VISIT,$visit);
 
-
-
         return $visit;
     }
 
 
     /**
+     * Page 3 - Identification des visiteurs
      * Retourne la visite en cours dans la session
      *
      * @return Visit
@@ -68,7 +72,8 @@ class VisitManager
 
 
     /**
-     * Retourne le nombre de tickets en fonction du $nbticket demandé en page 2 "order"
+     * Page 2 - Order
+     * Retourne le nombre de tickets en fonction du $nbticket demandé
      *
      * @param Visit $visit
      */
@@ -82,29 +87,29 @@ class VisitManager
 
 
     /**
-     * Affichage du datepicker sur la page Order
+     * Page 2 - Order
+     * Affichage dans le datepicker sur la page Order
      *
      * @param Visit $visit
+     * @param PublicHolidaysService $publicHolidaysService
      */
     public function whichVisitDay(Visit $visit)
     {
-        // TODO Ajouter les jours fériés
         date_default_timezone_set('Europe/Paris');
         $hour = date("H:i");
         $today = date("w");
         $tomorrow = date('w', strtotime('+1 day'));
+        $publicHolidays = $this->publicHolidaysService->getPublicHolidays($year = null);
 
-        if($hour > "16:00" || $today == 0 || $today == 2) {
 
+        if($hour > "16:00" || $today == 0 || $today == 2 || $today == $publicHolidays) {
             $visitDate = (new \DateTime())->modify('+ 1 days');
 
-            if($tomorrow  == 0 || $tomorrow == 2)
-            {
+            if($tomorrow  == 0 || $tomorrow == 2 || $tomorrow == $publicHolidays) {
                 $visitDate = (new \DateTime())->modify('+ 2 days');
             }
         }
         else {
-
             $visitDate = (new \DateTime());
         }
 
@@ -115,6 +120,9 @@ class VisitManager
 
 
     /**
+     * Page 3 - Identification des visiteurs
+     * Calcule le prix de chaque billet en fonction de l'âge et du type de billet
+     *
      * @param Visit $visit
      * @param Ticket $ticket
      * @return int
@@ -169,6 +177,9 @@ class VisitManager
 
 
     /**
+     * Page 3 - Identification
+     * Calcule le prix total de la visite
+     *
      * @param Visit $visit
      */
     public function computePrice(Visit $visit)
@@ -176,11 +187,8 @@ class VisitManager
         $totalAmount = 0;
 
         foreach ($visit->getTickets() as $ticket) {
-
             $priceTicket = $this->computeTicketPrice($ticket, $visit);
-
             $totalAmount += $priceTicket;
-
         }
 
         $visit->setTotalAmount($totalAmount);
@@ -190,6 +198,9 @@ class VisitManager
 
 
     /**
+     * Page 5 - Pay
+     * Génère le bookingCode
+     *
      * @param Visit $visit
      */
     public function getBookingCode(Visit $visit)
@@ -200,6 +211,12 @@ class VisitManager
         return $bookingCode;
 
     }
+
+
+
+
+
+
 
 
 
