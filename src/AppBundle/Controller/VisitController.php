@@ -16,13 +16,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\Service\PublicHolidaysService;
 
 class VisitController extends Controller
 {
 
     /**
+     * Page 1 - Page d'accueil
      * @Route("/", name="homepage")
-     *
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -38,26 +39,41 @@ class VisitController extends Controller
      *
      * @param Request $request
      * @param VisitManager $visitManager
+     * @param PublicHolidaysService $publicHolidaysService
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function orderAction(Request $request, VisitManager $visitManager)
+    public function orderAction(Request $request, VisitManager $visitManager, PublicHolidaysService $publicHolidaysService)
     {
         $visit = $visitManager->initVisit();
+        $publicHolidays = $publicHolidaysService->getPublicHolidays($year = null);
 
         $form = $this->createForm(VisitType::class, $visit);
 
         $form->handleRequest($request);
-        dump($visit);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $visitManager->generateTickets($visit);
+        $validator = $this->get('validator');
+        $errors = $validator->validate($visit);
+        dump($errors);
 
-            return $this->redirect($this->generateUrl('app_visit_identify'));
+        if (count($errors) == 0) {
+
+            if($form->isSubmitted() && $form->isValid()) {
+                $visitManager->generateTickets($visit);
+
+                return $this->redirect($this->generateUrl('app_visit_identify'));
+            }
+
+            else {
+
+                return $this->render('Visit/order.html.twig', array('form' => $form->createView(), 'publicHolidays' => $publicHolidays,
+                    'errors' => $errors));
+            }
+
         }
 
-        //On est en GET. On affiche le formulaire
-        return $this->render('Visit/order.html.twig', array('form' => $form->createView()));
+        return $this->render('Visit/order.html.twig', array('form' => $form->createView(), 'publicHolidays' => $publicHolidays));
+
     }
 
 
@@ -82,13 +98,12 @@ class VisitController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-
             $visitManager->computePrice($visit);
 
             return $this->redirect($this->generateUrl('app_visit_customer'));
 
         }
-        //On est en GET. On affiche le formulaire
+
         return $this->render('Visit/identify.html.twig', array('form'=>$form->createView(), 'visit' => $visit,));
     }
 
@@ -137,40 +152,47 @@ class VisitController extends Controller
     public function payAction(Request $request, VisitManager $visitManager)
     {
         $visit = $visitManager->getCurrentVisit();
+
+        // Création du booking code
+        $visitManager->getBookingCode($visit);
+
         dump($visit);
 
-        if($request->getMethod() === "POST")
-        {
-            if($visitManager->getBookingCode($visit))
-            {
 
-              //TODO enregistrement dans la base
-                /*
-                 $em = $this->getDoctrine()->getManager();
-                $em->persist($visit);
-                $em->flush();
-                */
+        if($request->getMethod() === "POST") {
+            //Création de la charge - Stripe
+            $token = $request->request->get('stripeToken');
 
-             // TODO envoi du mail de rservation
+            \Stripe\Stripe::setApiKey("pk_test_1UTDqeBhaz9wN1ejB82UEBcf");
+            \Stripe\Charge::create(array(
+                "amount" => $visitManager->computePrice($visit) * 100,
+                "currency" => "eur",
+                "source" => $token,
+                "description" => "Réservation sur la billeterie du Musée du Louvre"));
 
-                $token = $request->request->get('stripeToken');
+            //TODO enregistrement dans la base
+            /*
+             $em = $this->getDoctrine()->getManager();
+            $em->persist($visit);
+            $em->flush();
+            */
 
+            // TODO envoi du mail de rservation
 
-                return $this->redirect($this->generateUrl('app_visit_confirmation'));
-            }
-
-            else{
-
-                //TODO Comment savoir si le message flash est OK
-                $this->get('session')->getFlashBag()->add('notice', 'Le paiement a échoué.');
-                return $this->redirectToRoute('app_visit_pay');
-            }
-
-
+            $this->get('session')->getFlashBag()->add('notice', 'Votre paiement a bien été pris en compte.');
+            return $this->redirect($this->generateUrl('app_visit_confirmation'));
         }
 
+        /*else{
+            // Message flash si le paiement a échoué
+            $this->get('session')->getFlashBag()->add('notice', 'Le paiement a échoué.');
+            return $this->redirectToRoute('app_visit_pay');
+        }*/
+
         return $this->render('Visit/pay.html.twig', array('visit' => $visit));
+
     }
+
 
 
     /**
