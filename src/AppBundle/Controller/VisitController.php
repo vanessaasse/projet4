@@ -17,9 +17,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Service\PublicHolidaysService;
+use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 
 class VisitController extends Controller
 {
+
+    protected $container;
+
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * Page 1 - Page d'accueil
@@ -91,7 +99,8 @@ class VisitController extends Controller
      */
     public function identifyAction(Request $request, VisitManager $visitManager)
     {
-        $visit = $visitManager->getCurrentVisit(Visit::IS_VALID_INIT);
+        //$visit = $visitManager->getCurrentVisit(Visit::IS_VALID_INIT);
+        $visit = $visitManager->getCurrentVisit();
         dump($visit);
 
         $form = $this->createForm(VisitTicketsType::class, $visit);
@@ -145,14 +154,13 @@ class VisitController extends Controller
      * @Route("/pay", name="app_visit_pay")
      * @param Request $request
      * @param VisitManager $visitManager
-     *
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws InvalidVisitSessionException
      */
     public function payAction(Request $request, VisitManager $visitManager)
     {
-        $visit = $visitManager->getCurrentVisit(Visit::IS_VALID_WITH_TICKET);
+        //$visit = $visitManager->getCurrentVisit(Visit::IS_VALID_WITH_TICKET);
+        $visit = $visitManager->getCurrentVisit();
 
         // Création du booking code
         $visitManager->getBookingCode($visit);
@@ -164,7 +172,10 @@ class VisitController extends Controller
             //Création de la charge - Stripe
             $token = $request->request->get('stripeToken');
 
-            \Stripe\Stripe::setApiKey("pk_test_1UTDqeBhaz9wN1ejB82UEBcf");
+            $secretkey = $this->getParameter('stripe_secret_key');
+
+
+            \Stripe\Stripe::setApiKey($secretkey);
             \Stripe\Charge::create(array(
                 "amount" => $visitManager->computePrice($visit) * 100,
                 "currency" => "eur",
