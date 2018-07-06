@@ -92,7 +92,7 @@
                                         <form action="" method="POST">
                                             <script
                                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                                    data-key="pk_test_1UTDqeBhaz9wN1ejB82UEBcf"
+                                                    data-key= {{ stripe_publish_key }}
                                                     data-amount="{{ visit.totalAmount * 100 }}"
                                                     data-email="{{ visit.customer.email }}"
                                                     data-name="Musée du Louvre"
