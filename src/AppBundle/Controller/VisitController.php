@@ -46,7 +46,8 @@ class VisitController extends Controller
     public function orderAction(Request $request, VisitManager $visitManager, PublicHolidaysService $publicHolidaysService)
     {
         $visit = $visitManager->initVisit();
-        $publicHolidays = $publicHolidaysService->getPublicHolidays($year = null);
+
+        $publicHolidays = $publicHolidaysService->getPublicHolidaysOnTheseTwoYears();
 
         $form = $this->createForm(VisitType::class, $visit);
 
@@ -90,7 +91,7 @@ class VisitController extends Controller
      */
     public function identifyAction(Request $request, VisitManager $visitManager)
     {
-        $visit = $visitManager->getCurrentVisit();
+        $visit = $visitManager->getCurrentVisit(Visit::IS_VALID_INIT);
         dump($visit);
 
         $form = $this->createForm(VisitTicketsType::class, $visit);
@@ -151,7 +152,7 @@ class VisitController extends Controller
      */
     public function payAction(Request $request, VisitManager $visitManager)
     {
-        $visit = $visitManager->getCurrentVisit();
+        $visit = $visitManager->getCurrentVisit(Visit::IS_VALID_WITH_TICKET);
 
         // Création du booking code
         $visitManager->getBookingCode($visit);
