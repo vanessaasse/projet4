@@ -18,25 +18,13 @@ class NoReservationOnPublicHolidaysValidator extends ConstraintValidator
 
     }
 
-    public function check(\DateTime $day)
-    {
-        $publicHolidays = $this->publicHolidaysService->getPublicHolidays($year = null);
-
-        if (in_array($day->format('dmY'), $publicHolidays)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
     /**
      * @param mixed $value
      * @param Constraint $constraint
      */
     public function validate($value, Constraint $constraint)
     {
-        if ($this->check($value) == true) {
+        if ($this->publicHolidaysService->checkIsHoliday($value) == true) {
 
             $this->context->buildViolation($constraint->getMessage())
                 ->addViolation();
