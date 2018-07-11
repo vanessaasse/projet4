@@ -12,9 +12,14 @@ use AppBundle\Validator\Constraints as LouvreAssert;
  *
  * @ORM\Table(name="visit")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\VisitRepository")
+ *
+ *
  */
 class Visit
 {
+    //const IS_VALID_INIT = array("order_registration");
+    //const IS_VALID_WITH_TICKET = array("order_registration", "or");
+
     /**
      * @var int
      *
@@ -35,14 +40,12 @@ class Visit
      *
      *
      * @ORM\Column(name="visitDate", type="date")
-     * @Assert\GreaterThanOrEqual("today", message="Vous devez choisir une date de visite supérieure ou égale à la date du jour.",
-     *     groups={"order_registration"})
      * @LouvreAssert\ToLateForToday(hour=16, groups={"order_registration"})
      * @LouvreAssert\NoReservationOnTuesday(day=2, groups={"order_registration"})
      * @LouvreAssert\NoReservationOnSunday(day=0, groups={"order_registration"})
      * @LouvreAssert\NoReservationOnPublicHolidays(publicHolidays="",groups={"order_registration"})
-     * @Assert\Range(max="+1 year", groups={"order_registration"})
-     *
+     * @Assert\Range(min="today", minMessage="Vous devez choisir une date de visite supérieure ou égale à la date du jour.",
+     *     max="+1 year", maxMessage="La réservation est uniquement sur l'année en cours", groups={"order_registration"})
      */
     private $visitDate;
 
@@ -50,16 +53,15 @@ class Visit
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255)
-     * @Assert\NotNull(message="Vous devez choisir un type de billet.")
+     * @Assert\NotNull(message="Vous devez choisir un type de billet.", groups={"order_registration"})
      *
      */
     private $type;
 
     /**
      * @var int
-     *
-     *
      * @ORM\Column(name="nbTicket", type="integer")
+     *
      *
      */
     private $nbTicket;
@@ -80,7 +82,7 @@ class Visit
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Assert\Valid()
      */
@@ -89,7 +91,7 @@ class Visit
 
     /**
      * @var Ticket[]|ArrayCollection
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ticket", mappedBy="visit")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ticket", mappedBy="visit", cascade={"persist"})
      * @Assert\Valid()
      */
     private $tickets;
