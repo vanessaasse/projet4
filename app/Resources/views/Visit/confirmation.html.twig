@@ -38,15 +38,33 @@
             <div class="container">
 
                 <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-3">
             </div>
 
 
-            <div class="col-lg-4">
+            <div class="col-lg-5">
 
-                Votre commande a bien été prise en compte.
-                Vous allez recevoir à l'adresse XXX la confirmation de votre paiement ainsi que votre code de réservation.
+                <div class="title-recap"><button type="button" class="btn btn-success text-white">Votre commande a bien été validée.</button></div>
+
+                Votre code de réservation : {{ visit.bookingCode }}<br/><br/>
+
+                Vous allez recevoir à l'adresse mail <span class="num-billet">{{ visit.customer.email }}</span> :<br/>
+                <ul>
+                    <li>la confirmation de votre paiement,</li>
+                    <li>le récapitulatif de votre commande (nombre de billets, noms des visiteurs, tarifs),</li>
+                    <li>le code de réservation de votre visite.</li>
+                </ul>
+                Bonne visite !<br/><br/><br/><br/>
+
+
+                <div class="title-recap"><button type="button" class="btn btn-success text-white">Préparez votre visite :</button></div>
+                <ul>
+                    <li><a href="https://www.louvre.fr/expositions" target="_blank">Les expositions en cours</a></li>
+                    <li><a href="https://www.louvre.fr/visites-guidees" target="_blank">Les visites guidées</a></li>
+                    <li><a href="https://www.louvre.fr/horaires-tarifs-acces" target="_blank">Les informations pratiques (plan d'accès, horaires)</a></li>
+                </ul>
             </div>
+
 
 
             <div class="col-lg-4">
