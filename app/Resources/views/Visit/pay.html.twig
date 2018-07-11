@@ -36,86 +36,71 @@
         <section>
 
             <div class="container">
-
                 <div class="row">
-                    <div class="col-lg-1">
+
+                    <div class="col-lg-4">
                     </div>
 
                     <div class="col-lg-6">
 
-                        <div class="num-billet">Récapitulatif de votre commande :</div>
-
-                        Date de la visite : {{ visit.visitDate | date('d/m/Y') }}<br/>
-                        Type de billet : {{ visit.type }}<br/>
-
+                        <div class="title-recap"><button type="button" class="btn btn-success text-white">Récapitulatif de votre commande :</button></div>
+                        <ul>
+                            <li>Date de la visite : {{ visit.visitDate | date('d/m/Y') }}</li>
+                            <li>Type de billet : {{ visit.type }}</li>
+                            <li>
                             {% for ticket in visit.tickets %}
 
                                 Billet n° {{ loop.index }} : {{ ticket.lastname }} {{ ticket.firstname }} - {{ ticket.price }} euros <br/>
 
                             {% endfor %}
-                        Total de la commande : {{ visit.totalAmount }} euros
+                            </li>
+                            <li>Total de la commande : {{ visit.totalAmount }} euros</li>
+                        </ul>
+                        <br/>
 
+                        <div class="title-recap"><button type="button" class="btn btn-success text-white">Coordonnées de l'acheteur :</button></div>
+                        <ul>
+                            <li>Nom : {{ visit.customer.lastname }}</li>
+                            <li>Prénom : {{ visit.customer.firstname }}</li>
+                            <li>Email : {{ visit.customer.email }}</li>
+                        </ul>
+                        <br/>
+
+                        <div class="title-recap"><button type="button" class="btn btn-success text-white">Adresse de facturation :</button></div>
+                        <ul>
+                            <li>Adresse : {{ visit.customer.adress }}</li>
+                            <li>Code postal : {{ visit.customer.postCode }}</li>
+                            <li>Ville : {{ visit.customer.city }} - {{ visit.customer.country }}</li>
+                        </ul>
+                        <br/>
+
+
+                            <form action="" method="POST">
+                                <script
+                                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key= {{ stripe_publish_key }}
+                                        data-amount="{{ visit.totalAmount * 100 }}"
+                                        data-email="{{ visit.customer.email }}"
+                                        data-name="Musée du Louvre"
+                                        data-description="Billeterie"
+                                        data-locale="auto"
+                                        data-currency="eur"
+                                        data-zip-code="true"
+                                        data-allow-remember-me="false">
+                                </script>
+                            </form>
                     </div>
 
 
-                    <div class="col-lg-5">
-                        <div class="num-billet">Coordonnées de l'acheteur :</div>
-                        Nom : {{ visit.customer.lastname }}<br/>
-                        Prénom : {{ visit.customer.firstname }}<br/>
-                        Email : {{ visit.customer.email }}<br/><br/>
-
-                        <div class="num-billet">Adresse de facturation :</div>
-                        Adresse : {{ visit.customer.adress }}<br/>
-                        Code postal : {{ visit.customer.postCode }}<br/>
-                        Ville : {{ visit.customer.city }} - {{ visit.customer.country }}<br/><br/>
-                    </div>
-
-
-
-                </div>
-
-
-
-                <div class="row">
-
-                    <div class="col-lg-1">
-                    </div>
-
-
-                    <div class="col-lg-11">
-                        <div class="container">
-                            <div class="form-group">
-
-                                <form method="post">
-
-                                    <div class="col-sm-11">
-                                        <form action="" method="POST">
-                                            <script
-                                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                                    data-key= {{ stripe_publish_key }}
-                                                    data-amount="{{ visit.totalAmount * 100 }}"
-                                                    data-email="{{ visit.customer.email }}"
-                                                    data-name="Musée du Louvre"
-                                                    data-description="Billeterie"
-                                                    data-locale="auto"
-                                                    data-currency="eur"
-                                                    data-zip-code="true"
-                                                    data-allow-remember-me="false">
-                                            </script>
-                                        </form>
-                                    </div>
-
-                                </form>
-
-
-                                <div class="star">(*) champs obligatoires</div>
-
-                            </div>
-                        </div>
+                    <div class="col-lg-2">
                     </div>
 
                 </div>
             </div>
+
+
+
+
         </section>
 
     {% endblock %}
