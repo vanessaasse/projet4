@@ -165,6 +165,8 @@ class VisitController extends Controller
         // Création du booking code
         $visitManager->getBookingCode($visit);
 
+        //$ticket->setVisit($visit);
+
         dump($visit);
 
 
@@ -172,9 +174,10 @@ class VisitController extends Controller
             //Création de la charge - Stripe
             $token = $request->request->get('stripeToken');
 
+            // chargement de la clé secrète de Stripe
             $secretkey = $this->getParameter('stripe_secret_key');
 
-
+            // paiement
             \Stripe\Stripe::setApiKey($secretkey);
             \Stripe\Charge::create(array(
                 "amount" => $visitManager->computePrice($visit) * 100,
@@ -182,12 +185,11 @@ class VisitController extends Controller
                 "source" => $token,
                 "description" => "Réservation sur la billeterie du Musée du Louvre"));
 
-            //TODO enregistrement dans la base
-            /*
-             $em = $this->getDoctrine()->getManager();
+            // enregistrement dans la base
+            /*$em = $this->getDoctrine()->getManager();
             $em->persist($visit);
-            $em->flush();
-            */
+            $em->flush();*/
+
 
             // TODO envoi du mail de rservation
 
@@ -212,9 +214,11 @@ class VisitController extends Controller
      *
      * @Route("/confirmation")
      */
-    public function confirmationAction()
+    public function confirmationAction(VisitManager $visitManager)
     {
-        return $this->render('Visit/confirmation.html.twig');
+        $visit = $visitManager->getCurrentVisit();
+
+        return $this->render('Visit/confirmation.html.twig', array('visit' => $visit));
     }
 
 
