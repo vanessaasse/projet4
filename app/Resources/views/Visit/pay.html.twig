@@ -45,32 +45,32 @@
 
                         <div class="title-recap"><button type="button" class="btn btn-success text-white">Récapitulatif de votre commande :</button></div>
                         <ul>
-                            <li>Date de la visite : {{ visit.visitDate | date('d/m/Y') }}</li>
-                            <li>Type de billet : {{ visit.type }}</li>
+                            <li><strong>Date de la visite :</strong> {{ visit.visitDate | date('d/m/Y') }}</li>
+                            <li><strong>Type de billet :</strong> {{ visit.type }}</li>
                             <li>
                             {% for ticket in visit.tickets %}
 
-                                Billet n° {{ loop.index }} : {{ ticket.lastname }} {{ ticket.firstname }} - {{ ticket.price }} euros <br/>
+                                <strong>Billet n° {{ loop.index }} :</strong> {{ ticket.lastname }} {{ ticket.firstname }} - {{ ticket.price }} euros <br/>
 
                             {% endfor %}
                             </li>
-                            <li>Total de la commande : {{ visit.totalAmount }} euros</li>
+                            <li><strong>Total de la commande :</strong> {{ visit.totalAmount }} euros</li>
                         </ul>
                         <br/>
 
                         <div class="title-recap"><button type="button" class="btn btn-success text-white">Coordonnées de l'acheteur :</button></div>
                         <ul>
-                            <li>Nom : {{ visit.customer.lastname }}</li>
-                            <li>Prénom : {{ visit.customer.firstname }}</li>
-                            <li>Email : {{ visit.customer.email }}</li>
+                            <li><strong>Nom :</strong> {{ visit.customer.lastname }}</li>
+                            <li><strong>Prénom :</strong> {{ visit.customer.firstname }}</li>
+                            <li><strong>Email :</strong> {{ visit.customer.email }}</li>
                         </ul>
                         <br/>
 
                         <div class="title-recap"><button type="button" class="btn btn-success text-white">Adresse de facturation :</button></div>
                         <ul>
-                            <li>Adresse : {{ visit.customer.adress }}</li>
-                            <li>Code postal : {{ visit.customer.postCode }}</li>
-                            <li>Ville : {{ visit.customer.city }} - {{ visit.customer.country }}</li>
+                            <li><strong>Adresse :</strong> {{ visit.customer.adress }}</li>
+                            <li><strong>Code postal :</strong> {{ visit.customer.postCode }}</li>
+                            <li><strong>Ville :</strong> {{ visit.customer.city }} - {{ visit.customer.country }}</li>
                         </ul>
                         <br/>
 
@@ -78,12 +78,13 @@
                             <form action="" method="POST">
                                 <script
                                         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                        data-key= {{ stripe_publish_key }}
+                                        data-key="{{ stripe_publish_key }}"
                                         data-amount="{{ visit.totalAmount * 100 }}"
                                         data-email="{{ visit.customer.email }}"
                                         data-name="Musée du Louvre"
                                         data-description="Billeterie"
-                                        data-locale="auto"
+                                        data-locale="{{ app.request.locale }}"
+                                        data-label="Je paie la commande"
                                         data-currency="eur"
                                         data-zip-code="true"
                                         data-allow-remember-me="false">
