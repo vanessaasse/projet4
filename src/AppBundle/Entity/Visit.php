@@ -17,7 +17,8 @@ use AppBundle\Validator\Constraints as LouvreAssert;
  */
 class Visit
 {
-    //const IS_VALID_INIT = array("order_registration");
+
+    const IS_VALID_INIT = ["order_registration"];
     //const IS_VALID_WITH_TICKET = array("order_registration", "or");
 
     /**
@@ -31,7 +32,6 @@ class Visit
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="invoiceDate", type="datetime")
      */
     private $invoiceDate;
@@ -61,21 +61,18 @@ class Visit
     /**
      * @var int
      * @ORM\Column(name="nbTicket", type="integer")
-     *
-     *
+     * @Assert\Range(min=1, max=20)
      */
     private $nbTicket;
 
     /**
      * @var int
-     *
      * @ORM\Column(name="totalAmount", type="integer")
      */
     private $totalAmount;
 
     /**
      * @var int
-     *
      * @ORM\Column(name="bookingCode", type="bigint", unique=true)
      */
     private $bookingCode;
@@ -84,7 +81,7 @@ class Visit
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\Valid()
+     * @Assert\Valid(groups={"order_registration"})
      */
     private $customer;
 
@@ -92,7 +89,7 @@ class Visit
     /**
      * @var Ticket[]|ArrayCollection
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ticket", mappedBy="visit", cascade={"persist"})
-     * @Assert\Valid()
+     * @Assert\Valid(groups={"order_registration"})
      */
     private $tickets;
 
@@ -273,7 +270,6 @@ class Visit
     public function setCustomer(\AppBundle\Entity\Customer $customer)
     {
         $this->customer = $customer;
-
         return $this;
     }
 
@@ -297,6 +293,7 @@ class Visit
     public function addTicket(\AppBundle\Entity\Ticket $ticket)
     {
         $this->tickets[] = $ticket;
+        $ticket->setVisit($this);
 
         return $this;
     }
