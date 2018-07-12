@@ -361,3 +361,8 @@ a.breadcrumb-item
 .title-recap{
   margin-bottom: 20px;
 }
+
+.stripe-button-el{
+  width: 255px;
+  text-transform: uppercase;
+}
