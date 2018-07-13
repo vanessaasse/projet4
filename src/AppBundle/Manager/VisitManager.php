@@ -8,13 +8,18 @@ use AppBundle\Entity\Visit;
 use AppBundle\Entity\Customer;
 use AppBundle\Exception\InvalidVisitSessionException;
 use AppBundle\Service\PublicHolidaysService;
+use Doctrine\ORM\Mapping as Embedded;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 /**
  * Class VisitManager
  * @package AppBundle\Manager
+ * @Embedded\Embedded
  */
 class VisitManager
 {
@@ -27,11 +32,14 @@ class VisitManager
 
     private $publicHolidaysService;
 
-    public function __construct(SessionInterface $session, PublicHolidaysService $publicHolidaysService)
+    private $validator;
+
+
+    public function __construct(SessionInterface $session, PublicHolidaysService $publicHolidaysService, ValidatorInterface $validator)
     {
         $this->session = $session;
         $this->publicHolidaysService = $publicHolidaysService;
-
+        $this->validator = $validator;
     }
 
 
@@ -56,17 +64,24 @@ class VisitManager
      * Page 3 - Identification des visiteurs
      * Retourne la visite en cours dans la session
      *
+     * @param array $group
      * @return Visit
      * @throws InvalidVisitSessionException
      */
-    public function getCurrentVisit()
+    public function getCurrentVisit($validateBy = null)
     {
         $visit = $this->session->get(self::SESSION_ID_CURRENT_VISIT);
-        if(!$visit)
+
+        if(!$visit instanceof Visit)
         {
-            // TODO Créer la méthode associée
-            throw new InvalidVisitSessionException();
+            throw new InvalidVisitSessionException("Cette page est inaccessible.");
         }
+
+        if(!empty($validateBy) && count($this->validator->validate($visit,null,$validateBy)) > 0)
+        {
+            throw new InvalidVisitSessionException("Commande invalide.");
+        }
+
         return $visit;
     }
 
@@ -99,7 +114,7 @@ class VisitManager
         $hour = date("H:i");
         $today = date("w");
         $tomorrow = date('w', strtotime('+1 day'));
-        $publicHolidays = $this->publicHolidaysService->getPublicHolidays($year = null);
+        $publicHolidays = $this->publicHolidaysService->getPublicHolidaysOnTheseTwoYears();
 
 
         if($hour > "16:00" || $today == 0 || $today == 2 || $today == $publicHolidays) {
@@ -206,17 +221,10 @@ class VisitManager
     public function getBookingCode(Visit $visit)
     {
         $bookingCode = uniqid();
-
         $visit->setBookingCode($bookingCode);
         return $bookingCode;
 
     }
-
-
-
-
-
-
 
 
 
