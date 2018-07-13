@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as LouvreAssert;
 
@@ -12,6 +13,7 @@ use AppBundle\Validator\Constraints as LouvreAssert;
  *
  * @ORM\Table(name="visit")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\VisitRepository")
+ * @UniqueEntity("bookingCode")
  *
  *
  */
@@ -19,7 +21,9 @@ class Visit
 {
 
     const IS_VALID_INIT = ["order_registration"];
-    //const IS_VALID_WITH_TICKET = array("order_registration", "or");
+    const IS_VALID_WITH_TICKET = ["order_registration", "identification_registration"];
+    const IS_VALID_WITH_CUSTOMER = ["order_registration", "identification_registration", "customer_registration"];
+    const IS_VALID_WITH_BOOKINGCODE = ["order_registration", "identification_registration", "customer_registration", "pay_registration"];
 
     /**
      * @var int
@@ -27,17 +31,18 @@ class Visit
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Assert\NotNull()
      */
     private $id;
 
     /**
      * @var \DateTime
      * @ORM\Column(name="invoiceDate", type="datetime")
+     * @Assert\DateTime(groups={"order_registration"})
      */
     private $invoiceDate;
 
     /**
-     *
      *
      * @ORM\Column(name="visitDate", type="date")
      * @LouvreAssert\ToLateForToday(hour=16, groups={"order_registration"})
@@ -51,7 +56,6 @@ class Visit
 
     /**
      * @var string
-     *
      * @ORM\Column(name="type", type="string", length=255)
      * @Assert\NotNull(message="Vous devez choisir un type de billet.", groups={"order_registration"})
      *
@@ -61,19 +65,23 @@ class Visit
     /**
      * @var int
      * @ORM\Column(name="nbTicket", type="integer")
-     * @Assert\Range(min=1, max=20)
+     * @Assert\Range(min=1, minMessage="Vous devez réserver au minimum un billet.", max=20,
+     *     maxMessage="Vous ne pouvez pas réserver plus de 20 billets par commande.", groups={"order_registration"})
      */
     private $nbTicket;
 
     /**
      * @var int
      * @ORM\Column(name="totalAmount", type="integer")
+     *
      */
     private $totalAmount;
 
     /**
      * @var string
      * @ORM\Column(name="bookingCode", type="string", unique=true)
+     * @Assert\NotNull(groups={"pay_registration"})
+     *
      */
     private $bookingCode;
 
@@ -81,7 +89,7 @@ class Visit
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\Valid(groups={"order_registration"})
+     * @Assert\Valid(groups={"customer_registration"})
      */
     private $customer;
 
