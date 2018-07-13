@@ -72,8 +72,8 @@ class Visit
     private $totalAmount;
 
     /**
-     * @var int
-     * @ORM\Column(name="bookingCode", type="bigint", unique=true)
+     * @var string
+     * @ORM\Column(name="bookingCode", type="string", unique=true)
      */
     private $bookingCode;
 
