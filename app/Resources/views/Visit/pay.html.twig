@@ -38,62 +38,72 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-4">
-                    </div>
-
-                    <div class="col-lg-6">
-
-                        <div class="title-recap"><button type="button" class="btn btn-success text-white">Récapitulatif de votre commande :</button></div>
-                        <ul>
-                            <li><strong>Date de la visite :</strong> {{ visit.visitDate | date('d/m/Y') }}</li>
-                            <li><strong>Type de billet :</strong> {{ visit.type }}</li>
-                            <li>
-                            {% for ticket in visit.tickets %}
-
-                                <strong>Billet n° {{ loop.index }} :</strong> {{ ticket.lastname }} {{ ticket.firstname }} - {{ ticket.price }} euros <br/>
-
-                            {% endfor %}
-                            </li>
-                            <li><strong>Total de la commande :</strong> {{ visit.totalAmount }} euros</li>
-                        </ul>
-                        <br/>
-
-                        <div class="title-recap"><button type="button" class="btn btn-success text-white">Coordonnées de l'acheteur :</button></div>
-                        <ul>
-                            <li><strong>Nom :</strong> {{ visit.customer.lastname }}</li>
-                            <li><strong>Prénom :</strong> {{ visit.customer.firstname }}</li>
-                            <li><strong>Email :</strong> {{ visit.customer.email }}</li>
-                        </ul>
-                        <br/>
-
-                        <div class="title-recap"><button type="button" class="btn btn-success text-white">Adresse de facturation :</button></div>
-                        <ul>
-                            <li><strong>Adresse :</strong> {{ visit.customer.adress }}</li>
-                            <li><strong>Code postal :</strong> {{ visit.customer.postCode }}</li>
-                            <li><strong>Ville :</strong> {{ visit.customer.city }} - {{ visit.customer.country }}</li>
-                        </ul>
-                        <br/>
-
-
-                            <form action="" method="POST">
-                                <script
-                                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                        data-key="{{ stripe_publish_key }}"
-                                        data-amount="{{ visit.totalAmount * 100 }}"
-                                        data-email="{{ visit.customer.email }}"
-                                        data-name="Musée du Louvre"
-                                        data-description="Billeterie"
-                                        data-locale="{{ app.request.locale }}"
-                                        data-label="Je paie la commande"
-                                        data-currency="eur"
-                                        data-zip-code="true"
-                                        data-allow-remember-me="false">
-                                </script>
-                            </form>
-                    </div>
-
-
                     <div class="col-lg-2">
+                    </div>
+
+                    <div class="col-lg-9">
+
+                        <div class="row">
+
+                            <div class="col-lg-7">
+
+                            <div class="title-recap"><button type="button" class="btn btn-success text-white">Récapitulatif de votre commande</button></div>
+                            <ul>
+                                <li><strong>Date de la visite :</strong> {{ visit.visitDate | date('d/m/Y') }}</li>
+                                <li><strong>Type de billet :</strong> {{ visit.type }}</li>
+                                <li>
+                                {% for ticket in visit.tickets %}
+
+                                    <strong>Billet n° {{ loop.index }} :</strong> {{ ticket.lastname }} {{ ticket.firstname }} - {{ ticket.price }} euros <br/>
+
+                                {% endfor %}
+                                </li>
+                                <li><strong>Total de la commande :</strong> {{ visit.totalAmount }} euros</li>
+                            </ul>
+                            <br/>
+
+                                <form action="" method="POST">
+                                    <script
+                                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                            data-key="{{ stripe_publish_key }}"
+                                            data-amount="{{ visit.totalAmount * 100 }}"
+                                            data-email="{{ visit.customer.email }}"
+                                            data-name="Musée du Louvre"
+                                            data-description="Billeterie"
+                                            data-locale="{{ app.request.locale }}"
+                                            data-label="Je paie la commande"
+                                            data-currency="eur"
+                                            data-zip-code="true"
+                                            data-allow-remember-me="false">
+                                    </script>
+                                </form>
+
+                            </div>
+
+                            <div class="col-lg-5">
+
+
+                            <div class="title-recap"><button type="button" class="btn btn-success text-white">Coordonnées de l'acheteur</button></div>
+                            <ul>
+                                <li><strong>Nom :</strong> {{ visit.customer.lastname }}</li>
+                                <li><strong>Prénom :</strong> {{ visit.customer.firstname }}</li>
+                                <li><strong>Email :</strong> {{ visit.customer.email }}</li>
+                            </ul>
+                            <br/>
+
+                            <div class="title-recap"><button type="button" class="btn btn-success text-white">Adresse de facturation</button></div>
+                            <ul>
+                                <li><strong>Adresse :</strong> {{ visit.customer.adress }}</li>
+                                <li><strong>Code postal :</strong> {{ visit.customer.postCode }}</li>
+                                <li><strong>Ville :</strong> {{ visit.customer.city }} - {{ visit.customer.country }}</li>
+                            </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-1">
                     </div>
 
                 </div>
