@@ -15,75 +15,70 @@ class Customer
 {
     /**
      * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Assert\NotNull()
      */
     private $id;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="lastname", type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez saisir un nom de famille.")
-     * @Assert\Type(type="alpha", message="Le nom saisi est incorrect.")
+     * @Assert\NotBlank(message="Vous devez saisir un nom de famille.", groups={"customer_registration"})
+     * @Assert\Type(type="alpha", message="Le nom saisi est incorrect.", groups={"customer_registration"})
      *
      */
     private $lastname;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="firstname", type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez saisir un prénom.")
-     * @Assert\Type(type="alpha", message="Le prénom saisi est incorrect.")
+     * @Assert\NotBlank(message="Vous devez saisir un prénom.", groups={"customer_registration"})
+     * @Assert\Type(type="alpha", message="Le prénom saisi est incorrect.", groups={"customer_registration"})
      *
      */
     private $firstname;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="email", type="string", length=255)
      * @Assert\Email(
      *     strict=true,
-     *     message="L'email saisi n'est pas une adresse valide.")
+     *     message="L'email saisi n'est pas une adresse valide.",
+     *     groups={"customer_registration"})
      *
      */
     private $email;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="adress", type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez saisir votre adresse postale.")
+     * @Assert\NotBlank(message="Vous devez saisir votre adresse postale.", groups={"customer_registration"})
      *
      */
     private $adress;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="postCode", type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez saisir le code postal de votre ville.")
+     * @Assert\NotBlank(message="Vous devez saisir le code postal de votre ville.", groups={"customer_registration"})
      *
      */
     private $postCode;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="city", type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez saisir le nom de votre ville.")
+     * @Assert\NotBlank(message="Vous devez saisir le nom de votre ville.", groups={"customer_registration"})
      *
      */
     private $city;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="country", type="string", length=255)
+     * @Assert\NotBlank(groups={"customer_registration"})
      *
      */
     private $country;
