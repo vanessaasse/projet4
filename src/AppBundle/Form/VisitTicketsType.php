@@ -33,7 +33,8 @@ class VisitTicketsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Visit::class
+            'data_class' => Visit::class,
+            'validation_groups' => array('identification_registration')
         ));
     }
 

@@ -19,57 +19,53 @@ class Ticket
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Assert\NotNull()
      */
     private $id;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="lastname", type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez saisir votre nom de famille.")
-     * @Assert\Type(type="alpha", message="Le nom saisi est incorrect.")
-     *
-     *
+     * @Assert\NotBlank(message="Vous devez saisir votre nom de famille.", groups={"identification_registration"})
+     * @Assert\Type(type="alpha", message="Le nom saisi est incorrect.", groups={"identification_registration"})
      */
     private $lastname;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="firstname", type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez saisir un prénom.")
-     * @Assert\Type(type="alpha", message="Le prénom saisi est incorrect.")
+     * @Assert\NotBlank(message="Vous devez saisir un prénom.", groups={"identification_registration"})
+     * @Assert\Type(type="alpha", message="Le prénom saisi est incorrect.", groups={"identification_registration"})
      *
      */
     private $firstname;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="country", type="string", length=255)
+     * @Assert\NotBlank(groups={"identification_registration"})
      *
      */
     private $country;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="birthday", type="date")
+     * @Assert\Date(groups={"identification_registration"})
      *
      */
     private $birthday;
 
     /**
      * @var bool
-     *
      * @ORM\Column(name="discount", type="boolean")
      */
     private $discount;
 
     /**
      * @var int
-     *
      * @ORM\Column(name="price", type="integer")
+     * @Assert\NotBlank(groups={"identification_registration"})
      */
     private $price;
 
@@ -78,6 +74,7 @@ class Ticket
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Visit", inversedBy="tickets", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid(groups={"identification_registration"})
      */
     private $visit;
 
