@@ -1,16 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vanessa
- * Date: 08/06/2018
- * Time: 12:06
- */
+
 
 namespace AppBundle\Exception;
 
 
+
+/**
+ * Class InvalidVisitSessionException
+ * @package AppBundle\Exception
+ */
 class InvalidVisitSessionException extends \Exception
 {
-
 
 }
