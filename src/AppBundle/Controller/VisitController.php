@@ -17,18 +17,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Service\PublicHolidaysService;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+
 
 class VisitController extends Controller
 {
-
-    protected $container;
-
-    public function __construct(Container $container)
-    {
-        $this->container = $container;
-    }
-
     /**
      * Page 1 - Page d'accueil
      * @Route("/", name="homepage")
@@ -44,11 +36,9 @@ class VisitController extends Controller
     /**
      * Page 2 - Initialisation de la visite - choix de la date / du type de billet / du nb de billets
      * @Route("/order")
-     *
      * @param Request $request
      * @param VisitManager $visitManager
      * @param PublicHolidaysService $publicHolidaysService
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function orderAction(Request $request, VisitManager $visitManager, PublicHolidaysService $publicHolidaysService)
@@ -61,24 +51,10 @@ class VisitController extends Controller
 
         $form->handleRequest($request);
 
-        $validator = $this->get('validator');
-        $errors = $validator->validate($visit);
-        dump($errors);
-
-        if (count($errors) == 0) {
-
-            if($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted() && $form->isValid()) {
                 $visitManager->generateTickets($visit);
 
                 return $this->redirect($this->generateUrl('app_visit_identify'));
-            }
-
-            else {
-
-                return $this->render('Visit/order.html.twig', array('form' => $form->createView(), 'publicHolidays' => $publicHolidays,
-                    'errors' => $errors));
-            }
-
         }
 
         return $this->render('Visit/order.html.twig', array('form' => $form->createView(), 'publicHolidays' => $publicHolidays));
@@ -89,18 +65,15 @@ class VisitController extends Controller
     /**
      * page 3 - Identification des visiteurs - création des billets
      * @Route("/identification", name="app_visit_identify")
-     *
      * @param Request $request
      * @param VisitManager $visitManager
-     *
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws InvalidVisitSessionException
      */
     public function identifyAction(Request $request, VisitManager $visitManager)
     {
-        //$visit = $visitManager->getCurrentVisit(Visit::IS_VALID_INIT);
-        $visit = $visitManager->getCurrentVisit();
+
+        $visit = $visitManager->getCurrentVisit(Visit::IS_VALID_INIT);
         dump($visit);
 
         $form = $this->createForm(VisitTicketsType::class, $visit);
@@ -121,17 +94,15 @@ class VisitController extends Controller
     /**
      * page 4 - Coordonnées de l'acheteur - création du customer
      * @Route("/customer", name="app_visit_customer")
-     *
      * @param Request $request
      * @param VisitManager $visitManager
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws InvalidVisitSessionException
      *
      */
     public function customerAction(Request $request, VisitManager $visitManager)
     {
-        $visit = $visitManager->getCurrentVisit();
+        $visit = $visitManager->getCurrentVisit(Visit::IS_VALID_WITH_TICKET);
         dump($visit);
 
         $form = $this->createForm(VisitCustomerType::class, $visit);
@@ -150,7 +121,6 @@ class VisitController extends Controller
 
     /**
      * page 5 paiement
-     *
      * @Route("/pay", name="app_visit_pay")
      * @param Request $request
      * @param VisitManager $visitManager
@@ -159,13 +129,10 @@ class VisitController extends Controller
      */
     public function payAction(Request $request, VisitManager $visitManager)
     {
-        //$visit = $visitManager->getCurrentVisit(Visit::IS_VALID_WITH_TICKET);
-        $visit = $visitManager->getCurrentVisit();
+        $visit = $visitManager->getCurrentVisit(Visit::IS_VALID_WITH_CUSTOMER);
 
         // Création du booking code
         $visitManager->getBookingCode($visit);
-
-        //$ticket->setVisit($visit);
 
         dump($visit);
 
@@ -186,14 +153,14 @@ class VisitController extends Controller
                 "description" => "Réservation sur la billeterie du Musée du Louvre"));
 
             // enregistrement dans la base
-            /*$em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($visit);
-            $em->flush();*/
+            $em->flush();
 
 
             // TODO envoi du mail de rservation
 
-            $this->get('session')->getFlashBag()->add('notice', 'Votre paiement a bien été pris en compte.');
+            $this->addFlash('notice', 'Votre paiement a bien été pris en compte.');
             return $this->redirect($this->generateUrl('app_visit_confirmation'));
         }
 
@@ -208,15 +175,14 @@ class VisitController extends Controller
     }
 
 
-
     /**
      * page 6 confirmation
-     *
      * @Route("/confirmation")
+     * @throws InvalidVisitSessionException
      */
     public function confirmationAction(VisitManager $visitManager)
     {
-        $visit = $visitManager->getCurrentVisit();
+        $visit = $visitManager->getCurrentVisit(Visit::IS_VALID_WITH_BOOKINGCODE);
 
         return $this->render('Visit/confirmation.html.twig', array('visit' => $visit));
     }
