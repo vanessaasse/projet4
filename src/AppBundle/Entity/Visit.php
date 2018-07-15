@@ -14,6 +14,8 @@ use AppBundle\Validator\Constraints as LouvreAssert;
  * @ORM\Table(name="visit")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\VisitRepository")
  * @UniqueEntity("bookingCode")
+ * @LouvreAssert\LimitedReservationAfterTwoHours(hour="14", ticket="Billet journée")
+ * @LouvreAssert\OneThousandTickets(nbTicketsByDay="1000")
  *
  *
  */
