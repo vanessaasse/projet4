@@ -6,12 +6,14 @@ use AppBundle\Entity\Customer;
 use AppBundle\Entity\Visit;
 use AppBundle\Entity\Ticket;
 use AppBundle\Exception\InvalidVisitSessionException;
+use AppBundle\Form\ContactType;
 use AppBundle\Form\CustomerType;
 use AppBundle\Form\TicketType;
 use AppBundle\Form\VisitCustomerType;
 use AppBundle\Form\VisitTicketsType;
 use AppBundle\Form\VisitType;
 use AppBundle\Manager\VisitManager;
+use AppBundle\Service\EmailService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,8 +21,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Service\PublicHolidaysService;
 
 
+
 class VisitController extends Controller
 {
+
+
+
+
     /**
      * Page 1 - Page d'accueil
      * @Route("/", name="homepage")
@@ -50,6 +57,7 @@ class VisitController extends Controller
         $form = $this->createForm(VisitType::class, $visit);
 
         $form->handleRequest($request);
+        dump($visit);
 
         if($form->isSubmitted() && $form->isValid()) {
                 $visitManager->generateTickets($visit);
@@ -130,12 +138,7 @@ class VisitController extends Controller
     public function payAction(Request $request, VisitManager $visitManager)
     {
         $visit = $visitManager->getCurrentVisit(Visit::IS_VALID_WITH_CUSTOMER);
-
-        // Création du booking code
-        $visitManager->getBookingCode($visit);
-
         dump($visit);
-
 
         if($request->getMethod() === "POST") {
             //Création de la charge - Stripe
@@ -152,23 +155,17 @@ class VisitController extends Controller
                 "source" => $token,
                 "description" => "Réservation sur la billeterie du Musée du Louvre"));
 
+            // Création du booking code
+            $visitManager->generateBookingCodeWithEmail($visit);
+
             // enregistrement dans la base
             $em = $this->getDoctrine()->getManager();
             $em->persist($visit);
             $em->flush();
 
-
-            // TODO envoi du mail de rservation
-
-            $this->addFlash('notice', 'Votre paiement a bien été pris en compte.');
+            $this->addFlash('notice', 'flash.payment.success');
             return $this->redirect($this->generateUrl('app_visit_confirmation'));
         }
-
-        /*else{
-            // Message flash si le paiement a échoué
-            $this->get('session')->getFlashBag()->add('notice', 'Le paiement a échoué.');
-            return $this->redirectToRoute('app_visit_pay');
-        }*/
 
         return $this->render('Visit/pay.html.twig', array('visit' => $visit));
 
@@ -190,12 +187,26 @@ class VisitController extends Controller
 
     /**
      * page contact
-     *
+     * @param Request
+     * @param \Swift_Mailer
      * @Route("/contact")
      */
-    public function contactAction()
+    public function contactAction(Request $request, EmailService $emailService)
     {
-        return $this->render('Visit/contact.html.twig');
+        $form = $this->createForm(ContactType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $emailService->sendMailContact($form->getData());
+
+            $this->addFlash('notice', 'Votre message a bien été pris en compte. Nous vous répondrons dans les plus brefs délais.');
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->render('Visit/contact.html.twig', array('form'=>$form->createView()));
+
     }
 
 }
