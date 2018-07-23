@@ -5,15 +5,15 @@ namespace AppBundle\Manager;
 
 use AppBundle\Entity\Ticket;
 use AppBundle\Entity\Visit;
-use AppBundle\Entity\Customer;
 use AppBundle\Exception\InvalidVisitSessionException;
+use AppBundle\Service\EmailService;
 use AppBundle\Service\PublicHolidaysService;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as Embedded;
+use Stripe\ApiOperations\Request;
+use Stripe\Stripe;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 /**
@@ -29,17 +29,18 @@ class VisitManager
      * @var SessionInterface
      */
     private $session;
-
     private $publicHolidaysService;
-
     private $validator;
+    private $emailService;
 
 
-    public function __construct(SessionInterface $session, PublicHolidaysService $publicHolidaysService, ValidatorInterface $validator)
+    public function __construct(SessionInterface $session, PublicHolidaysService $publicHolidaysService, ValidatorInterface $validator,
+EmailService $emailService)
     {
         $this->session = $session;
         $this->publicHolidaysService = $publicHolidaysService;
         $this->validator = $validator;
+        $this->emailService = $emailService;
     }
 
 
@@ -47,7 +48,6 @@ class VisitManager
      * Page 2 - Order
      * Initialisation de la visite et de la session
      * Création de l'objet Visit
-     *
      * @return Visit
      */
     public function initVisit()
@@ -61,12 +61,12 @@ class VisitManager
 
 
     /**
-     * Page 3 - Identification des visiteurs
-     * Retourne la visite en cours dans la session
      *
+     * Retourne la visite en cours dans la session
      * @param array $group
      * @return Visit
      * @throws InvalidVisitSessionException
+     * $validateBy sert à appeler la constante de classe visit
      */
     public function getCurrentVisit($validateBy = null)
     {
@@ -89,7 +89,6 @@ class VisitManager
     /**
      * Page 2 - Order
      * Retourne le nombre de tickets en fonction du $nbticket demandé
-     *
      * @param Visit $visit
      */
     public function generateTickets(Visit $visit)
@@ -104,7 +103,6 @@ class VisitManager
     /**
      * Page 2 - Order
      * Affichage dans le datepicker sur la page Order
-     *
      * @param Visit $visit
      * @param PublicHolidaysService $publicHolidaysService
      */
@@ -137,7 +135,6 @@ class VisitManager
     /**
      * Page 3 - Identification des visiteurs
      * Calcule le prix de chaque billet en fonction de l'âge et du type de billet
-     *
      * @param Visit $visit
      * @param Ticket $ticket
      * @return int
@@ -150,7 +147,7 @@ class VisitManager
 
         $discount = $ticket->getDiscount();
 
-        if ($visit->getType() == 'Billet journée')
+        if ($visit->getType() == Visit::TYPE_FULL_DAY)
         {
             if ($age >= 12 && $age < 60) {
                 $price = 16;
@@ -168,7 +165,7 @@ class VisitManager
             }
         }
 
-        elseif ($visit->getType() == 'Billet demi-journée (à partir de 14h)')
+        elseif ($visit->getType() == Visit::TYPE_HALF_DAY)
         {
             if ($age >= 12 && $age < 60) {
                 $price = 8;
@@ -194,7 +191,6 @@ class VisitManager
     /**
      * Page 3 - Identification
      * Calcule le prix total de la visite
-     *
      * @param Visit $visit
      */
     public function computePrice(Visit $visit)
@@ -215,20 +211,26 @@ class VisitManager
     /**
      * Page 5 - Pay
      * Génère le bookingCode
-     *
      * @param Visit $visit
      */
-    public function getBookingCode(Visit $visit)
+    public function generateBookingCodeWithEmail(Visit $visit)
     {
         $bookingCode = uniqid();
         $visit->setBookingCode($bookingCode);
-        return $bookingCode;
+
+        $this->emailService->sendMailConfirmation($visit);
+        return $visit;
 
     }
 
-
-
-
-    //TODO méthode pour empêcher la résa de billets au dela de 1000 billets réservés
+    /**
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function generateMailContact()
+    {
+        $this->emailService->sendMailContact();
+    }
 
 }
