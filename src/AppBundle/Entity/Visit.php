@@ -14,13 +14,17 @@ use AppBundle\Validator\Constraints as LouvreAssert;
  * @ORM\Table(name="visit")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\VisitRepository")
  * @UniqueEntity("bookingCode")
- * @LouvreAssert\LimitedReservationAfterTwoHours(hour="14", ticket="Billet journée")
- * @LouvreAssert\OneThousandTickets(nbTicketsByDay="1000")
+ * @LouvreAssert\LimitedReservationAfterHour(hour=14,groups={"order_registration"})
+ * @LouvreAssert\OneThousandTickets(nbTicketsByDay=Visit::NB_TICKET_MAX_DAY, groups={"order_registration"})
  *
  *
  */
 class Visit
 {
+
+    const TYPE_HALF_DAY = 0;
+    const TYPE_FULL_DAY = 1;
+    const NB_TICKET_MAX_DAY = 1000;
 
     const IS_VALID_INIT = ["order_registration"];
     const IS_VALID_WITH_TICKET = ["order_registration", "identification_registration"];
@@ -46,6 +50,7 @@ class Visit
 
     /**
      *
+     * @var \DateTime
      * @ORM\Column(name="visitDate", type="date")
      * @LouvreAssert\ToLateForToday(hour=16, groups={"order_registration"})
      * @LouvreAssert\NoReservationOnTuesday(day=2, groups={"order_registration"})
@@ -57,8 +62,8 @@ class Visit
     private $visitDate;
 
     /**
-     * @var string
-     * @ORM\Column(name="type", type="string", length=255)
+     * @var integer
+     * @ORM\Column(name="type", type="integer")
      * @Assert\NotNull(message="Vous devez choisir un type de billet.", groups={"order_registration"})
      *
      */
@@ -106,10 +111,11 @@ class Visit
 
     /**
      * Visit constructor.
+     *
      */
     public function __construct()
     {
-        $this->setInvoiceDate(new \DateTime());
+        $this->setInvoiceDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
         $this->tickets = new ArrayCollection();
         //$this->visitDate = (new \DateTime())/*->modify('+1 day')*/;
 
