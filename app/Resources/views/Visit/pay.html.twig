@@ -50,7 +50,14 @@
                             <div class="title-recap"><button type="button" class="btn btn-success text-white">Récapitulatif de votre commande</button></div>
                             <ul>
                                 <li><strong>Date de la visite :</strong> {{ visit.visitDate | date('d/m/Y') }}</li>
-                                <li><strong>Type de billet :</strong> {{ visit.type }}</li>
+                                <li><strong>Type de billet :</strong>
+                                    {% if visit.type is constant('TYPE_FULL_DAY', visit ) %}
+                                    Billet journée
+                                    {% endif %}
+                                    {% if visit.type is constant('TYPE_HALF_DAY', visit) %}
+                                    Billet demi-journée (à partir de 14h)
+                                    {% endif %}
+                                </li>
                                 <li>
                                 {% for ticket in visit.tickets %}
 
