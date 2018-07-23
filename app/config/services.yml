@@ -1,7 +1,8 @@
 # Learn more about services, parameters and containers at
 # https://symfony.com/doc/current/service_container.html
 parameters:
-    #parameter_name: value
+
+
 
 services:
     # default configuration for services in *this* file
@@ -30,8 +31,11 @@ services:
         tags: ['controller.service_arguments']
 
 
+    AppBundle\Service\EmailService:
+       # arguments: ['@mailer', '@twig', '%mail_user%']
+       arguments:
+           $emailfrom: '%mailer_user%'
 
-    # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
+
+
+
