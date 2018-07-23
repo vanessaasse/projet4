@@ -44,7 +44,13 @@
 
             <div class="col-lg-7">
 
-                <div class="title-recap"><button type="button" class="btn btn-success text-white">Votre commande a bien été validée !</button></div>
+                {% for message in app.flashes('notice') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                <div class="title-recap"><button type="button" class="btn btn-success text-white">Votre commande est désormais validée !</button></div>
 
                 Votre code de réservation : {{ visit.bookingCode }}<br/><br/>
 
