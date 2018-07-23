@@ -30,8 +30,8 @@ class VisitType extends AbstractType
         )
             ->add('type', ChoiceType::class, array(
                 'choices' => array(
-                    'Billet journée' => 'Billet journée',
-                    'Billet demi-journée (à partir de 14h)' => 'Billet demi-journée (à partir de 14h)'
+                    'Billet journée' => Visit::TYPE_FULL_DAY,
+                    'Billet demi-journée (à partir de 14h)' => Visit::TYPE_HALF_DAY
                 ),
                 'label' => 'Types de billets*',
                 'expanded' => true,
