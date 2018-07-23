@@ -3,6 +3,7 @@
 namespace AppBundle\Validator\Constraints;
 
 
+use AppBundle\Entity\Visit;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -11,19 +12,28 @@ use Symfony\Component\Validator\ConstraintValidator;
  * @package AppBundle\Validator\Constraints
  *
  */
-class LimitedReservationAfterTwoHoursValidator extends ConstraintValidator
+class LimitedReservationAfterHourValidator extends ConstraintValidator
 {
     /**
      * @param mixed $value
      * @param Constraint $constraint
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($object, Constraint $constraint)
     {
         $hour = date("H");
 
-        if($value->format('dmY') === date('dmY') && $hour >= $constraint->hour && $ticket = $constraint->ticket)
+        if(!$object instanceof Visit)
+        {
+           return;
+        }
+
+        if($object->getType() == Visit::TYPE_FULL_DAY &&
+            $hour >= $constraint->hour &&
+            $object->getVisitDate()->format('dmY') === date('dmY')
+        )
         {
             $this->context->buildViolation($constraint->getMessage())
+                ->atPath('type')
                 ->addViolation();
         }
     }

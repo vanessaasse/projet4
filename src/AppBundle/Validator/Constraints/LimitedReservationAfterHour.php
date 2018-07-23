@@ -10,11 +10,9 @@ use Symfony\Component\Validator\Constraint;
  *
  * @Annotation
  */
-class LimitedReservationAfterTwoHours extends Constraint
+class LimitedReservationAfterHour extends Constraint
 {
     public $hour;
-
-    public $ticket;
 
     public function __construct($options = null)
     {
@@ -24,7 +22,7 @@ class LimitedReservationAfterTwoHours extends Constraint
 
     public function getRequiredOptions()
     {
-        return array('hour', 'ticket');
+        return array('hour');
     }
 
 
