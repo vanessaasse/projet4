@@ -208,7 +208,7 @@ header.masthead p {
 
 @media (min-width: 1200px) {
   header.masthead h1 {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
   }
 }
 
@@ -366,3 +366,4 @@ a.breadcrumb-item
   width: 255px;
   text-transform: uppercase;
 }
+
