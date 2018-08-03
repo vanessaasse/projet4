@@ -3,7 +3,7 @@
 {% extends "layout.html.twig" %}
 
     {% block title %}
-        Identification des visiteurs - {{ parent() }}
+        {{ 'title.site.identify' | trans }} - {{ parent() }}
     {% endblock %}
 
 
@@ -20,13 +20,13 @@
 
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a class="breadcrumb-item" href="{{ path('app_visit_order') }}">Choix des billets</a></li>
-                                <li class="breadcrumb-item text-success font-weight-bold"
-                                    style="text-decoration:underline;">IDENTIFICATION DES VISITEURS
+                                <li class="breadcrumb-item"><a class="breadcrumb-item" href="{{ path('app_visit_order') }}">{{ 'breadcrumb.first.label' | trans }}</a></li>
+                                <li class="breadcrumb-item text-success font-weight-bold text-uppercase"
+                                    style="text-decoration:underline;">{{ 'breadcrumb.second.label' | trans }}
                                 </li>
-                                <li class="breadcrumb-item active">Coordonnées de l'acheteur</li>
-                                <li class="breadcrumb-item active">Paiement</li>
-                                <li class="breadcrumb-item active">Confirmation de la commande</li>
+                                <li class="breadcrumb-item active">{{ 'breadcrumb.third.label' | trans }}</li>
+                                <li class="breadcrumb-item active">{{ 'breadcrumb.fourth.label' | trans }}</li>
+                                <li class="breadcrumb-item active">{{ 'breadcrumb.five.label' | trans }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -52,7 +52,7 @@
 
                                 {% for ticket in form.tickets %}
 
-                                    <div class="num-billet">BILLET N°{{ loop.index }}</div><br/>
+                                    <div class="num-billet">{{ 'ticket' | trans }} n°{{ loop.index }}</div><br/>
 
                                     {{ form_row(ticket.lastname) }}
                                     {{ form_row(ticket.firstname) }}
@@ -72,13 +72,11 @@
                                     </div>
 
                                     <div class="col-sm-11">
-                                        <button type="submit" class="btn btn-success">Validez</button>
+                                        <button type="submit" class="btn btn-success">{{ 'button.validate' | trans }}</button>
                                     </div>
                                 </div>
 
                                 {{ form_end(form) }}<br/>
-
-                                <div class="star">(*) champs obligatoires</div>
 
                             </div>
                         </div>
