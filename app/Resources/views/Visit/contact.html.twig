@@ -3,7 +3,7 @@
 {% extends "layout.html.twig" %}
 
     {% block title %}
-        Contact - {{ parent() }}
+        {{ 'title.site.contact' | trans }} - {{ parent() }}
     {% endblock %}
 
 
@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-lg-10 mx-auto">
                         <h1 class="text-uppercase">
-                            <strong>Bienvenue sur la billeterie du musée du louvre</strong>
+                            <strong>{{ 'title.welcome' | trans }}</strong>
                         </h1>
                     </div>
                 </div>
@@ -34,12 +34,11 @@
 
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item text-success font-weight-bold" style="text-decoration:underline;">CONTACTEZ-NOUS</li>
+                                <li class="breadcrumb-item text-success font-weight-bold text-uppercase" style="text-decoration:underline;">{{ 'contact.us' | trans }}</li>
                             </ol>
                         </nav>
 
-                        <p>Besoin d'informations avant de préparer votre visite, une question concernant votre commande en ligne... Contactez-nous
-                            via le formulaire ci-dessous. Nous vous répondrons dans les plus brefs délais.</p>
+                        <p>{{ 'contact.paragraph0' | trans }}</p>
 
                         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
@@ -56,7 +55,7 @@
                             </div>
 
                             <div class="col-sm-11">
-                                <button type="submit" class="btn btn-success">Validez</button>
+                                <button type="submit" class="btn btn-success">{{ 'button.validate' | trans }}</button>
                             </div>
                         </div>
 
