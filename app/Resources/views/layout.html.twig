@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <title>{% block title %}{{ 'title.home' | trans }}{% endblock %}</title>
+        <title>{% block title %}{{ 'title.site' | trans }}{% endblock %}</title>
 
         {% block stylesheets %}
             <!-- Bootstrap core CSS -->
@@ -40,25 +40,25 @@
     <div class="container-fluid bg-light">
         <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="navbar-brand"><a href="{{ path('homepage') }}">Billetterie du Musée du Louvre</a></div>
+            <div class="navbar-brand"><a href="{{ path('homepage') }}">{{ 'nav.title' | trans }}</a></div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ path('homepage') }}">Accueil </a>
+                        <a class="nav-link" href="{{ path('homepage') }}">{{ 'nav.home' | trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_visit_contact') }}">Contact</a>
+                        <a class="nav-link" href="{{ path('app_visit_contact') }}">{{ 'nav.contact' | trans }}</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Languages
+                            {{ 'nav.languages' | trans }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Français</a>
-                            <a class="dropdown-item" href="#">English</a>
+                            <a class="dropdown-item" href="#">{{ 'nav.languages.fr' | trans }}</a>
+                            <a class="dropdown-item" href="#">{{ 'nav.languages.en' | trans }}</a>
                         </div>
                     </li>
                 </ul>
@@ -88,7 +88,7 @@
                     <div class="container">
                         <hr/>
                         <div class="footer-text">
-                            <p>Paiement 100% sécurisé | <a href="https://www.louvre.fr/" target="_blank">Site officiel du musée du Louvre</a> | Contact |<br/>
+                            <p>{{ 'footer.payment' | trans }} | <a href="https://www.louvre.fr/" target="_blank">{{ 'footer.louvre.website' | trans }}</a> | <a href="{{ path('app_visit_contact') }}">{{ 'nav.contact' | trans }}</a> |<br/>
                                 © 2018 - Vanessa Asse - <a href="https://openclassrooms.com/paths/chef-de-projet-multimedia-developpement" target="blank">
                                     Projet 4 dans la cadre de la formation "Chef de projet multimédia - spécialité Développement" avec Openclassrooms</a></p>
                         </div>
