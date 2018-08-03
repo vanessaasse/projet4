@@ -34,7 +34,8 @@ class EmailService
     {
         $email = $visit->getCustomer()->getEmail();
 
-        $message = (new \Swift_Message('Confirmation de votre réservation sur le site du Musée du Louvre'))
+        $message = (new \Swift_Message())
+            ->setSubject('emailservice.subject_validator_order') // TODO voir pourquoi la traduction ne fonctionne pas
             ->setFrom($this->emailfrom) // je récupère l'adresse que j'ai enregistré dans parameters.yml grâce à cet argument
             ->setTo($email)
             ->setBody($this->templating->render('Emails/registration.html.twig', ['visit' => $visit]))
@@ -52,7 +53,7 @@ class EmailService
      */
     public function sendMailContact($data)
     {
-        $message = (new \Swift_Message('Site du Musée du Louvre - Page Contact'))
+        $message = (new \Swift_Message('email.subject_contact_page'))
             ->setFrom($data['email']) // je récupère l'adresse donnée par l'internaute dans le formulaire.
                                         // Dans le controller, j'ai appelé les datas par  $emailService->sendMailContact($form->getData());
             ->setTo($this->emailfrom) // je récupère l'adresse que j'ai enregistré dans parameters.yml grâce à cet argument
