@@ -22,7 +22,7 @@ class VisitType extends AbstractType
     {
 
         $builder->add('visitDate', DateType::class, array(
-            'label' => 'Date de visite*',
+            'label' => 'label.visit.date',
             'widget' => 'single_text',
             'attr' => ['class' => 'datepicker'],
             'required' => true
@@ -30,10 +30,10 @@ class VisitType extends AbstractType
         )
             ->add('type', ChoiceType::class, array(
                 'choices' => array(
-                    'Billet journée' => Visit::TYPE_FULL_DAY,
-                    'Billet demi-journée (à partir de 14h)' => Visit::TYPE_HALF_DAY
+                    'label.full.day.ticket' => Visit::TYPE_FULL_DAY,
+                    'label.half.day.ticket' => Visit::TYPE_HALF_DAY
                 ),
-                'label' => 'Types de billets*',
+                'label' => 'label.visit.type',
                 'expanded' => true,
                 'multiple' => false,
 
@@ -45,7 +45,7 @@ class VisitType extends AbstractType
                     '11' => 11, '12' => 12, '13' => 13, '14' => 14, '15' => 15, '16' => 16, '17' => 17, '18' => 18,
                     '19' => 19, '20' => 20
                 ),
-                'label' => 'Nombre de billets*',
+                'label' => 'label.visit.nb.tickets',
                 'required' => true
             ));
     }
