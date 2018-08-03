@@ -3,7 +3,7 @@
 {% extends "layout.html.twig" %}
 
     {% block title %}
-        Confirmation de la commande - {{ parent() }}
+        {{ 'title.site.confirmation' | trans }} - {{ parent() }}
     {% endblock %}
 
 
@@ -20,11 +20,11 @@
 
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_order') }}">Choix des billets</a></li>
-                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_identify') }}">Identification des visiteurs</a></li>
-                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_customer') }}">Coordonnées de l'acheteur</a></li>
-                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_pay') }}">Paiement</a></li>
-                                <li class="breadcrumb-item text-success font-weight-bold" style="text-decoration:underline;">CONFIRMATION DE LA COMMANDE</li>
+                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_order') }}">{{ 'breadcrumb.first.label' | trans }}</a></li>
+                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_identify') }}">{{ 'breadcrumb.second.label' | trans }}</a></li>
+                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_customer') }}">{{ 'breadcrumb.third.label' | trans }}</a></li>
+                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_pay') }}">{{ 'breadcrumb.fourth.label' | trans }}</a></li>
+                                <li class="breadcrumb-item text-success font-weight-bold text-uppercase" style="text-decoration:underline;">{{ 'breadcrumb.five.label' | trans }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -46,28 +46,28 @@
 
                 {% for message in app.flashes('notice') %}
                     <div class="alert alert-success">
-                        {{ message }}
+                        {{ message | trans }}
                     </div>
                 {% endfor %}
 
-                <div class="title-recap"><button type="button" class="btn btn-success text-white">Votre commande est désormais validée !</button></div>
+                <div class="title-recap"><button type="button" class="btn btn-success text-white">{{ 'validate.visit' | trans }} !</button></div>
 
-                Votre code de réservation : {{ visit.bookingCode }}<br/><br/>
+                {{ 'label.bookingcode' | trans }} : {{ visit.bookingCode }}<br/><br/>
 
-                Vous allez recevoir à l'adresse mail <span class="num-billet">{{ visit.customer.email }}</span><br/>
+                {{ 'send.email' | trans }} <span class="num-billet">{{ visit.customer.email }}</span><br/>
                 <ul>
-                    <li>la confirmation de votre paiement,</li>
-                    <li>le récapitulatif de votre commande (nombre de billets, noms des visiteurs, tarifs),</li>
-                    <li>le code de réservation de votre visite.</li>
+                    <li>{{ 'confirmed.payment' | trans }},</li>
+                    <li>{{ 'content.visit' | trans }},</li>
+                    <li>{{ 'unique.bookingcode.visit' | trans }}.</li>
                 </ul>
-                Bonne visite !<br/><br/><br/><br/>
+                {{ 'have.a.good.visit' | trans }} !<br/><br/><br/>
 
 
-                <div class="title-recap"><button type="button" class="btn btn-success text-white">Préparez votre visite</button></div>
+                <div class="title-recap"><button type="button" class="btn btn-success text-white">{{ 'prepare.your.visit' | trans }}</button></div>
                 <ul>
-                    <li><a href="https://www.louvre.fr/expositions" target="_blank">Les expositions en cours</a></li>
-                    <li><a href="https://www.louvre.fr/visites-guidees" target="_blank">Les visites guidées</a></li>
-                    <li><a href="https://www.louvre.fr/horaires-tarifs-acces" target="_blank">Les informations pratiques (plan d'accès, horaires)</a></li>
+                    <li><a href="https://www.louvre.fr/expositions" target="_blank">{{ 'exhibitions' | trans }}</a></li>
+                    <li><a href="https://www.louvre.fr/visites-guidees" target="_blank">{{ 'guided.tour' | trans }}</a></li>
+                    <li><a href="https://www.louvre.fr/horaires-tarifs-acces" target="_blank">{{ 'informations.museum' | trans }}</a></li>
                 </ul>
             </div>
 
@@ -77,10 +77,7 @@
             </div>
 
                 </div>
-
             </div>
-
-
         </section>
 
     {% endblock %}
