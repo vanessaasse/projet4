@@ -26,16 +26,16 @@ class Ticket
     /**
      * @var string
      * @ORM\Column(name="lastname", type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez saisir votre nom de famille.", groups={"identification_registration"})
-     * @Assert\Type(type="alpha", message="Le nom saisi est incorrect.", groups={"identification_registration"})
+     * @Assert\NotBlank(message="constraint.ticket.notblank.lastname", groups={"identification_registration"})
+     * @Assert\Type(type="alpha", message="constraint.ticket.type.lastname", groups={"identification_registration"}) // TODO modifier le type pour permettre les accents et les traits d'union
      */
     private $lastname;
 
     /**
      * @var string
      * @ORM\Column(name="firstname", type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez saisir un prénom.", groups={"identification_registration"})
-     * @Assert\Type(type="alpha", message="Le prénom saisi est incorrect.", groups={"identification_registration"})
+     * @Assert\NotBlank(message="constraint.ticket.notblank.firstname", groups={"identification_registration"})
+     * @Assert\Type(type="alpha", message="constraint.ticket.type.firstname", groups={"identification_registration"})
      *
      */
     private $firstname;

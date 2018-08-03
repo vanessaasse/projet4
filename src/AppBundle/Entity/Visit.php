@@ -56,15 +56,15 @@ class Visit
      * @LouvreAssert\NoReservationOnTuesday(day=2, groups={"order_registration"})
      * @LouvreAssert\NoReservationOnSunday(day=0, groups={"order_registration"})
      * @LouvreAssert\NoReservationOnPublicHolidays(publicHolidays="",groups={"order_registration"})
-     * @Assert\Range(min="today", minMessage="Vous devez choisir une date de visite supérieure ou égale à la date du jour.",
-     *     max="+1 year", maxMessage="La réservation est uniquement sur l'année en cours", groups={"order_registration"})
+     * @Assert\Range(min="today", minMessage="constraint.visit.min.visitdate",
+     *     max="+1 year", maxMessage="constraint.visit.max.visitdate", groups={"order_registration"})
      */
     private $visitDate;
 
     /**
      * @var integer
      * @ORM\Column(name="type", type="integer")
-     * @Assert\NotNull(message="Vous devez choisir un type de billet.", groups={"order_registration"})
+     * @Assert\NotNull(message="constraint.visit.type", groups={"order_registration"})
      *
      */
     private $type;
@@ -72,8 +72,8 @@ class Visit
     /**
      * @var int
      * @ORM\Column(name="nbTicket", type="integer")
-     * @Assert\Range(min=1, minMessage="Vous devez réserver au minimum un billet.", max=20,
-     *     maxMessage="Vous ne pouvez pas réserver plus de 20 billets par commande.", groups={"order_registration"})
+     * @Assert\Range(min=1, minMessage="constraint.visit.min.nb.tickets", max=20,
+     *     maxMessage="constraint.visit.max.nb.tickets", groups={"order_registration"})
      */
     private $nbTicket;
 
