@@ -3,7 +3,7 @@
 <!DOCTYPE>
 <html lang="fr">
 <head>
-    <title>Réservation - Musée du Louvre</title>
+    <title>{{ 'title.registration' | trans }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -12,6 +12,7 @@
 <table style="min-width:320px;" width="100%" cellspacing="0" cellpadding="0" bgcolor="#eaeced">
 
     <td class="wrapper" style="padding:0 10px;">
+        <!-- TODO Afficher les images dans l'email + flash code -->
 
         <!-- module 1 -->
         <table width="100%" height="60%" cellpadding="0" cellspacing="0">
@@ -23,24 +24,30 @@
                                 <table width="100%" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td data-min="25" data-max="45" align="center" style="font:35px/38px Arial, Helvetica, sans-serif; color:#f05f40; padding:0 0 24px;">
-                                            Billetterie du Musée du Louvre
+                                            {{ 'title.site' | trans }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td data-min="10" data-max="26" align="left" style="font:16px Arial, Helvetica, sans-serif; color:#000000; padding:0 0 23px;">
-                                            Bonjour {{ visit.customer.firstname }},<br/><br/>
+                                            {{ 'hello' | trans }} {{ visit.customer.firstname }},<br/><br/>
 
-                                            Vous venez d'effectuer une commande en ligne sur la billetterie du Louvre. Nous vous en remercions.<br/><br/>
-                                            Vous trouverez ci-dessous le récapitulatif de vos achats.
+                                            {{ 'valid.order' | trans }}<br/><br/>
+                                            {{ 'order.summary' | trans }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td data-min="10" data-max="26" align="left" style="font:16px Arial, Helvetica, sans-serif; color:#000000; padding:0 0 23px;">
 
-                                            <strong>Date de votre visite :</strong> {{ visit.visitDate | date('d/m/Y') }}<br/>
-                                            <strong>Type de billet :</strong> {{ visit.type }}<br/>
-                                            <strong>Code de réservation :</strong> {{ visit.bookingCode}}<br/>
-                                            <strong>Total de votre commande :</strong> {{ visit.totalAmount }} euros<br/>
+                                            <strong>{{ 'label.visit.date' | trans }} :</strong> {{ visit.visitDate | date('d/m/Y') }}<br/>
+                                            <strong>{{ 'label.visit.type' | trans }} :</strong>
+                                            {% if visit.type is constant('TYPE_FULL_DAY', visit ) %}
+                                                {{ 'label.full.day.ticket' | trans }}
+                                            {% endif %}
+                                            {% if visit.type is constant('TYPE_HALF_DAY', visit) %}
+                                                {{ 'label.half.day.ticket' | trans }}
+                                            {% endif %}<br/>
+                                            <strong>{{ 'label.bookingcode' | trans }} :</strong> {{ visit.bookingCode}}<br/>
+                                            <strong>{{ 'total.invoice' | trans }} :</strong> {{ visit.totalAmount }} euros<br/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -48,10 +55,10 @@
 
                                             {% for ticket in visit.tickets %}
 
-                                                <strong>Billet n° {{ loop.index }}</strong><br/>
-                                                Au nom de {{ ticket.lastname }} {{ ticket.firstname }}<br/>
-                                                Date de naissance : {{ ticket.birthday | date('d/m/Y')}}<br/>
-                                                Tarif de ce billet : {{ ticket.price }} euros<br/><br/>
+                                                <strong>{{ 'ticket' | trans }} n° {{ loop.index }}</strong><br/>
+                                                {{ 'on.behalf.of' | trans }} {{ ticket.lastname }} {{ ticket.firstname }}<br/>
+                                                {{ 'label.birthday.visitor' | trans }} : {{ ticket.birthday | date('d/m/Y')}}<br/>
+                                                {{ 'price.ticket' | trans }} : {{ ticket.price }} euros<br/><br/>
 
                                             {% endfor %}
                                         </td>
@@ -76,14 +83,14 @@
                                 <table width="100%" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td data-min="20" data-max="40" data-link-style="text-decoration:none; color:#292c34;" align="center" style="font:30px/33px Arial, Helvetica, sans-serif; color:#f05f40; padding:0 0 23px;">
-                                            Préparez votre visite
+                                            {{ 'prepare.your.visit' | trans }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td data-min="10" data-max="26" align="left" style="font:16px Arial, Helvetica, sans-serif; color:#000000; padding:0 0 23px;">
-                                            <p>Le musée du Louvre vous accueille de 9h à 18h, jusqu'à 21h45 les jeudis et vendredis. La fermeture des salles débute à 17h30 et à 21h30 les jeudis et vendredis.</p>
+                                            <p>{{ 'registration.paragraph0' | trans }}</p>
 
-                                            <p>Le billet acheté en ligne est nominatif. Un document d’identité peut vous être demandé à votre arrivée. </p>
+                                            <p>{{ 'registration.paragraph1' | trans }} </p>
                                         </td>
                                     </tr>
                                 </table>
@@ -106,12 +113,12 @@
                                                                     <table width="100%" cellpadding="0" cellspacing="0">
                                                                         <tr>
                                                                             <td align="right" style="font:bold 15px/23px Arial, Helvetica, sans-serif; color:#fff; padding:0 0 6px;">
-                                                                                <a href="https://www.louvre.fr/visites-guidees" target="_blank" style="text-decoration: underline; color: white">Les visites guidées</a>
+                                                                                <a href="https://www.louvre.fr/visites-guidees" target="_blank" style="text-decoration: underline; color: white">{{ 'guided.tour' | trans }}</a>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td data-min="10" data-max="25" align="right" style="font:15px/23px Arial, Helvetica, sans-serif; color:#ffffff;">
-                                                                                Que vous veniez pour la première fois ou que vous soyez un habitué, trouvez la visite qui vous correspond, parmi le large choix de thématiques proposées.
+                                                                                {{ 'comments.guided_tour' | trans }}
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -132,12 +139,12 @@
                                                                     <table width="100%" cellpadding="0" cellspacing="0">
                                                                         <tr>
                                                                             <td align="right" style="font:bold 15px/23px Arial, Helvetica, sans-serif; color:#fff; padding:0 0 6px;">
-                                                                                <a href="https://www.louvre.fr/horaires-tarifs-acces" target="_blank" style="text-decoration: underline; color: white">Infos pratiques</a>
+                                                                                <a href="https://www.louvre.fr/horaires-tarifs-acces" target="_blank" style="text-decoration: underline; color: white">{{ 'pratical.informations' | trans }}</a>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td data-min="10" data-max="25" align="right" style="font:15px/23px Arial, Helvetica, sans-serif; color:#ffffff;">
-                                                                                Les horaires du musée, les heures d'ouverture et de fermeture des salles, les rendez-vous des visites guidées, les informations pour y accéder...
+                                                                                {{ 'comments.pratical.informations' | trans }}
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -160,12 +167,12 @@
                                                                     <table width="100%" cellpadding="0" cellspacing="0">
                                                                         <tr>
                                                                             <td data-min="10" data-max="25" style="font:bold 15px/23px Arial, Helvetica, sans-serif; color:#ffffff; padding:0 0 6px;">
-                                                                                <a href="https://www.louvre.fr/expositions" target="_blank" style="text-decoration: underline; color: white">Les expositions</a>
+                                                                                <a href="https://www.louvre.fr/expositions" target="_blank" style="text-decoration: underline; color: white">{{ 'exhibitions' | trans }}</a>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td style="font:15px/23px Arial, Helvetica, sans-serif; color:#ffffff;">
-                                                                                Découvrez les expositions permanentes et temporaires du Musée du louvre. Chaque saison, nous vous proposons des expositions temporaires, fruits des dernières recherches des spécialistes.
+                                                                                {{ 'comments.exhibitions' | trans }}
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -185,12 +192,12 @@
                                                                     <table width="100%" cellpadding="0" cellspacing="0">
                                                                         <tr>
                                                                             <td data-min="10" data-max="25" style="font:bold 15px/23px Arial, Helvetica, sans-serif; color:#ffffff; padding:0 0 6px;">
-                                                                                <a href="https://www.louvre.fr/ateliers" target="_blank" style="text-decoration: underline; color: white">Les ateliers</a>
+                                                                                <a href="https://www.louvre.fr/ateliers" target="_blank" style="text-decoration: underline; color: white">{{ 'workshops' | trans }}</a>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td data-color="text-2" data-size="size text-2" data-min="10" data-max="25" data-link-color="link text-2 color" data-link-style="font-weight:bold; text-decoration:underline; color:#fff;" style="font:15px/23px Arial, Helvetica, sans-serif; color:#fff;">
-                                                                                Les ateliers du Louvre sont acessibles pour les enfants comme pour les adultes. Un large choix d'approches artistiques y est proposé sous la conduite d’un expert.
+                                                                                {{ 'comments.workshops' | trans }}
                                                                             </td>
                                                                         </tr>
                                                                     </table>
