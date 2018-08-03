@@ -3,7 +3,7 @@
 {% extends "layout.html.twig" %}
 
     {% block title %}
-        Choix des billets - {{ parent() }}
+        {{ 'title.site.order' | trans }} - {{ parent() }}
     {% endblock %}
 
 
@@ -20,21 +20,19 @@
 
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item text-success font-weight-bold"
-                                    style="text-decoration:underline;">CHOIX DES BILLETS
+                                <li class="breadcrumb-item text-success font-weight-bold text-uppercase"
+                                    style="text-decoration:underline;">{{ 'breadcrumb.first.label' | trans }}
                                 </li>
-                                <li class="breadcrumb-item active">Identification des visiteurs</li>
-                                <li class="breadcrumb-item active">Coordonnées de l'acheteur</li>
-                                <li class="breadcrumb-item active">Paiement</li>
-                                <li class="breadcrumb-item active">Confirmation de la commande</li>
+                                <li class="breadcrumb-item active">{{ 'breadcrumb.second.label' | trans }}</li>
+                                <li class="breadcrumb-item active">{{ 'breadcrumb.third.label' | trans }}</li>
+                                <li class="breadcrumb-item active">{{ 'breadcrumb.fourth.label' | trans }}</li>
+                                <li class="breadcrumb-item active">{{ 'breadcrumb.five.label' | trans }}</li>
                             </ol>
                         </nav>
                     </div>
                 </div>
             </div>
         </div>
-
-        {# {{ form(form) }} #}
 
 
         <section>
@@ -51,7 +49,7 @@
 
                                 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
-                                {{ form_row(form.visitDate, {'attr': {'data-date-dates-disabled': publicHolidays |json_encode() }}) }}<br/>
+                                {{ form_row(form.visitDate,  {'attr': {'data-date-dates-disabled': publicHolidays |json_encode() }}) }}<br/>
 
                                 {{ form_row(form.type, {label_attr: {class: 'radio-custom'} }) }}<br/>
 
@@ -62,13 +60,12 @@
                                     </div>
 
                                     <div class="col-sm-11">
-                                        <button type="submit" class="btn btn-success">Validez</button>
+                                        <button type="submit" class="btn btn-success">{{ 'button.validate' | trans }}</button>
                                     </div>
                                 </div>
 
                                 {{ form_end(form) }}<br/>
 
-                                <div class="star">(*) champs obligatoires</div>
                             </div>
                         </div>
                     </div>
@@ -93,6 +90,7 @@
     <script src="{{ asset('assets/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap-datepicker-master/dist/locales/bootstrap-datepicker.fr.min.js') }}"></script>
 
+
     <script>
         $(document).ready(function () {
 
@@ -100,7 +98,7 @@
                 format: "yyyy-mm-dd",
                 language: "fr",
                 autoclose: true,
-                daysOfWeekDisabled: '0,2',
+                daysOfWeekDisabled: '0, 2',
                 endDate: '+1y'
             });
         });
