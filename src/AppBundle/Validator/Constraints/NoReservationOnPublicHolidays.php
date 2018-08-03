@@ -3,6 +3,7 @@
 namespace AppBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class NoReservationOnPublicHolidays
@@ -28,7 +29,8 @@ class NoReservationOnPublicHolidays extends Constraint
 
     public function getMessage()
     {
-        return 'Réservation indisponible ce jour férié.';
+        return 'constraint.no_reservation_on_public_holidays';
+
     }
 
 

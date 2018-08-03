@@ -29,6 +29,6 @@ class NoReservationOnTuesday extends Constraint
 
     public function getMessage()
     {
-        return 'Il n\'est pas possible de réserver un billet en ligne pour la journée du mardi. Ce jour, le musée est fermé.';
+        return 'constraint.no_reservation_on_tuesday';
     }
 }

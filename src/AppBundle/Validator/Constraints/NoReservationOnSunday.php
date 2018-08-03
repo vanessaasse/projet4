@@ -3,6 +3,7 @@
 namespace AppBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\HttpFoundation\Response;
 
 
 /**
@@ -29,6 +30,10 @@ class NoReservationOnSunday extends Constraint
 
     public function getMessage()
     {
-        return 'En ligne, il n\'est pas possible de réserver une visite pour la journée du dimanche.';
+        return 'constraint.no_reservation_on_sunday';
+
+        //$message = $this->get('translator')->trans('En ligne, il n\'est pas possible de réserver une visite pour la journée du dimanche.');
+
+        //return new Response($message);
     }
 }

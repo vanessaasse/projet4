@@ -28,8 +28,7 @@ class OneThousandTickets extends Constraint
 
     public function getMessage()
     {
-        return 'Il n\'y a plus de billets disponibles à la réservation sur cette date. Veuillez effectuer une réservation sur une
-        autre date.';
+        return 'constraint.one_thousand_tickets';
     }
 
 

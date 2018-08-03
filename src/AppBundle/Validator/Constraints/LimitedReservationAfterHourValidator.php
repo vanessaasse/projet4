@@ -33,6 +33,7 @@ class LimitedReservationAfterHourValidator extends ConstraintValidator
         )
         {
             $this->context->buildViolation($constraint->getMessage())
+                ->setParameter('%hour%',$constraint->hour)
                 ->atPath('type')
                 ->addViolation();
         }

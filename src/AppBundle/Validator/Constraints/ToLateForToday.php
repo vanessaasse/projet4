@@ -28,7 +28,7 @@ class ToLateForToday extends Constraint
 
     public function getMessage()
     {
-        return 'Une fois '.$this->hour.'h passées, vous ne pouvez plus effectuer une réservation sur le jour en cours.';
+        return 'constraint.to_late_for_today';
     }
 
 

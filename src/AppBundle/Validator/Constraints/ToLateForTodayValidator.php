@@ -20,6 +20,7 @@ class ToLateForTodayValidator extends ConstraintValidator
         if($value->format('dmY') === date('dmY') && $hour >= $constraint->hour)
         {
             $this->context->buildViolation($constraint->getMessage())
+                ->setParameter('%hour%',$constraint->hour)
                 ->addViolation();
         }
     }

@@ -3,6 +3,7 @@
 namespace AppBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class LimitedReservationAfterTwoHours
@@ -28,8 +29,12 @@ class LimitedReservationAfterHour extends Constraint
 
     public function getMessage()
     {
-        return 'Une fois '.$this->hour.'h passées, vous ne pouvez plus acheter de billet journée pour aujourd\'hui.';
+        return 'constraint.limited_reservation_after_hour' ;
+
+
     }
+
+
 
 
     public function getTargets()
