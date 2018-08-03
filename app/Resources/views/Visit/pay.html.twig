@@ -3,7 +3,7 @@
 {% extends "layout.html.twig" %}
 
     {% block title %}
-        Paiement de la commande - {{ parent() }}
+        {{ 'title.site.pay' | trans }} - {{ parent() }}
     {% endblock %}
 
 
@@ -20,11 +20,11 @@
 
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_order') }}">Choix des billets</a></li>
-                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_identify') }}">Identification des visiteurs</a></li>
-                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_customer') }}">Coordonnées de l'acheteur</a></li>
-                                <li class="breadcrumb-item text-success font-weight-bold" style="text-decoration:underline;">PAIEMENT</li>
-                                <li class="breadcrumb-item active">Confirmation de la commande</li>
+                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_order') }}">{{ 'breadcrumb.first.label' | trans }}</a></li>
+                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_identify') }}">{{ 'breadcrumb.second.label' | trans }}</a></li>
+                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_customer') }}">{{ 'breadcrumb.third.label' | trans }}</a></li>
+                                <li class="breadcrumb-item text-success font-weight-bold text-uppercase" style="text-decoration:underline;">{{ 'breadcrumb.fourth.label' | trans }}</li>
+                                <li class="breadcrumb-item active">{{ 'breadcrumb.five.label' | trans }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -47,25 +47,25 @@
 
                             <div class="col-lg-7">
 
-                            <div class="title-recap"><button type="button" class="btn btn-success text-white">Récapitulatif de votre commande</button></div>
+                            <div class="title-recap"><button type="button" class="btn btn-success text-white">{{ 'payment.visit' | trans }}</button></div>
                             <ul>
-                                <li><strong>Date de la visite :</strong> {{ visit.visitDate | date('d/m/Y') }}</li>
-                                <li><strong>Type de billet :</strong>
+                                <li><strong>{{ 'label.visit.date' | trans }} :</strong> {{ visit.visitDate | date('d/m/Y') }}</li>
+                                <li><strong>{{ 'label.visit.type' | trans }} :</strong>
                                     {% if visit.type is constant('TYPE_FULL_DAY', visit ) %}
-                                    Billet journée
+                                    {{ 'label.full.day.ticket' | trans }}
                                     {% endif %}
                                     {% if visit.type is constant('TYPE_HALF_DAY', visit) %}
-                                    Billet demi-journée (à partir de 14h)
+                                    {{ 'label.half.day.ticket' | trans }}
                                     {% endif %}
                                 </li>
                                 <li>
                                 {% for ticket in visit.tickets %}
 
-                                    <strong>Billet n° {{ loop.index }} :</strong> {{ ticket.lastname }} {{ ticket.firstname }} - {{ ticket.price }} euros <br/>
+                                    <strong>{{ 'ticket' | trans }} n° {{ loop.index }} :</strong> {{ ticket.lastname }} {{ ticket.firstname }} - {{ ticket.price }} euros <br/>
 
                                 {% endfor %}
                                 </li>
-                                <li><strong>Total de la commande :</strong> {{ visit.totalAmount }} euros</li>
+                                <li><strong>{{ 'total.invoice' | trans }} :</strong> {{ visit.totalAmount }} euros</li>
                             </ul>
                             <br/>
 
@@ -90,19 +90,19 @@
                             <div class="col-lg-5">
 
 
-                            <div class="title-recap"><button type="button" class="btn btn-success text-white">Coordonnées de l'acheteur</button></div>
+                            <div class="title-recap"><button type="button" class="btn btn-success text-white">{{ 'label.contact.customer' | trans }}</button></div>
                             <ul>
-                                <li><strong>Nom :</strong> {{ visit.customer.lastname }}</li>
-                                <li><strong>Prénom :</strong> {{ visit.customer.firstname }}</li>
-                                <li><strong>Email :</strong> {{ visit.customer.email }}</li>
+                                <li><strong>{{ 'label.lastname.customer' | trans }} :</strong> {{ visit.customer.lastname }}</li>
+                                <li><strong>{{ 'label.firstname.customer' | trans }} :</strong> {{ visit.customer.firstname }}</li>
+                                <li><strong>{{ 'label.email.customer' | trans }} :</strong> {{ visit.customer.email }}</li>
                             </ul>
                             <br/>
 
-                            <div class="title-recap"><button type="button" class="btn btn-success text-white">Adresse de facturation</button></div>
+                            <div class="title-recap"><button type="button" class="btn btn-success text-white">{{ 'invoice.informations' | trans }}</button></div>
                             <ul>
-                                <li><strong>Adresse :</strong> {{ visit.customer.adress }}</li>
-                                <li><strong>Code postal :</strong> {{ visit.customer.postCode }}</li>
-                                <li><strong>Ville :</strong> {{ visit.customer.city }} - {{ visit.customer.country }}</li>
+                                <li><strong>{{ 'label.adress.customer' | trans }} :</strong> {{ visit.customer.adress }}</li>
+                                <li><strong>{{ 'label.postcode.customer' | trans }} :</strong> {{ visit.customer.postCode }}</li>
+                                <li><strong>{{ 'label.city.customer' | trans }} :</strong> {{ visit.customer.city }} - {{ visit.customer.country }}</li>
                             </ul>
                             </div>
 
