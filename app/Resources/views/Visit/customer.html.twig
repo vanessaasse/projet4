@@ -3,7 +3,7 @@
 {% extends "layout.html.twig" %}
 
     {% block title %}
-        Coordonnées de l'acheteur - {{ parent() }}
+        {{ 'label.contact.customer' | trans }} - {{ parent() }}
     {% endblock %}
 
 
@@ -20,11 +20,11 @@
 
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_order') }}">Choix des billets</a></li>
-                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_identify') }}">Identification des visiteurs</a></li>
-                                <li class="breadcrumb-item text-success font-weight-bold" style="text-decoration:underline;">COORDONNEES DE L'ACHETEUR</li>
-                                <li class="breadcrumb-item active">Paiement</li>
-                                <li class="breadcrumb-item active">Confirmation de la commande</li>
+                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_order') }}">{{ 'breadcrumb.first.label' | trans }}</a></li>
+                                <li class="breadcrumb-item active"><a class="breadcrumb-item" href="{{ path('app_visit_identify') }}">{{ 'breadcrumb.second.label' | trans }}</a></li>
+                                <li class="breadcrumb-item text-success font-weight-bold text-uppercase" style="text-decoration:underline;">{{ 'breadcrumb.third.label' | trans }}</li>
+                                <li class="breadcrumb-item active">{{ 'breadcrumb.fourth.label' | trans }}</li>
+                                <li class="breadcrumb-item active">{{ 'breadcrumb.five.label' | trans }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -50,7 +50,7 @@
                     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
 
-                    <div class="num-billet">Coordonnées de l'acheteur :</div><br/>
+                    <div class="num-billet">{{ 'breadcrumb.third.label' | trans }} :</div><br/>
 
                     {{ form_row(form.customer.lastname) }}<br/>
 
@@ -59,7 +59,7 @@
                     {{ form_row(form.customer.email) }}<br/>
 
 
-                    <div class="num-billet">Adresse de facturation :</div><br/>
+                    <div class="num-billet">{{ 'invoice.informations' | trans }} :</div><br/>
 
                     {{ form_row(form.customer.adress) }}<br/>
 
@@ -74,15 +74,13 @@
                             </div>
 
                             <div class="col-sm-11">
-                                <button type="submit" class="btn btn-success">Validez</button>
+                                <button type="submit" class="btn btn-success">{{ 'button.validate' | trans }}</button>
                             </div>
                         </div>
 
 
 
                     {{ form_end(form) }}<br/>
-
-                                <div class="star">(*) champs obligatoires</div>
 
                             </div>
                         </div>
