@@ -133,3 +133,10 @@ message.contact: "Message"
 #EmailService
 emailservice.subject_validator_order: "Confirmation de votre réservation sur le site du Musée du Louvre"
 email.subject_contact_page: "Site du Musée du Louvre - Page Contact"
+
+
+#ContactType
+label.lastname: 'Nom'
+label.firstname: 'Prénom'
+label.email: 'Email'
+label.message: 'Message'

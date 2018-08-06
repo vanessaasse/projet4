@@ -133,3 +133,10 @@ message.contact: "Message"
 #EmailService
 emailservice.subject_validator_order: "Booking confirmation on the ticketing of Louvre Museum"
 email.subject_contact_page: "Louvre Museum website - Contact Page"
+
+
+#ContactType
+label.lastname: 'Lastname'
+label.firstname: 'Firstname'
+label.email: 'Email'
+label.message: 'Message'

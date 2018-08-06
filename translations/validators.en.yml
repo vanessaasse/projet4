@@ -32,3 +32,11 @@ constraint.no_reservation_on_tuesday: "It's not possible to book a ticket on tue
 constraint.one_thousand_tickets: "There aren't no more available tickets on this day.
 Please make a reservation on another day."
 constraint.to_late_for_today: "Once %hour%h passed, you cannot make a reservation on date today."
+
+
+#ContactType
+constraint.contactType_lastname_notBlank: 'You have to enter your lastname.'
+constraint.contactType_firstname_notBlank: 'You have to enter your firstname.'
+constraint.contactType_email_notBlank: 'You have to enter your email adress.'
+constraint.contactType_email_valide: "This email adress is invalid."
+constraint.contactType_message_notBlank: 'You have to enter your message.'

@@ -7,8 +7,10 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 
 class ContactType extends AbstractType
@@ -16,28 +18,29 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('lastname', TextType::class, array(
-            'label' => 'Nom*',
+            'label' => 'label.lastname',
             'required' => true,
             'constraints' => array(
-                    new NotBlank(array('message' => 'Vous devez saisir votre nom de famille.'))
+                    new NotBlank(array('message' => 'constraint.contactType_lastname_notBlank'))
             )))
             ->add('firstname', TextType::class, array(
-                'label' => 'Prénom*',
+                'label' => 'label.firstname',
                 'required' => true,
                 'constraints' => array(
-                    new NotBlank(array('message' => 'Vous devez saisir votre prénom.'))
+                    new NotBlank(array('message' => 'constraint.contactType_firstname_notBlank'))
             )))
             ->add('email', EmailType::class, array(
-                'label' => 'Email*',
+                'label' => 'label.email',
                 'required' => true,
                 'constraints' => array(
-                    new NotBlank(array('message' => 'Vous devez saisir votre email.'))
-            ))) // TODO mettre strict=true + message email valide comme dans l'entité customer
+                    new NotBlank(array('message' => 'constraint.contactType_email_notBlank')),
+                    new Email(array('strict' => true, 'message' => "constraint.contactType_email_valide"))
+            )))
             ->add('message', TextareaType::class, array(
-                'label' => 'Message*',
+                'label' => 'label.message',
                 'required' => true,
                 'constraints' => array(
-                    new NotBlank(array('message' => 'Vous devez saisir votre message.'))
+                    new NotBlank(array('message' => 'constraint.contactType_message_notBlank'))
 
             )));
     }

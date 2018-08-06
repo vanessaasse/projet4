@@ -32,3 +32,11 @@ constraint.no_reservation_on_tuesday: "Il n'est pas possible de réserver un bil
 constraint.one_thousand_tickets: "Il n'y a plus de billets disponibles à la réservation sur cette date.
 Veuillez effectuer une réservation sur une autre date."
 constraint.to_late_for_today: "Une fois %hour%h passées, vous ne pouvez plus effectuer une réservation sur le jour en cours."
+
+
+#ContactType
+constraint.contactType_lastname_notBlank: 'Vous devez saisir votre nom de famille.'
+constraint.contactType_firstname_notBlank: 'Vous devez saisir votre prénom.'
+constraint.contactType_email_notBlank: 'Vous devez saisir votre email.'
+constraint.contactType_email_valide: "L'email saisi n'est pas une adresse valide."
+constraint.contactType_message_notBlank: 'Vous devez saisir votre message.'
