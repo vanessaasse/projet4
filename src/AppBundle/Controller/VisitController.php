@@ -30,7 +30,7 @@ class VisitController extends Controller
 
     /**
      * Page 1 - Page d'accueil
-     * @Route("/", name="homepage")
+     * @Route("/{_locale}", name="homepage")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -42,7 +42,7 @@ class VisitController extends Controller
 
     /**
      * Page 2 - Initialisation de la visite - choix de la date / du type de billet / du nb de billets
-     * @Route("/order")
+     * @Route("/{_locale}/order", name="app_visit_order")
      * @param Request $request
      * @param VisitManager $visitManager
      * @param PublicHolidaysService $publicHolidaysService
@@ -72,7 +72,7 @@ class VisitController extends Controller
 
     /**
      * page 3 - Identification des visiteurs - création des billets
-     * @Route("/identification", name="app_visit_identify")
+     * @Route("/{_locale}/identification", name="app_visit_identify")
      * @param Request $request
      * @param VisitManager $visitManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -99,7 +99,7 @@ class VisitController extends Controller
 
     /**
      * page 4 - Coordonnées de l'acheteur - création du customer
-     * @Route("/customer", name="app_visit_customer")
+     * @Route("/{_locale}/customer", name="app_visit_customer")
      * @param Request $request
      * @param VisitManager $visitManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -126,7 +126,7 @@ class VisitController extends Controller
 
     /**
      * page 5 paiement
-     * @Route("/pay", name="app_visit_pay")
+     * @Route("/{_locale}/pay", name="app_visit_pay")
      * @param Request $request
      * @param VisitManager $visitManager
      * @return \Symfony\Component\HttpFoundation\Response
@@ -170,7 +170,7 @@ class VisitController extends Controller
 
     /**
      * page 6 confirmation
-     * @Route("/confirmation")
+     * @Route("/{_locale}/confirmation", name="app_visit_confirmation")
      * @throws InvalidVisitSessionException
      */
     public function confirmationAction(VisitManager $visitManager)
@@ -185,7 +185,7 @@ class VisitController extends Controller
      * page contact
      * @param Request
      * @param \Swift_Mailer
-     * @Route("/contact")
+     * @Route("/{_locale}/contact", name="contact")
      */
     public function contactAction(Request $request, EmailService $emailService)
     {
