@@ -35,7 +35,10 @@ class Ticket
      * @var string
      * @ORM\Column(name="firstname", type="string", length=255)
      * @Assert\NotBlank(message="constraint.ticket.notblank.firstname", groups={"identification_registration"})
-     * @Assert\Type(type="alpha", message="constraint.ticket.type.firstname", groups={"identification_registration"})
+     * @Assert\Regex(
+     *     pattern="/[-a-zA-Zéèàêâùïüë]/",
+     *     message="constraint.ticket.type.firstname",
+     *     groups={"identification_registration"})
      *
      */
     private $firstname;
