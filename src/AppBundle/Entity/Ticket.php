@@ -27,7 +27,10 @@ class Ticket
      * @var string
      * @ORM\Column(name="lastname", type="string", length=255)
      * @Assert\NotBlank(message="constraint.ticket.notblank.lastname", groups={"identification_registration"})
-     * @Assert\Type(type="alpha", message="constraint.ticket.type.lastname", groups={"identification_registration"}) // TODO modifier le type pour permettre les accents et les traits d'union
+     * @Assert\Regex(
+     *     pattern="/[-a-zA-Zéèàêâùïüë]/",
+     *     message="constraint.ticket.type.lastname",
+     *     groups={"identification_registration"})
      */
     private $lastname;
 

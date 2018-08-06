@@ -26,7 +26,10 @@ class Customer
      * @var string
      * @ORM\Column(name="lastname", type="string", length=255)
      * @Assert\NotBlank(message="constraint.customer.notblank.lastname", groups={"customer_registration"})
-     * @Assert\Type(type="alpha", message="constraint.customer.type.lastname", groups={"customer_registration"})
+     * @Assert\Regex(
+     *     pattern="/[-a-zA-Zéèàêâùïüë]/",
+     *     message="constraint.customer.type.lastname",
+     *     groups={"customer_registration"})
      *
      */
     private $lastname;
