@@ -38,7 +38,6 @@ class VisitTicketsType extends AbstractType
         ));
     }
 
-    // TODO voir pourquoi le groupe de validation ne fonctionne pas
 
     /**
      * {@inheritdoc}
