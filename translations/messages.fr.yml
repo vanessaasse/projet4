@@ -78,6 +78,9 @@ invoice.informations: "Adresse de facturation"
 title.site.pay: 'Paiement de la commande'
 payment.visit: 'Récapitulatif de votre commande'
 total.invoice: 'Total de la commande'
+pay.order: "Je paie la commande"
+louvre.museum: "Musée du Louvre"
+ticketing: "Billeterie"
 
 
 #confirmation.html.twig

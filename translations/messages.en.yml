@@ -4,7 +4,7 @@ label.full.day.ticket: 'Whole day ticket'
 label.half.day.ticket: 'Half day ticket (from 2:00PM)'
 label.visit.date: 'Visit date'
 label.visit.type: 'Ticket type'
-label.visit.nb.tickets: 'How many ticket'
+label.visit.nb.tickets: 'How many tickets'
 label.lastname.visitor: 'Lastname'
 label.firstname.visitor: 'Firstname'
 label.country.visitor: 'Country'
@@ -78,6 +78,9 @@ invoice.informations: "Billing adress"
 title.site.pay: 'Payment for the order'
 payment.visit: 'Your order summary'
 total.invoice: 'Total amount of the order'
+pay.order: "I pay the order"
+louvre.museum: "Louvre Museum"
+ticketing: "Ticketing"
 
 
 #confirmation.html.twig
