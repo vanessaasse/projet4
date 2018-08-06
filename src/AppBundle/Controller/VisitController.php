@@ -80,9 +80,7 @@ class VisitController extends Controller
      */
     public function identifyAction(Request $request, VisitManager $visitManager)
     {
-
         $visit = $visitManager->getCurrentVisit(Visit::IS_VALID_INIT);
-        dump($visit);
 
         $form = $this->createForm(VisitTicketsType::class, $visit);
 
@@ -111,7 +109,6 @@ class VisitController extends Controller
     public function customerAction(Request $request, VisitManager $visitManager)
     {
         $visit = $visitManager->getCurrentVisit(Visit::IS_VALID_WITH_TICKET);
-        dump($visit);
 
         $form = $this->createForm(VisitCustomerType::class, $visit);
 
@@ -138,7 +135,6 @@ class VisitController extends Controller
     public function payAction(Request $request, VisitManager $visitManager)
     {
         $visit = $visitManager->getCurrentVisit(Visit::IS_VALID_WITH_CUSTOMER);
-        dump($visit);
 
         if($request->getMethod() === "POST") {
             //Création de la charge - Stripe
@@ -201,7 +197,7 @@ class VisitController extends Controller
 
             $emailService->sendMailContact($form->getData());
 
-            $this->addFlash('notice', 'Votre message a bien été pris en compte. Nous vous répondrons dans les plus brefs délais.');
+            $this->addFlash('notice', 'message.contact.send');
             return $this->redirect($this->generateUrl('homepage'));
         }
 
