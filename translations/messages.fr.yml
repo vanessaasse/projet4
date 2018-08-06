@@ -119,7 +119,7 @@ pratical.informations: "Infos pratiques"
 comments.pratical.informations: "Les horaires du musée, les heures d'ouverture et de fermeture des salles, les rendez-vous des visites guidées, les informations pour y accéder..."
 comments.exhibitions: "Découvrez les expositions permanentes et temporaires du Musée du louvre. Chaque saison, nous vous proposons des expositions temporaires, fruits des dernières recherches des spécialistes."
 workshops: "Les ateliers"
-comments.workshops: "Les ateliers du Louvre sont acessibles pour les enfants comme pour les adultes. Un large choix d'approches artistiques y est proposé sous la conduite d’un expert."
+comments.workshops: "Les ateliers du Louvre sont accessibles pour les enfants comme pour les adultes. Un large choix d'approches artistiques y est proposé sous la conduite d’un expert."
 
 #Emails/contact.html.twig
 title.email.contact: "Page Contact - Musée du Louvre"

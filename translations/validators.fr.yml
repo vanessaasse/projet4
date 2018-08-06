@@ -7,15 +7,15 @@ constraint.visit.max.nb.tickets: "Vous ne pouvez pas réserver plus de 20 billet
 
 
 #ticket
-constraint.ticket.notblank.lastname: "Vous devez saisir votre nom de famille."
+constraint.ticket.notblank.lastname: "Vous devez saisir un nom de famille."
 constraint.ticket.type.lastname: "Le nom saisi est incorrect."
 constraint.ticket.notblank.firstname: "Vous devez saisir un prénom."
 constraint.ticket.type.firstname: "Le prénom saisi est incorrect."
 
 #customer
-constraint.customer.notblank.lastname: "Vous devez saisir un nom de famille."
+constraint.customer.notblank.lastname: "Vous devez saisir votre nom de famille."
 constraint.customer.type.lastname: "Le nom saisi est incorrect."
-constraint.customer.notblank.firstname: "Vous devez saisir un prénom."
+constraint.customer.notblank.firstname: "Vous devez saisir votre prénom."
 constraint.customer.type.firstname: "Le prénom saisi est incorrect."
 constraint.customer.notblank.email: "Vous devez saisir un email."
 constraint.customer.message.email: "L'email saisi n'est pas une adresse valide."

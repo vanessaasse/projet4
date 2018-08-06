@@ -92,44 +92,44 @@ prepare.your.visit: 'Plan your visit'
 exhibitions: 'Exhibitions'
 guided.tour: 'Guided tours'
 informations.museum: "Practical informations (location, hours)"
-have.a.good.visit: 'Bonne visite'
+have.a.good.visit: 'Enjoy your visit'
 
 
 #contact.html.twig
 title.site.contact: 'Contact'
-contact.us: "Contactez-nous"
-contact.paragraph0: "Besoin d'informations avant de préparer votre visite, une question concernant votre commande en ligne...
-Contactez-nous via le formulaire ci-dessous. Nous vous répondrons dans les plus brefs délais."
+contact.us: "Contact us"
+contact.paragraph0: "You need some informations to plan your visit, you have a question about your order...
+Contact us with the form below. We will answer you quickly."
 
 #visitController
-flash.payment.success: "Votre paiement a bien été pris en compte."
-message.contact.send: "Votre message a bien été pris en compte. Nous vous répondrons dans les plus brefs délais."
+flash.payment.success: "You payment has been accepted."
+message.contact.send: "Your message has been sent successfully. We will answer you quickly."
 
 #Emails/registration.html.twig
-title.registration: "Réservation - Musée du Louvre"
-hello: 'Bonjour'
-valid.order: "Vous venez d'effectuer une commande en ligne sur la billetterie du Louvre. Nous vous en remercions."
-order.summary: "Vous trouverez ci-dessous le récapitulatif de vos achats."
-on.behalf.of: "Au nom de"
-price.ticket: "Prix de ce billet"
-registration.paragraph0: "Le musée du Louvre vous accueille de 9h à 18h, jusqu'à 21h45 les jeudis et vendredis. La fermeture des salles débute à 17h30 et à 21h30 les jeudis et vendredis."
-registration.paragraph1: "Le billet acheté en ligne est nominatif. Un document d’identité peut vous être demandé à votre arrivée."
-comments.guided_tour: "Que vous veniez pour la première fois ou que vous soyez un habitué, trouvez la visite qui vous correspond, parmi le large choix de thématiques proposées."
-pratical.informations: "Infos pratiques"
-comments.pratical.informations: "Les horaires du musée, les heures d'ouverture et de fermeture des salles, les rendez-vous des visites guidées, les informations pour y accéder..."
-comments.exhibitions: "Découvrez les expositions permanentes et temporaires du Musée du louvre. Chaque saison, nous vous proposons des expositions temporaires, fruits des dernières recherches des spécialistes."
-workshops: "Les ateliers"
-comments.workshops: "Les ateliers du Louvre sont acessibles pour les enfants comme pour les adultes. Un large choix d'approches artistiques y est proposé sous la conduite d’un expert."
+title.registration: "Booking - Louvre Museum"
+hello: 'Hello'
+valid.order: "You have confirmed your online order on ticketing of Louvre Museum. We thank you."
+order.summary: "Your order summary can be found below."
+on.behalf.of: "On behalf of "
+price.ticket: "Price of this ticket"
+registration.paragraph0: "The Louvre Museum welcomes you from 9:00AM to 6:00PM, until 9:45 all thursdays and fridays. Rooms close from 5:30PM, from 9:30PM all thursdays and fridays."
+registration.paragraph1: "The online ticket is nominative. An identity document can be asked to you when you will arrive."
+comments.guided_tour: "If it's your first time in Louvre Museum or if you are a regular, find the best guided tour for you."
+pratical.informations: "Practical informations"
+comments.pratical.informations: "Hours of museum, time of opening and closing of rooms, guides tours, locations..."
+comments.exhibitions: "Discover permanent and temporary exhibitions of Louvre Museum. Each season, we invite you to discover a new temporary exhibition, result of the latest expert research."
+workshops: "Workshops"
+comments.workshops: "There are some workshops for children and for adults. A wide range of artistic approaches is offered."
 
 #Emails/contact.html.twig
-title.email.contact: "Page Contact - Musée du Louvre"
-contact.page: "Page Contact"
-new.message: "Voici un nouveau message envoyé par un internaute via la page Contact de la billeterie du Musée du Louvre."
-lastname.contact: "Nom"
-firstname.contact: "Prénom"
+title.email.contact: "Contact Page - Louvre Museum"
+contact.page: "Contact Page"
+new.message: "This is a new message sent by a visitor with Contact Page of the ticketing of Louvre Museum."
+lastname.contact: "Lastname"
+firstname.contact: "Firstname"
 email.contact: "Email"
 message.contact: "Message"
 
 #EmailService
-emailservice.subject_validator_order: "Confirmation de votre réservation sur le site du Musée du Louvre"
-email.subject_contact_page: "Site du Musée du Louvre - Page Contact"
+emailservice.subject_validator_order: "Booking confirmation on the ticketing of Louvre Museum"
+email.subject_contact_page: "Louvre Museum website - Contact Page"
