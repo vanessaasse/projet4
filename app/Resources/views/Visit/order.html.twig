@@ -47,7 +47,7 @@
                         <div class="container">
                             <div class="form-group">
 
-                                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                                {{ form_start(form, {'attr': {'class': 'was-validated'}}) }}
 
                                 {{ form_row(form.visitDate,  {'attr': {'data-date-dates-disabled': publicHolidays |json_encode() }}) }}<br/>
 
