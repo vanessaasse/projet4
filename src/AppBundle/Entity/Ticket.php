@@ -65,7 +65,6 @@ class Ticket
     /**
      * @var int
      * @ORM\Column(name="price", type="integer")
-     * @Assert\NotBlank(groups={"identification_registration"})
      */
     private $price;
 
