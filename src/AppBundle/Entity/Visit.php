@@ -64,7 +64,7 @@ class Visit
     /**
      * @var integer
      * @ORM\Column(name="type", type="integer")
-     * @Assert\NotNull(message="constraint.visit.type", groups={"order_registration"})
+     * @Assert\NotBlank(message="constraint.visit.type", groups={"order_registration"})
      *
      */
     private $type;
@@ -104,7 +104,7 @@ class Visit
     /**
      * @var Ticket[]|ArrayCollection
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ticket", mappedBy="visit", cascade={"persist"})
-     * @Assert\Valid(groups={"order_registration"})
+     * @Assert\Valid(groups={"identification_registration"})
      */
     private $tickets;
 
