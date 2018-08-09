@@ -57,8 +57,8 @@
                             {{ 'nav.languages' | trans }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">{{ 'nav.languages.fr' | trans }}</a>
-                            <a class="dropdown-item" href="#">{{ 'nav.languages.en' | trans }}</a>
+                            <a class="dropdown-item" href="{{ path(app.request.get('_route'),{ _locale: 'fr'}) }}">{{ 'nav.languages.fr' | trans }}</a>
+                            <a class="dropdown-item" href="{{ path(app.request.get('_route'),{ _locale: 'en'}) }}">{{ 'nav.languages.en' | trans }}</a>
                         </div>
                     </li>
                 </ul>
