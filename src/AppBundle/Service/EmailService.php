@@ -4,6 +4,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Visit;
 use AppBundle\Form\ContactType;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class EmailService
@@ -18,13 +19,17 @@ class EmailService
     protected $mailer;
     protected $templating;
     private $emailfrom;
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
 
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating, $emailfrom)
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating, $emailfrom, TranslatorInterface $translator)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
         $this->emailfrom = $emailfrom;
-
+        $this->translator = $translator;
     }
     /**
      * @param Visit $visit
@@ -35,13 +40,13 @@ class EmailService
         $email = $visit->getCustomer()->getEmail();
 
         $message = (new \Swift_Message())
-            ->setSubject('emailservice.subject_validator_order') // TODO voir pourquoi la traduction ne fonctionne pas
+            ->setSubject($this->translator->trans('emailservice.subject_validator_order'))
             ->setFrom($this->emailfrom) // je récupère l'adresse que j'ai enregistré dans parameters.yml grâce à cet argument
             ->setTo($email)
             ->setBody($this->templating->render('Emails/registration.html.twig', ['visit' => $visit]))
             ->setContentType('text/html');
 
-        $this->mailer->send($message);
+        return $this->mailer->send($message);
 
     }
 
@@ -53,7 +58,7 @@ class EmailService
      */
     public function sendMailContact($data)
     {
-        $message = (new \Swift_Message('email.subject_contact_page'))
+        $message = (new \Swift_Message($this->translator->trans('email.subject_contact_page')))
             ->setFrom($data['email']) // je récupère l'adresse donnée par l'internaute dans le formulaire.
                                         // Dans le controller, j'ai appelé les datas par  $emailService->sendMailContact($form->getData());
             ->setTo($this->emailfrom) // je récupère l'adresse que j'ai enregistré dans parameters.yml grâce à cet argument
