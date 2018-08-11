@@ -41,6 +41,7 @@ twig:
         - bootstrap_4_horizontal_layout.html.twig
     globals:
         stripe_publish_key: '%stripe_publish_key%'
+        stripe_secret_key: '%stripe_secret_key%'
 
 
 # Doctrine Configuration
