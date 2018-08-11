@@ -143,3 +143,14 @@ label.lastname: 'Nom'
 label.firstname: 'Prénom'
 label.email: 'Email'
 label.message: 'Message'
+
+
+#error.404.html.twig / error.403.html.twig / error.html.twig
+title.site.error: "Une erreur est survenue."
+Oops: "Oops"
+error.server: "Le serveur retourne une erreur"
+broken.link: "le lien de cette page est cassé ou n'existe plus."
+sorry: "Désolé pour la gêne occasionnée."
+go.to.homepage: "Nous vous donnons rendez-vous en page d'accueil."
+access.denied: "Accès refusé. Vous n'avez pas les droits requis pour accéder à cette partie du site. Veuillez contacter l'administrateur."
+website.unavailable: le site est actuellement indisponible. Veuillez vous y connecter ultérieurement.

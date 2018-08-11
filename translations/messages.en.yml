@@ -143,3 +143,14 @@ label.lastname: 'Lastname'
 label.firstname: 'Firstname'
 label.email: 'Email'
 label.message: 'Message'
+
+
+#error.404.html.twig / error.403.html.twig / error.html.twig
+title.site.error: "An error occurred."
+Oops: "Oops"
+error.server: "The server returned a error"
+broken.link: "this link is broken or doesn't still exist."
+sorry: "We would be sorry for this inconvenience."
+go.to.homepage: "We will meet again on homepage."
+access.denied: "Access denied. You don't have the necessary access rights to visit this section of the website. Please contact the website administration."
+website.unavailable: the website is unavailable at the moment. Please come back thereafter.
