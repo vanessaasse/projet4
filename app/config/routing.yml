@@ -10,3 +10,10 @@ root:
             _controller: FrameworkBundle:Redirect:redirect
             route: homepage
             permanent: true
+
+
+
+
+errors:
+    resource: "@TwigBundle/Resources/config/routing/errors.xml"
+    prefix:   /error
