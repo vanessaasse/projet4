@@ -153,4 +153,4 @@ broken.link: "le lien de cette page est cassé ou n'existe plus."
 sorry: "Désolé pour la gêne occasionnée."
 go.to.homepage: "Nous vous donnons rendez-vous en page d'accueil."
 access.denied: "Accès refusé. Vous n'avez pas les droits requis pour accéder à cette partie du site. Veuillez contacter l'administrateur."
-website.unavailable: le site est actuellement indisponible. Veuillez vous y connecter ultérieurement.
+website.unavailable: "Le site est actuellement indisponible. Veuillez vous y connecter ultérieurement."
