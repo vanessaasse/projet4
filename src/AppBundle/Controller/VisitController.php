@@ -149,7 +149,7 @@ class VisitController extends Controller
                 "amount" => $visitManager->computePrice($visit) * 100,
                 "currency" => "eur",
                 "source" => $token,
-                "description" => "Réservation sur la billeterie du Musée du Louvre"));
+                "description" => "Réservation sur la billetterie du Musée du Louvre"));
 
             // Création du booking code
             $visitManager->generateBookingCodeWithEmail($visit);
