@@ -127,7 +127,7 @@ comments.workshops: "Les ateliers du Louvre sont accessibles pour les enfants co
 #Emails/contact.html.twig
 title.email.contact: "Page Contact - Musée du Louvre"
 contact.page: "Page Contact"
-new.message: "Voici un nouveau message envoyé par un internaute via la page Contact de la billeterie du Musée du Louvre."
+new.message: "Voici un nouveau message envoyé par un internaute via la page Contact de la billetterie du Musée du Louvre."
 lastname.contact: "Nom"
 firstname.contact: "Prénom"
 email.contact: "Email"
