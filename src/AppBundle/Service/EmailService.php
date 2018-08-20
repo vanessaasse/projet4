@@ -50,7 +50,7 @@ class EmailService
         $message->setBody($this->templating->render('Emails/registration.html.twig', ['visit' => $visit, 'img' => $img]));
         /* dans les variables à afficher, en plus de la visite, j'affiche l'image que j'appelerai dans Twig en {{ img }}*/
 
-        return $this->mailer->send($message, $img);
+        return $this->mailer->send($message);
 
     }
 
