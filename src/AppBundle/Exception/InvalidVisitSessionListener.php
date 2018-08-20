@@ -2,8 +2,8 @@
 
 namespace AppBundle\Exception;
 
+
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 
 class InvalidVisitSessionListener
@@ -20,16 +20,21 @@ class InvalidVisitSessionListener
      * @param GetResponseForExceptionEvent $event
      * @return mixed
      */
-    public function ListeningException(GetResponseForExceptionEvent $event)
+    public function ListeningException()
     {
         //TODO terminer les listeners
-        $exception = $event->getException();
 
-        if($exception instanceof HttpExceptionInterface) {
+        if($this == "Commande invalide") {
 
             $this->addFlash('notice', 'message.contact.send');
             return $this->redirect($this->generateUrl('homepage'));
 
+        }
+
+        if($this == "Cette page est inaccessible.")
+        {
+            $this->addFlash('notice', 'message.contact.send');
+            return $this->redirect($this->generateUrl('homepage'));
         }
 
     }
