@@ -4,7 +4,6 @@
 namespace AppBundle\Exception;
 
 
-
 /**
  * Class InvalidVisitSessionException
  * @package AppBundle\Exception
