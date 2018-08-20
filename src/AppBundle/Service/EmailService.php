@@ -39,17 +39,18 @@ class EmailService
     {
         $email = $visit->getCustomer()->getEmail();
 
-        //$image = ('assets/img/logo-louvre.jpg');
-
         $message = (new \Swift_Message())
             ->setContentType('text/html')
             ->setSubject($this->translator->trans('emailservice.subject_validator_order'))
             ->setFrom($this->emailfrom) // je récupère l'adresse que j'ai enregistré dans parameters.yml grâce à cet argument
-            ->setTo($email)
-            //->embed(\Swift_Image::fromPath($image))
-            ->setBody($this->templating->render('Emails/registration.html.twig', ['visit' => $visit/*, 'image' => $image*/]));
+            ->setTo($email);
 
-        return $this->mailer->send($message);
+        $img = $message->embed(\Swift_Image::fromPath('assets/img/logo-louvre.jpg')); // j'ajoute l'image que je souhaite afficher
+
+        $message->setBody($this->templating->render('Emails/registration.html.twig', ['visit' => $visit, 'img' => $img]));
+        /* dans les variables à afficher, en plus de la visite, j'affiche l'image que j'appelerai dans Twig en {{ img }}*/
+
+        return $this->mailer->send($message, $img);
 
     }
 
