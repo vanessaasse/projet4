@@ -28,7 +28,7 @@ class ExceptionListener
 
     /**
      * @param GetResponseForExceptionEvent $event
-     * @param VisitManager $visitManager
+     *
      */
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
