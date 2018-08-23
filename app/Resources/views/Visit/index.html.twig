@@ -39,6 +39,16 @@
                                 </div>
                             {% endfor %}
 
+
+                            {% for message in app.flashes('error') %}
+                                <div class="alert alert-danger">
+                                    {{ message | trans}}
+                                </div>
+                            {% endfor %}
+
+
+
+
                             <p>{{ 'homepage.paragraph0' | trans }}</p>
 
                             <p>{{ 'homepage.paragraph1' | trans }} :
