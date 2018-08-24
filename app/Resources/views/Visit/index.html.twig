@@ -71,26 +71,26 @@
 
                                 <tr>
                                     <td>{{ 'homepage.first.price' | trans }}</td>
-                                    <td>16 euros</td>
-                                    <td>8 euros</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::FULL_DAY_PRICE') }} euros</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::HALF_DAY_PRICE') }} euros</td>
                                 </tr>
 
                                 <tr>
                                     <td>{{ 'homepage.second.price' | trans }}</td>
-                                    <td>12 euros</td>
-                                    <td>6 euros</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::FULL_DAY_SENIOR') }} euros</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::HALF_DAY_SENIOR') }} euros</td>
                                 </tr>
 
                                 <tr>
                                     <td>{{ 'homepage.third.price' | trans }}**</td>
-                                    <td>10 euros</td>
-                                    <td>5 euros</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::FULL_DAY_DISCOUNT') }} euros</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::HALF_DAY_DISCOUNT') }} euros</td>
                                 </tr>
 
                                 <tr>
                                     <td>{{ 'homepage.fourth.price' | trans }}*** </td>
-                                    <td> 8 euros</td>
-                                    <td>4 euros</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::FULL_DAY_CHILD') }} euros</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::HALF_DAY_CHILD') }} euros</td>
                                 </tr>
                             </table>
                             <div class="star">(*){{ 'discount.first.condition' | trans }} - (**){{ 'discount.second.condition' | trans }} - (***){{ 'discount.third.condition' | trans }}</div>
@@ -107,9 +107,6 @@
 
                 </div>
             </div>
-
-            <!--<img src="{{ qr_code_path('vanessa') }}">-->
-            <img src="{{ qr_code_data_uri('vanessa') }}">
 
         </section>
 
