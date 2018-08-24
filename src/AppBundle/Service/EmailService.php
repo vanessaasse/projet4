@@ -64,7 +64,7 @@ class EmailService
     {
         $message = (new \Swift_Message($this->translator->trans('email.subject_contact_page')))
             ->setFrom($data['email']) // je récupère l'adresse donnée par l'internaute dans le formulaire.
-                                        // Dans le controller, j'ai appelé les datas par  $emailService->sendMailContact($form->getData());
+            // Dans le controller, j'ai appelé les datas par  $emailService->sendMailContact($form->getData());
             ->setTo($this->emailfrom) // je récupère l'adresse que j'ai enregistré dans parameters.yml grâce à cet argument
             ->setBody($this->templating->render('Emails/contact.html.twig',
                 array('data' => $data)))
