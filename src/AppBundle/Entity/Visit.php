@@ -26,6 +26,10 @@ class Visit
     const TYPE_FULL_DAY = 1;
     const NB_TICKET_MAX_DAY = 1000;
 
+    const LIMITED_HOUR_TODAY = 16;
+
+
+
     const IS_VALID_INIT = ["order_registration"];
     const IS_VALID_WITH_TICKET = ["order_registration", "identification_registration"];
     const IS_VALID_WITH_CUSTOMER = ["order_registration", "identification_registration", "customer_registration"];
