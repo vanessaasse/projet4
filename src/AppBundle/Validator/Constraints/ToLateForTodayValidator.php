@@ -15,6 +15,8 @@ class ToLateForTodayValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
+        if(!$value instanceof \DateTime) return;
+
         $hour = date("H");
 
         if($value->format('dmY') === date('dmY') && $hour >= $constraint->hour)

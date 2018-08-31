@@ -3,7 +3,7 @@ app:
     type: annotation
     prefix: /{_locale}
     requirements:
-        _locale: "fr|en"
+       _locale: "fr|en"
 
 
 root:

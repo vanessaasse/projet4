@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
+
 /**
  * Class VisitManager
  * @package AppBundle\Manager
@@ -32,6 +33,7 @@ class VisitManager
     private $publicHolidaysService;
     private $validator;
     private $emailService;
+
 
 
     public function __construct(SessionInterface $session, PublicHolidaysService $publicHolidaysService, ValidatorInterface $validator,
@@ -75,6 +77,7 @@ EmailService $emailService)
         if(!$visit instanceof Visit)
         {
             throw new InvalidVisitSessionException("Cette page est inaccessible.");
+
         }
 
         if(!empty($validateBy) && count($this->validator->validate($visit,null,$validateBy)) > 0)
@@ -97,6 +100,8 @@ EmailService $emailService)
         {
             $visit->addTicket(new Ticket());
         }
+
+        return $visit;
     }
 
 
@@ -109,13 +114,13 @@ EmailService $emailService)
     public function whichVisitDay(Visit $visit)
     {
         date_default_timezone_set('Europe/Paris');
-        $hour = date("H:i");
+        $hour = date("H");
         $today = date("w");
         $tomorrow = date('w', strtotime('+1 day'));
         $publicHolidays = $this->publicHolidaysService->getPublicHolidaysOnTheseTwoYears();
 
 
-        if($hour > "16:00" || $today == 0 || $today == 2 || $today == $publicHolidays) {
+        if($hour > Visit::LIMITED_HOUR_TODAY || $today == 0 || $today == 2 || $today == $publicHolidays) {
             $visitDate = (new \DateTime())->modify('+ 1 days');
 
             if($tomorrow  == 0 || $tomorrow == 2 || $tomorrow == $publicHolidays) {
@@ -139,47 +144,80 @@ EmailService $emailService)
      * @param Ticket $ticket
      * @return int
      */
-    public function computeTicketPrice(Ticket $ticket, Visit $visit)
+    public function computeTicketPrice(Ticket $ticket)
     {
         $birthday = $ticket->getBirthday();
+        $visit = $ticket->getVisit();
         $today = new \DateTime();
         $age = date_diff($birthday, $today)->y;
 
         $discount = $ticket->getDiscount();
 
+        /*
+         * Exemple
+         * Comment mieux trouver le bon prix en fonction de l'âge
+         *
+         *
+         *
+        //Trouver le bon tarif
+        if($age < Ticket::AGE_CHILD){ // Bébé
+            $price = Ticket::PRICE_FREE;
+
+        }elseif($age < Ticket::AGE_ADULT){ //Enfant
+            $price = Ticket::PRICE_CHILD;
+        }elseif ($age < Ticket::AGE_SENIOR){ // Adulte/Normal
+            $price = Ticket::PRICE_ADULT;
+        }else{ // Senior
+            $price = Ticket::PRICE_SENIOR;
+        }
+
+        // Verifier reduction
+        if($ticket->getDiscount() === true && $price > Ticket::PRICE_DISCOUNT ){
+            $price = Ticket::PRICE_DISCOUNT;
+        }
+
+        //Appliquer coeff journée/demi journée
+        if($ticket->getVisit()->getType() === Visit::TYPE_HALF_DAY){
+            $price = $price * Ticket::HALF_DAY_COEFF;
+        }
+
+        */
+
+
+
         if ($visit->getType() == Visit::TYPE_FULL_DAY)
         {
-            if ($age >= 12 && $age < 60) {
-                $price = 16;
+            if ($age >= Ticket::MAX_AGE_CHILD && $age < Ticket::MIN_AGE_SENIOR) {
+                $price = Ticket::FULL_DAY_PRICE;
 
-                if ($age >= 12 && $age < 60 && $discount == true){
-                    $price = 10;
+                if ($age >= Ticket::MAX_AGE_CHILD && $age < Ticket::MIN_AGE_SENIOR && $discount == true){
+                    $price = Ticket::FULL_DAY_DISCOUNT;
                 }
 
-            } elseif ($age >= 60) {
-                $price = 12;
-            } elseif ($age >= 4 && $age < 12) {
-                $price = 8;
+            } elseif ($age >= Ticket::MIN_AGE_SENIOR) {
+                $price = Ticket::FULL_DAY_SENIOR;
+            } elseif ($age >= Ticket::MIN_AGE_CHILD && $age < Ticket::MAX_AGE_CHILD) {
+                $price = Ticket::FULL_DAY_CHILD;
             } else {
-                $price = 0;
+                $price = Ticket::FREE_TICKET;
             }
         }
 
         elseif ($visit->getType() == Visit::TYPE_HALF_DAY)
         {
-            if ($age >= 12 && $age < 60) {
-                $price = 8;
+            if ($age >= Ticket::MAX_AGE_CHILD && $age < Ticket::MIN_AGE_SENIOR) {
+                $price = Ticket::HALF_DAY_PRICE;
 
-                if ($age >= 12 && $age < 60 && $discount == true){
-                    $price = 5;
+                if ($age >= Ticket::MAX_AGE_CHILD && $age < Ticket::MIN_AGE_SENIOR && $discount == true){
+                    $price = Ticket::HALF_DAY_DISCOUNT;
                 }
 
-            } elseif ($age >= 60) {
-                $price = 6;
-            } elseif ($age >= 4 && $age < 12) {
-                $price = 4;
+            } elseif ($age >= Ticket::MIN_AGE_SENIOR) {
+                $price = Ticket::HALF_DAY_SENIOR;
+            } elseif ($age >= Ticket::MIN_AGE_CHILD && $age < Ticket::MAX_AGE_CHILD) {
+                $price = Ticket::HALF_DAY_CHILD;
             } else {
-                $price = 0;
+                $price = Ticket::FREE_TICKET;
             }
         }
 
@@ -198,7 +236,7 @@ EmailService $emailService)
         $totalAmount = 0;
 
         foreach ($visit->getTickets() as $ticket) {
-            $priceTicket = $this->computeTicketPrice($ticket, $visit);
+            $priceTicket = $this->computeTicketPrice($ticket);
             $totalAmount += $priceTicket;
         }
 

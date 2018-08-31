@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /Users/vanessa/Documents/Openclassrooms/projet4/src/AppBundle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href=".css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href=".css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href=".css/style.css" rel="stylesheet" type="text/css">
+  <link href=".css/custom.css" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]>
+  <script src=".js/html5shiv.min.js"></script>
+  <script src=".js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="index.html">/Users/vanessa/Documents/Openclassrooms/projet4/src/AppBundle</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controller/VisitController.php.html#25">AppBundle\Controller\VisitController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/PublicHolidaysService.php.html#5">AppBundle\Service\PublicHolidaysService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/ToLateForToday.php.html#13">AppBundle\Validator\Constraints\ToLateForToday</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/OneThousandTicketsValidator.php.html#17">AppBundle\Validator\Constraints\OneThousandTicketsValidator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/OneThousandTickets.php.html#13">AppBundle\Validator\Constraints\OneThousandTickets</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnTuesdayValidator.php.html#9">AppBundle\Validator\Constraints\NoReservationOnTuesdayValidator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnTuesday.php.html#14">AppBundle\Validator\Constraints\NoReservationOnTuesday</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnSundayValidator.php.html#9">AppBundle\Validator\Constraints\NoReservationOnSundayValidator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnSunday.php.html#15">AppBundle\Validator\Constraints\NoReservationOnSunday</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnPublicHolidaysValidator.php.html#11">AppBundle\Validator\Constraints\NoReservationOnPublicHolidaysValidator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnPublicHolidays.php.html#14">AppBundle\Validator\Constraints\NoReservationOnPublicHolidays</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/LimitedReservationAfterHourValidator.php.html#15">AppBundle\Validator\Constraints\LimitedReservationAfterHourValidator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/LimitedReservationAfterHour.php.html#14">AppBundle\Validator\Constraints\LimitedReservationAfterHour</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/EmailService.php.html#13">AppBundle\Service\EmailService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#14">AppBundle\Entity\Customer</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/VisitRepository.php.html#10">AppBundle\Repository\VisitRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#24">AppBundle\Manager\VisitManager</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/VisitType.php.html#16">AppBundle\Form\VisitType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/VisitTicketsType.php.html#16">AppBundle\Form\VisitTicketsType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/VisitCustomerType.php.html#12">AppBundle\Form\VisitCustomerType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/TicketType.php.html#15">AppBundle\Form\TicketType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/CustomerType.php.html#14">AppBundle\Form\CustomerType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/ContactType.php.html#16">AppBundle\Form\ContactType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Exception/InvalidVisitSessionListener.php.html#9">AppBundle\Exception\InvalidVisitSessionListener</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#22">AppBundle\Entity\Visit</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#14">AppBundle\Entity\Ticket</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/ToLateForTodayValidator.php.html#10">AppBundle\Validator\Constraints\ToLateForTodayValidator</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Manager/VisitManager.php.html#24">AppBundle\Manager\VisitManager</a></td><td class="text-right">1560</td></tr>
+       <tr><td><a href="Controller/VisitController.php.html#25">AppBundle\Controller\VisitController</a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="Service/PublicHolidaysService.php.html#5">AppBundle\Service\PublicHolidaysService</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Validator/Constraints/LimitedReservationAfterHourValidator.php.html#15">AppBundle\Validator\Constraints\LimitedReservationAfterHourValidator</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Validator/Constraints/OneThousandTicketsValidator.php.html#17">AppBundle\Validator\Constraints\OneThousandTicketsValidator</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnSundayValidator.php.html#9">AppBundle\Validator\Constraints\NoReservationOnSundayValidator</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnTuesdayValidator.php.html#9">AppBundle\Validator\Constraints\NoReservationOnTuesdayValidator</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Exception/InvalidVisitSessionListener.php.html#9">AppBundle\Exception\InvalidVisitSessionListener</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnPublicHolidaysValidator.php.html#11">AppBundle\Validator\Constraints\NoReservationOnPublicHolidaysValidator</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Validator/Constraints/ToLateForTodayValidator.php.html#10">AppBundle\Validator\Constraints\ToLateForTodayValidator</a></td><td class="text-right">12</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controller/VisitController.php.html#37"><abbr title="AppBundle\Controller\VisitController::indexAction">indexAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#53"><abbr title="AppBundle\Manager\VisitManager::initVisit">initVisit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/PublicHolidaysService.php.html#14"><abbr title="AppBundle\Service\PublicHolidaysService::getPublicHolidaysOfThisYear">getPublicHolidaysOfThisYear</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/EmailService.php.html#62"><abbr title="AppBundle\Service\EmailService::sendMailContact">sendMailContact</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/EmailService.php.html#38"><abbr title="AppBundle\Service\EmailService::sendMailConfirmation">sendMailConfirmation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/EmailService.php.html#27"><abbr title="AppBundle\Service\EmailService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/VisitRepository.php.html#17"><abbr title="AppBundle\Repository\VisitRepository::countNbTicketsOnThisDate">countNbTicketsOnThisDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#231"><abbr title="AppBundle\Manager\VisitManager::generateMailContact">generateMailContact</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#216"><abbr title="AppBundle\Manager\VisitManager::generateBookingCodeWithEmail">generateBookingCodeWithEmail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#196"><abbr title="AppBundle\Manager\VisitManager::computePrice">computePrice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#142"><abbr title="AppBundle\Manager\VisitManager::computeTicketPrice">computeTicketPrice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#109"><abbr title="AppBundle\Manager\VisitManager::whichVisitDay">whichVisitDay</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#94"><abbr title="AppBundle\Manager\VisitManager::generateTickets">generateTickets</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#71"><abbr title="AppBundle\Manager\VisitManager::getCurrentVisit">getCurrentVisit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#37"><abbr title="AppBundle\Manager\VisitManager::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/PublicHolidaysService.php.html#60"><abbr title="AppBundle\Service\PublicHolidaysService::checkIsHoliday">checkIsHoliday</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/VisitType.php.html#68"><abbr title="AppBundle\Form\VisitType::getBlockPrefix">getBlockPrefix</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/VisitType.php.html#57"><abbr title="AppBundle\Form\VisitType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/VisitType.php.html#21"><abbr title="AppBundle\Form\VisitType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/VisitTicketsType.php.html#33"><abbr title="AppBundle\Form\VisitTicketsType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/VisitTicketsType.php.html#21"><abbr title="AppBundle\Form\VisitTicketsType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/VisitCustomerType.php.html#35"><abbr title="AppBundle\Form\VisitCustomerType::getBlockPrefix">getBlockPrefix</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/VisitCustomerType.php.html#27"><abbr title="AppBundle\Form\VisitCustomerType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/VisitCustomerType.php.html#18"><abbr title="AppBundle\Form\VisitCustomerType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/TicketType.php.html#60"><abbr title="AppBundle\Form\TicketType::getBlockPrefix">getBlockPrefix</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/TicketType.php.html#50"><abbr title="AppBundle\Form\TicketType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/TicketType.php.html#20"><abbr title="AppBundle\Form\TicketType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/CustomerType.php.html#63"><abbr title="AppBundle\Form\CustomerType::getBlockPrefix">getBlockPrefix</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/PublicHolidaysService.php.html#49"><abbr title="AppBundle\Service\PublicHolidaysService::getPublicHolidaysOnTheseTwoYears">getPublicHolidaysOnTheseTwoYears</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/LimitedReservationAfterHour.php.html#18"><abbr title="AppBundle\Validator\Constraints\LimitedReservationAfterHour::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/CustomerType.php.html#19"><abbr title="AppBundle\Form\CustomerType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnTuesday.php.html#24"><abbr title="AppBundle\Validator\Constraints\NoReservationOnTuesday::getRequiredOptions">getRequiredOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/ToLateForToday.php.html#29"><abbr title="AppBundle\Validator\Constraints\ToLateForToday::getMessage">getMessage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/ToLateForToday.php.html#23"><abbr title="AppBundle\Validator\Constraints\ToLateForToday::getRequiredOptions">getRequiredOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/ToLateForToday.php.html#17"><abbr title="AppBundle\Validator\Constraints\ToLateForToday::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/OneThousandTicketsValidator.php.html#35"><abbr title="AppBundle\Validator\Constraints\OneThousandTicketsValidator::validate">validate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/OneThousandTicketsValidator.php.html#25"><abbr title="AppBundle\Validator\Constraints\OneThousandTicketsValidator::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/OneThousandTickets.php.html#35"><abbr title="AppBundle\Validator\Constraints\OneThousandTickets::getTargets">getTargets</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/OneThousandTickets.php.html#29"><abbr title="AppBundle\Validator\Constraints\OneThousandTickets::getMessage">getMessage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/OneThousandTickets.php.html#23"><abbr title="AppBundle\Validator\Constraints\OneThousandTickets::getRequiredOptions">getRequiredOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/OneThousandTickets.php.html#17"><abbr title="AppBundle\Validator\Constraints\OneThousandTickets::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnTuesdayValidator.php.html#28"><abbr title="AppBundle\Validator\Constraints\NoReservationOnTuesdayValidator::validate">validate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnTuesdayValidator.php.html#15"><abbr title="AppBundle\Validator\Constraints\NoReservationOnTuesdayValidator::check">check</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnTuesday.php.html#30"><abbr title="AppBundle\Validator\Constraints\NoReservationOnTuesday::getMessage">getMessage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnTuesday.php.html#18"><abbr title="AppBundle\Validator\Constraints\NoReservationOnTuesday::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/LimitedReservationAfterHour.php.html#24"><abbr title="AppBundle\Validator\Constraints\LimitedReservationAfterHour::getRequiredOptions">getRequiredOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnSundayValidator.php.html#28"><abbr title="AppBundle\Validator\Constraints\NoReservationOnSundayValidator::validate">validate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnSundayValidator.php.html#15"><abbr title="AppBundle\Validator\Constraints\NoReservationOnSundayValidator::check">check</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnSunday.php.html#31"><abbr title="AppBundle\Validator\Constraints\NoReservationOnSunday::getMessage">getMessage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnSunday.php.html#25"><abbr title="AppBundle\Validator\Constraints\NoReservationOnSunday::getRequiredOptions">getRequiredOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnSunday.php.html#19"><abbr title="AppBundle\Validator\Constraints\NoReservationOnSunday::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnPublicHolidaysValidator.php.html#25"><abbr title="AppBundle\Validator\Constraints\NoReservationOnPublicHolidaysValidator::validate">validate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnPublicHolidaysValidator.php.html#15"><abbr title="AppBundle\Validator\Constraints\NoReservationOnPublicHolidaysValidator::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnPublicHolidays.php.html#30"><abbr title="AppBundle\Validator\Constraints\NoReservationOnPublicHolidays::getMessage">getMessage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnPublicHolidays.php.html#24"><abbr title="AppBundle\Validator\Constraints\NoReservationOnPublicHolidays::getRequiredOptions">getRequiredOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnPublicHolidays.php.html#18"><abbr title="AppBundle\Validator\Constraints\NoReservationOnPublicHolidays::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/LimitedReservationAfterHourValidator.php.html#21"><abbr title="AppBundle\Validator\Constraints\LimitedReservationAfterHourValidator::validate">validate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/LimitedReservationAfterHour.php.html#40"><abbr title="AppBundle\Validator\Constraints\LimitedReservationAfterHour::getTargets">getTargets</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/LimitedReservationAfterHour.php.html#30"><abbr title="AppBundle\Validator\Constraints\LimitedReservationAfterHour::getMessage">getMessage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/CustomerType.php.html#53"><abbr title="AppBundle\Form\CustomerType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/ContactType.php.html#48"><abbr title="AppBundle\Form\ContactType::getName">getName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/VisitController.php.html#51"><abbr title="AppBundle\Controller\VisitController::orderAction">orderAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#195"><abbr title="AppBundle\Entity\Customer::getAdress">getAdress</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#148"><abbr title="AppBundle\Entity\Ticket::getFirstname">getFirstname</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#136"><abbr title="AppBundle\Entity\Ticket::setFirstname">setFirstname</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#124"><abbr title="AppBundle\Entity\Ticket::getLastname">getLastname</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#112"><abbr title="AppBundle\Entity\Ticket::setLastname">setLastname</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#100"><abbr title="AppBundle\Entity\Ticket::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#90"><abbr title="AppBundle\Entity\Ticket::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#267"><abbr title="AppBundle\Entity\Customer::getCountry">getCountry</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#255"><abbr title="AppBundle\Entity\Customer::setCountry">setCountry</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#243"><abbr title="AppBundle\Entity\Customer::getCity">getCity</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#231"><abbr title="AppBundle\Entity\Customer::setCity">setCity</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#219"><abbr title="AppBundle\Entity\Customer::getPostCode">getPostCode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#207"><abbr title="AppBundle\Entity\Customer::setPostCode">setPostCode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#183"><abbr title="AppBundle\Entity\Customer::setAdress">setAdress</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#172"><abbr title="AppBundle\Entity\Ticket::getCountry">getCountry</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#171"><abbr title="AppBundle\Entity\Customer::getEmail">getEmail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#159"><abbr title="AppBundle\Entity\Customer::setEmail">setEmail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#147"><abbr title="AppBundle\Entity\Customer::getFirstname">getFirstname</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#135"><abbr title="AppBundle\Entity\Customer::setFirstname">setFirstname</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#123"><abbr title="AppBundle\Entity\Customer::getLastname">getLastname</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#111"><abbr title="AppBundle\Entity\Customer::setLastname">setLastname</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Customer.php.html#99"><abbr title="AppBundle\Entity\Customer::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/VisitController.php.html#190"><abbr title="AppBundle\Controller\VisitController::contactAction">contactAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/VisitController.php.html#176"><abbr title="AppBundle\Controller\VisitController::confirmationAction">confirmationAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/VisitController.php.html#135"><abbr title="AppBundle\Controller\VisitController::payAction">payAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/VisitController.php.html#109"><abbr title="AppBundle\Controller\VisitController::customerAction">customerAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/VisitController.php.html#81"><abbr title="AppBundle\Controller\VisitController::identifyAction">identifyAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#160"><abbr title="AppBundle\Entity\Ticket::setCountry">setCountry</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#184"><abbr title="AppBundle\Entity\Ticket::setBirthday">setBirthday</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/ContactType.php.html#18"><abbr title="AppBundle\Form\ContactType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#214"><abbr title="AppBundle\Entity\Visit::setNbTicket">setNbTicket</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Exception/InvalidVisitSessionListener.php.html#23"><abbr title="AppBundle\Exception\InvalidVisitSessionListener::ListeningException">ListeningException</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Exception/InvalidVisitSessionListener.php.html#14"><abbr title="AppBundle\Exception\InvalidVisitSessionListener::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#334"><abbr title="AppBundle\Entity\Visit::getTickets">getTickets</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#324"><abbr title="AppBundle\Entity\Visit::removeTicket">removeTicket</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#309"><abbr title="AppBundle\Entity\Visit::addTicket">addTicket</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#297"><abbr title="AppBundle\Entity\Visit::getCustomer">getCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#286"><abbr title="AppBundle\Entity\Visit::setCustomer">setCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#274"><abbr title="AppBundle\Entity\Visit::getBookingCode">getBookingCode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#262"><abbr title="AppBundle\Entity\Visit::setBookingCode">setBookingCode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#250"><abbr title="AppBundle\Entity\Visit::getTotalAmount">getTotalAmount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#238"><abbr title="AppBundle\Entity\Visit::setTotalAmount">setTotalAmount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#226"><abbr title="AppBundle\Entity\Visit::getNbTicket">getNbTicket</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#202"><abbr title="AppBundle\Entity\Visit::getType">getType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#196"><abbr title="AppBundle\Entity\Ticket::getBirthday">getBirthday</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#190"><abbr title="AppBundle\Entity\Visit::setType">setType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#178"><abbr title="AppBundle\Entity\Visit::getVisitDate">getVisitDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#166"><abbr title="AppBundle\Entity\Visit::setVisitDate">setVisitDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#154"><abbr title="AppBundle\Entity\Visit::getInvoiceDate">getInvoiceDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#142"><abbr title="AppBundle\Entity\Visit::setInvoiceDate">setInvoiceDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#130"><abbr title="AppBundle\Entity\Visit::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Visit.php.html#116"><abbr title="AppBundle\Entity\Visit::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#268"><abbr title="AppBundle\Entity\Ticket::getVisit">getVisit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#256"><abbr title="AppBundle\Entity\Ticket::setVisit">setVisit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#244"><abbr title="AppBundle\Entity\Ticket::getPrice">getPrice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#232"><abbr title="AppBundle\Entity\Ticket::setPrice">setPrice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#220"><abbr title="AppBundle\Entity\Ticket::getDiscount">getDiscount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Ticket.php.html#208"><abbr title="AppBundle\Entity\Ticket::setDiscount">setDiscount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validator/Constraints/ToLateForTodayValidator.php.html#16"><abbr title="AppBundle\Validator\Constraints\ToLateForTodayValidator::validate">validate</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Manager/VisitManager.php.html#142"><abbr title="AppBundle\Manager\VisitManager::computeTicketPrice">computeTicketPrice</abbr></a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#109"><abbr title="AppBundle\Manager\VisitManager::whichVisitDay">whichVisitDay</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Validator/Constraints/LimitedReservationAfterHourValidator.php.html#21"><abbr title="AppBundle\Validator\Constraints\LimitedReservationAfterHourValidator::validate">validate</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Validator/Constraints/OneThousandTicketsValidator.php.html#35"><abbr title="AppBundle\Validator\Constraints\OneThousandTicketsValidator::validate">validate</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#71"><abbr title="AppBundle\Manager\VisitManager::getCurrentVisit">getCurrentVisit</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/VisitController.php.html#51"><abbr title="AppBundle\Controller\VisitController::orderAction">orderAction</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/VisitController.php.html#81"><abbr title="AppBundle\Controller\VisitController::identifyAction">identifyAction</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Validator/Constraints/ToLateForTodayValidator.php.html#16"><abbr title="AppBundle\Validator\Constraints\ToLateForTodayValidator::validate">validate</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/VisitController.php.html#190"><abbr title="AppBundle\Controller\VisitController::contactAction">contactAction</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/VisitController.php.html#109"><abbr title="AppBundle\Controller\VisitController::customerAction">customerAction</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#94"><abbr title="AppBundle\Manager\VisitManager::generateTickets">generateTickets</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Exception/InvalidVisitSessionListener.php.html#23"><abbr title="AppBundle\Exception\InvalidVisitSessionListener::ListeningException">ListeningException</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Service/PublicHolidaysService.php.html#14"><abbr title="AppBundle\Service\PublicHolidaysService::getPublicHolidaysOfThisYear">getPublicHolidaysOfThisYear</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Service/PublicHolidaysService.php.html#60"><abbr title="AppBundle\Service\PublicHolidaysService::checkIsHoliday">checkIsHoliday</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controller/VisitController.php.html#135"><abbr title="AppBundle\Controller\VisitController::payAction">payAction</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnPublicHolidaysValidator.php.html#25"><abbr title="AppBundle\Validator\Constraints\NoReservationOnPublicHolidaysValidator::validate">validate</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnSundayValidator.php.html#15"><abbr title="AppBundle\Validator\Constraints\NoReservationOnSundayValidator::check">check</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnSundayValidator.php.html#28"><abbr title="AppBundle\Validator\Constraints\NoReservationOnSundayValidator::validate">validate</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnTuesdayValidator.php.html#15"><abbr title="AppBundle\Validator\Constraints\NoReservationOnTuesdayValidator::check">check</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Validator/Constraints/NoReservationOnTuesdayValidator.php.html#28"><abbr title="AppBundle\Validator\Constraints\NoReservationOnTuesdayValidator::validate">validate</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Manager/VisitManager.php.html#196"><abbr title="AppBundle\Manager\VisitManager::computePrice">computePrice</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 6.0.7</a> using <a href="https://secure.php.net/" target="_top">PHP 7.1.6</a> with <a href="https://xdebug.org/">Xdebug 2.5.0</a> and <a href="https://phpunit.de/">PHPUnit 7.3.1</a> at Mon Aug 20 16:47:28 CEST 2018.</small>
+    </p>
+   </footer>
+  </div>
+  <script src=".js/jquery.min.js" type="text/javascript"></script>
+  <script src=".js/bootstrap.min.js" type="text/javascript"></script>
+  <script src=".js/holder.min.js" type="text/javascript"></script>
+  <script src=".js/d3.min.js" type="text/javascript"></script>
+  <script src=".js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([27,0,0,0,0,0,0,0,0,0,0,4], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([121,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[100,0,"<a href=\"AppBundle.php.html#7\">AppBundle\\AppBundle<\/a>"],[0,16,"<a href=\"Controller\/VisitController.php.html#25\">AppBundle\\Controller\\VisitController<\/a>"],[0,15,"<a href=\"Entity\/Customer.php.html#14\">AppBundle\\Entity\\Customer<\/a>"],[0,16,"<a href=\"Entity\/Ticket.php.html#14\">AppBundle\\Entity\\Ticket<\/a>"],[0,19,"<a href=\"Entity\/Visit.php.html#22\">AppBundle\\Entity\\Visit<\/a>"],[100,0,"<a href=\"Exception\/InvalidVisitSessionException.php.html#11\">AppBundle\\Exception\\InvalidVisitSessionException<\/a>"],[0,3,"<a href=\"Exception\/InvalidVisitSessionListener.php.html#9\">AppBundle\\Exception\\InvalidVisitSessionListener<\/a>"],[0,2,"<a href=\"Form\/ContactType.php.html#16\">AppBundle\\Form\\ContactType<\/a>"],[0,3,"<a href=\"Form\/CustomerType.php.html#14\">AppBundle\\Form\\CustomerType<\/a>"],[0,3,"<a href=\"Form\/TicketType.php.html#15\">AppBundle\\Form\\TicketType<\/a>"],[0,3,"<a href=\"Form\/VisitCustomerType.php.html#12\">AppBundle\\Form\\VisitCustomerType<\/a>"],[0,2,"<a href=\"Form\/VisitTicketsType.php.html#16\">AppBundle\\Form\\VisitTicketsType<\/a>"],[0,3,"<a href=\"Form\/VisitType.php.html#16\">AppBundle\\Form\\VisitType<\/a>"],[0,39,"<a href=\"Manager\/VisitManager.php.html#24\">AppBundle\\Manager\\VisitManager<\/a>"],[100,0,"<a href=\"Repository\/CustomerRepository.php.html#11\">AppBundle\\Repository\\CustomerRepository<\/a>"],[100,0,"<a href=\"Repository\/TicketRepository.php.html#15\">AppBundle\\Repository\\TicketRepository<\/a>"],[0,1,"<a href=\"Repository\/VisitRepository.php.html#10\">AppBundle\\Repository\\VisitRepository<\/a>"],[0,3,"<a href=\"Service\/EmailService.php.html#13\">AppBundle\\Service\\EmailService<\/a>"],[0,5,"<a href=\"Service\/PublicHolidaysService.php.html#5\">AppBundle\\Service\\PublicHolidaysService<\/a>"],[0,4,"<a href=\"Validator\/Constraints\/LimitedReservationAfterHour.php.html#14\">AppBundle\\Validator\\Constraints\\LimitedReservationAfterHour<\/a>"],[0,5,"<a href=\"Validator\/Constraints\/LimitedReservationAfterHourValidator.php.html#15\">AppBundle\\Validator\\Constraints\\LimitedReservationAfterHourValidator<\/a>"],[0,3,"<a href=\"Validator\/Constraints\/NoReservationOnPublicHolidays.php.html#14\">AppBundle\\Validator\\Constraints\\NoReservationOnPublicHolidays<\/a>"],[0,3,"<a href=\"Validator\/Constraints\/NoReservationOnPublicHolidaysValidator.php.html#11\">AppBundle\\Validator\\Constraints\\NoReservationOnPublicHolidaysValidator<\/a>"],[0,3,"<a href=\"Validator\/Constraints\/NoReservationOnSunday.php.html#15\">AppBundle\\Validator\\Constraints\\NoReservationOnSunday<\/a>"],[0,4,"<a href=\"Validator\/Constraints\/NoReservationOnSundayValidator.php.html#9\">AppBundle\\Validator\\Constraints\\NoReservationOnSundayValidator<\/a>"],[0,3,"<a href=\"Validator\/Constraints\/NoReservationOnTuesday.php.html#14\">AppBundle\\Validator\\Constraints\\NoReservationOnTuesday<\/a>"],[0,4,"<a href=\"Validator\/Constraints\/NoReservationOnTuesdayValidator.php.html#9\">AppBundle\\Validator\\Constraints\\NoReservationOnTuesdayValidator<\/a>"],[0,4,"<a href=\"Validator\/Constraints\/OneThousandTickets.php.html#13\">AppBundle\\Validator\\Constraints\\OneThousandTickets<\/a>"],[0,5,"<a href=\"Validator\/Constraints\/OneThousandTicketsValidator.php.html#17\">AppBundle\\Validator\\Constraints\\OneThousandTicketsValidator<\/a>"],[0,3,"<a href=\"Validator\/Constraints\/ToLateForToday.php.html#13\">AppBundle\\Validator\\Constraints\\ToLateForToday<\/a>"],[0,3,"<a href=\"Validator\/Constraints\/ToLateForTodayValidator.php.html#10\">AppBundle\\Validator\\Constraints\\ToLateForTodayValidator<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"Controller\/VisitController.php.html#37\">AppBundle\\Controller\\VisitController::indexAction<\/a>"],[0,3,"<a href=\"Controller\/VisitController.php.html#51\">AppBundle\\Controller\\VisitController::orderAction<\/a>"],[0,3,"<a href=\"Controller\/VisitController.php.html#81\">AppBundle\\Controller\\VisitController::identifyAction<\/a>"],[0,3,"<a href=\"Controller\/VisitController.php.html#109\">AppBundle\\Controller\\VisitController::customerAction<\/a>"],[0,2,"<a href=\"Controller\/VisitController.php.html#135\">AppBundle\\Controller\\VisitController::payAction<\/a>"],[0,1,"<a href=\"Controller\/VisitController.php.html#176\">AppBundle\\Controller\\VisitController::confirmationAction<\/a>"],[0,3,"<a href=\"Controller\/VisitController.php.html#190\">AppBundle\\Controller\\VisitController::contactAction<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#99\">AppBundle\\Entity\\Customer::getId<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#111\">AppBundle\\Entity\\Customer::setLastname<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#123\">AppBundle\\Entity\\Customer::getLastname<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#135\">AppBundle\\Entity\\Customer::setFirstname<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#147\">AppBundle\\Entity\\Customer::getFirstname<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#159\">AppBundle\\Entity\\Customer::setEmail<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#171\">AppBundle\\Entity\\Customer::getEmail<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#183\">AppBundle\\Entity\\Customer::setAdress<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#195\">AppBundle\\Entity\\Customer::getAdress<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#207\">AppBundle\\Entity\\Customer::setPostCode<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#219\">AppBundle\\Entity\\Customer::getPostCode<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#231\">AppBundle\\Entity\\Customer::setCity<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#243\">AppBundle\\Entity\\Customer::getCity<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#255\">AppBundle\\Entity\\Customer::setCountry<\/a>"],[0,1,"<a href=\"Entity\/Customer.php.html#267\">AppBundle\\Entity\\Customer::getCountry<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#90\">AppBundle\\Entity\\Ticket::__construct<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#100\">AppBundle\\Entity\\Ticket::getId<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#112\">AppBundle\\Entity\\Ticket::setLastname<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#124\">AppBundle\\Entity\\Ticket::getLastname<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#136\">AppBundle\\Entity\\Ticket::setFirstname<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#148\">AppBundle\\Entity\\Ticket::getFirstname<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#160\">AppBundle\\Entity\\Ticket::setCountry<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#172\">AppBundle\\Entity\\Ticket::getCountry<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#184\">AppBundle\\Entity\\Ticket::setBirthday<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#196\">AppBundle\\Entity\\Ticket::getBirthday<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#208\">AppBundle\\Entity\\Ticket::setDiscount<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#220\">AppBundle\\Entity\\Ticket::getDiscount<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#232\">AppBundle\\Entity\\Ticket::setPrice<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#244\">AppBundle\\Entity\\Ticket::getPrice<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#256\">AppBundle\\Entity\\Ticket::setVisit<\/a>"],[0,1,"<a href=\"Entity\/Ticket.php.html#268\">AppBundle\\Entity\\Ticket::getVisit<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#116\">AppBundle\\Entity\\Visit::__construct<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#130\">AppBundle\\Entity\\Visit::getId<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#142\">AppBundle\\Entity\\Visit::setInvoiceDate<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#154\">AppBundle\\Entity\\Visit::getInvoiceDate<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#166\">AppBundle\\Entity\\Visit::setVisitDate<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#178\">AppBundle\\Entity\\Visit::getVisitDate<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#190\">AppBundle\\Entity\\Visit::setType<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#202\">AppBundle\\Entity\\Visit::getType<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#214\">AppBundle\\Entity\\Visit::setNbTicket<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#226\">AppBundle\\Entity\\Visit::getNbTicket<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#238\">AppBundle\\Entity\\Visit::setTotalAmount<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#250\">AppBundle\\Entity\\Visit::getTotalAmount<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#262\">AppBundle\\Entity\\Visit::setBookingCode<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#274\">AppBundle\\Entity\\Visit::getBookingCode<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#286\">AppBundle\\Entity\\Visit::setCustomer<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#297\">AppBundle\\Entity\\Visit::getCustomer<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#309\">AppBundle\\Entity\\Visit::addTicket<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#324\">AppBundle\\Entity\\Visit::removeTicket<\/a>"],[0,1,"<a href=\"Entity\/Visit.php.html#334\">AppBundle\\Entity\\Visit::getTickets<\/a>"],[0,1,"<a href=\"Exception\/InvalidVisitSessionListener.php.html#14\">AppBundle\\Exception\\InvalidVisitSessionListener::__construct<\/a>"],[0,2,"<a href=\"Exception\/InvalidVisitSessionListener.php.html#23\">AppBundle\\Exception\\InvalidVisitSessionListener::ListeningException<\/a>"],[0,1,"<a href=\"Form\/ContactType.php.html#18\">AppBundle\\Form\\ContactType::buildForm<\/a>"],[0,1,"<a href=\"Form\/ContactType.php.html#48\">AppBundle\\Form\\ContactType::getName<\/a>"],[0,1,"<a href=\"Form\/CustomerType.php.html#19\">AppBundle\\Form\\CustomerType::buildForm<\/a>"],[0,1,"<a href=\"Form\/CustomerType.php.html#53\">AppBundle\\Form\\CustomerType::configureOptions<\/a>"],[0,1,"<a href=\"Form\/CustomerType.php.html#63\">AppBundle\\Form\\CustomerType::getBlockPrefix<\/a>"],[0,1,"<a href=\"Form\/TicketType.php.html#20\">AppBundle\\Form\\TicketType::buildForm<\/a>"],[0,1,"<a href=\"Form\/TicketType.php.html#50\">AppBundle\\Form\\TicketType::configureOptions<\/a>"],[0,1,"<a href=\"Form\/TicketType.php.html#60\">AppBundle\\Form\\TicketType::getBlockPrefix<\/a>"],[0,1,"<a href=\"Form\/VisitCustomerType.php.html#18\">AppBundle\\Form\\VisitCustomerType::buildForm<\/a>"],[0,1,"<a href=\"Form\/VisitCustomerType.php.html#27\">AppBundle\\Form\\VisitCustomerType::configureOptions<\/a>"],[0,1,"<a href=\"Form\/VisitCustomerType.php.html#35\">AppBundle\\Form\\VisitCustomerType::getBlockPrefix<\/a>"],[0,1,"<a href=\"Form\/VisitTicketsType.php.html#21\">AppBundle\\Form\\VisitTicketsType::buildForm<\/a>"],[0,1,"<a href=\"Form\/VisitTicketsType.php.html#33\">AppBundle\\Form\\VisitTicketsType::configureOptions<\/a>"],[0,1,"<a href=\"Form\/VisitType.php.html#21\">AppBundle\\Form\\VisitType::buildForm<\/a>"],[0,1,"<a href=\"Form\/VisitType.php.html#57\">AppBundle\\Form\\VisitType::configureOptions<\/a>"],[0,1,"<a href=\"Form\/VisitType.php.html#68\">AppBundle\\Form\\VisitType::getBlockPrefix<\/a>"],[0,1,"<a href=\"Manager\/VisitManager.php.html#37\">AppBundle\\Manager\\VisitManager::__construct<\/a>"],[0,1,"<a href=\"Manager\/VisitManager.php.html#53\">AppBundle\\Manager\\VisitManager::initVisit<\/a>"],[0,4,"<a href=\"Manager\/VisitManager.php.html#71\">AppBundle\\Manager\\VisitManager::getCurrentVisit<\/a>"],[0,2,"<a href=\"Manager\/VisitManager.php.html#94\">AppBundle\\Manager\\VisitManager::generateTickets<\/a>"],[0,8,"<a href=\"Manager\/VisitManager.php.html#109\">AppBundle\\Manager\\VisitManager::whichVisitDay<\/a>"],[0,19,"<a href=\"Manager\/VisitManager.php.html#142\">AppBundle\\Manager\\VisitManager::computeTicketPrice<\/a>"],[0,2,"<a href=\"Manager\/VisitManager.php.html#196\">AppBundle\\Manager\\VisitManager::computePrice<\/a>"],[0,1,"<a href=\"Manager\/VisitManager.php.html#216\">AppBundle\\Manager\\VisitManager::generateBookingCodeWithEmail<\/a>"],[0,1,"<a href=\"Manager\/VisitManager.php.html#231\">AppBundle\\Manager\\VisitManager::generateMailContact<\/a>"],[0,1,"<a href=\"Repository\/VisitRepository.php.html#17\">AppBundle\\Repository\\VisitRepository::countNbTicketsOnThisDate<\/a>"],[0,1,"<a href=\"Service\/EmailService.php.html#27\">AppBundle\\Service\\EmailService::__construct<\/a>"],[0,1,"<a href=\"Service\/EmailService.php.html#38\">AppBundle\\Service\\EmailService::sendMailConfirmation<\/a>"],[0,1,"<a href=\"Service\/EmailService.php.html#62\">AppBundle\\Service\\EmailService::sendMailContact<\/a>"],[0,2,"<a href=\"Service\/PublicHolidaysService.php.html#14\">AppBundle\\Service\\PublicHolidaysService::getPublicHolidaysOfThisYear<\/a>"],[0,1,"<a href=\"Service\/PublicHolidaysService.php.html#49\">AppBundle\\Service\\PublicHolidaysService::getPublicHolidaysOnTheseTwoYears<\/a>"],[0,2,"<a href=\"Service\/PublicHolidaysService.php.html#60\">AppBundle\\Service\\PublicHolidaysService::checkIsHoliday<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/LimitedReservationAfterHour.php.html#18\">AppBundle\\Validator\\Constraints\\LimitedReservationAfterHour::__construct<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/LimitedReservationAfterHour.php.html#24\">AppBundle\\Validator\\Constraints\\LimitedReservationAfterHour::getRequiredOptions<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/LimitedReservationAfterHour.php.html#30\">AppBundle\\Validator\\Constraints\\LimitedReservationAfterHour::getMessage<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/LimitedReservationAfterHour.php.html#40\">AppBundle\\Validator\\Constraints\\LimitedReservationAfterHour::getTargets<\/a>"],[0,5,"<a href=\"Validator\/Constraints\/LimitedReservationAfterHourValidator.php.html#21\">AppBundle\\Validator\\Constraints\\LimitedReservationAfterHourValidator::validate<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/NoReservationOnPublicHolidays.php.html#18\">AppBundle\\Validator\\Constraints\\NoReservationOnPublicHolidays::__construct<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/NoReservationOnPublicHolidays.php.html#24\">AppBundle\\Validator\\Constraints\\NoReservationOnPublicHolidays::getRequiredOptions<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/NoReservationOnPublicHolidays.php.html#30\">AppBundle\\Validator\\Constraints\\NoReservationOnPublicHolidays::getMessage<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/NoReservationOnPublicHolidaysValidator.php.html#15\">AppBundle\\Validator\\Constraints\\NoReservationOnPublicHolidaysValidator::__construct<\/a>"],[0,2,"<a href=\"Validator\/Constraints\/NoReservationOnPublicHolidaysValidator.php.html#25\">AppBundle\\Validator\\Constraints\\NoReservationOnPublicHolidaysValidator::validate<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/NoReservationOnSunday.php.html#19\">AppBundle\\Validator\\Constraints\\NoReservationOnSunday::__construct<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/NoReservationOnSunday.php.html#25\">AppBundle\\Validator\\Constraints\\NoReservationOnSunday::getRequiredOptions<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/NoReservationOnSunday.php.html#31\">AppBundle\\Validator\\Constraints\\NoReservationOnSunday::getMessage<\/a>"],[0,2,"<a href=\"Validator\/Constraints\/NoReservationOnSundayValidator.php.html#15\">AppBundle\\Validator\\Constraints\\NoReservationOnSundayValidator::check<\/a>"],[0,2,"<a href=\"Validator\/Constraints\/NoReservationOnSundayValidator.php.html#28\">AppBundle\\Validator\\Constraints\\NoReservationOnSundayValidator::validate<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/NoReservationOnTuesday.php.html#18\">AppBundle\\Validator\\Constraints\\NoReservationOnTuesday::__construct<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/NoReservationOnTuesday.php.html#24\">AppBundle\\Validator\\Constraints\\NoReservationOnTuesday::getRequiredOptions<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/NoReservationOnTuesday.php.html#30\">AppBundle\\Validator\\Constraints\\NoReservationOnTuesday::getMessage<\/a>"],[0,2,"<a href=\"Validator\/Constraints\/NoReservationOnTuesdayValidator.php.html#15\">AppBundle\\Validator\\Constraints\\NoReservationOnTuesdayValidator::check<\/a>"],[0,2,"<a href=\"Validator\/Constraints\/NoReservationOnTuesdayValidator.php.html#28\">AppBundle\\Validator\\Constraints\\NoReservationOnTuesdayValidator::validate<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/OneThousandTickets.php.html#17\">AppBundle\\Validator\\Constraints\\OneThousandTickets::__construct<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/OneThousandTickets.php.html#23\">AppBundle\\Validator\\Constraints\\OneThousandTickets::getRequiredOptions<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/OneThousandTickets.php.html#29\">AppBundle\\Validator\\Constraints\\OneThousandTickets::getMessage<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/OneThousandTickets.php.html#35\">AppBundle\\Validator\\Constraints\\OneThousandTickets::getTargets<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/OneThousandTicketsValidator.php.html#25\">AppBundle\\Validator\\Constraints\\OneThousandTicketsValidator::__construct<\/a>"],[0,4,"<a href=\"Validator\/Constraints\/OneThousandTicketsValidator.php.html#35\">AppBundle\\Validator\\Constraints\\OneThousandTicketsValidator::validate<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/ToLateForToday.php.html#17\">AppBundle\\Validator\\Constraints\\ToLateForToday::__construct<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/ToLateForToday.php.html#23\">AppBundle\\Validator\\Constraints\\ToLateForToday::getRequiredOptions<\/a>"],[0,1,"<a href=\"Validator\/Constraints\/ToLateForToday.php.html#29\">AppBundle\\Validator\\Constraints\\ToLateForToday::getMessage<\/a>"],[0,3,"<a href=\"Validator\/Constraints\/ToLateForTodayValidator.php.html#16\">AppBundle\\Validator\\Constraints\\ToLateForTodayValidator::validate<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

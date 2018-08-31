@@ -14,6 +14,7 @@ use AppBundle\Form\VisitTicketsType;
 use AppBundle\Form\VisitType;
 use AppBundle\Manager\VisitManager;
 use AppBundle\Service\EmailService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +32,7 @@ class VisitController extends Controller
     /**
      * Page 1 - Page d'accueil
      * @Route("/", name="homepage")
+     * @Method({"GET"})
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -57,7 +59,6 @@ class VisitController extends Controller
         $form = $this->createForm(VisitType::class, $visit);
 
         $form->handleRequest($request);
-        dump($visit);
 
         if($form->isSubmitted() && $form->isValid()) {
                 $visitManager->generateTickets($visit);

@@ -62,6 +62,7 @@ class Visit
      * @LouvreAssert\NoReservationOnPublicHolidays(publicHolidays="",groups={"order_registration"})
      * @Assert\Range(min="today", minMessage="constraint.visit.min.visitdate",
      *     max="+1 year", maxMessage="constraint.visit.max.visitdate", groups={"order_registration"})
+     * @Assert\NotNull()
      */
     private $visitDate;
 
@@ -187,7 +188,7 @@ class Visit
     /**
      * Set type.
      *
-     * @param string $type
+     * @param int $type
      *
      * @return Visit
      */
@@ -201,7 +202,7 @@ class Visit
     /**
      * Get type.
      *
-     * @return string
+     * @return int
      */
     public function getType()
     {

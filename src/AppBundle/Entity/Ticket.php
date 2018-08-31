@@ -28,6 +28,24 @@ class Ticket
     const MAX_AGE_CHILD = 12;
     const MIN_AGE_SENIOR = 60;
 
+    /*
+     * Exemples
+     * Comment mieux nommer les constantes
+     *
+    const AGE_CHILD = 4;
+    const AGE_ADULT = 12;
+    const AGE_SENIOR = 60;
+
+    const PRICE_ADULT = 16;
+    const PRICE_DISCOUNT = 10;
+    const PRICE_SENIOR = 12;
+    const PRICE_CHILD = 8;
+    const PRICE_FREE = 0;
+
+    const PRICE_HALF_DAY_COEFF = 0.5;
+    */
+
+
     /**
      * @var int
      *
