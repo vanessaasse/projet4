@@ -69,6 +69,25 @@
                             </ul>
                             <br/>
 
+                            <div class="title-recap"><button type="button" class="btn btn-success text-white">{{ 'label.contact.customer' | trans }}</button></div>
+                            <ul>
+                                <li><strong>{{ 'label.lastname.customer' | trans }} :</strong> {{ visit.customer.lastname }}</li>
+                                <li><strong>{{ 'label.firstname.customer' | trans }} :</strong> {{ visit.customer.firstname }}</li>
+                                <li><strong>{{ 'label.email.customer' | trans }} :</strong> {{ visit.customer.email }}</li>
+                            </ul>
+                            <br/>
+
+                            </div>
+
+                            <div class="col-lg-5">
+
+                            <div class="title-recap"><button type="button" class="btn btn-success text-white">{{ 'invoice.informations' | trans }}</button></div>
+                            <ul>
+                                <li><strong>{{ 'label.adress.customer' | trans }} :</strong> {{ visit.customer.adress }}</li>
+                                <li><strong>{{ 'label.postcode.customer' | trans }} :</strong> {{ visit.customer.postCode }}</li>
+                                <li><strong>{{ 'label.city.customer' | trans }} :</strong> {{ visit.customer.city }} - {{ visit.customer.country }}</li>
+                            </ul>
+
                                 <form action="" method="POST">
                                     <script
                                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -85,25 +104,6 @@
                                     </script>
                                 </form>
 
-                            </div>
-
-                            <div class="col-lg-5">
-
-
-                            <div class="title-recap"><button type="button" class="btn btn-success text-white">{{ 'label.contact.customer' | trans }}</button></div>
-                            <ul>
-                                <li><strong>{{ 'label.lastname.customer' | trans }} :</strong> {{ visit.customer.lastname }}</li>
-                                <li><strong>{{ 'label.firstname.customer' | trans }} :</strong> {{ visit.customer.firstname }}</li>
-                                <li><strong>{{ 'label.email.customer' | trans }} :</strong> {{ visit.customer.email }}</li>
-                            </ul>
-                            <br/>
-
-                            <div class="title-recap"><button type="button" class="btn btn-success text-white">{{ 'invoice.informations' | trans }}</button></div>
-                            <ul>
-                                <li><strong>{{ 'label.adress.customer' | trans }} :</strong> {{ visit.customer.adress }}</li>
-                                <li><strong>{{ 'label.postcode.customer' | trans }} :</strong> {{ visit.customer.postCode }}</li>
-                                <li><strong>{{ 'label.city.customer' | trans }} :</strong> {{ visit.customer.city }} - {{ visit.customer.country }}</li>
-                            </ul>
                             </div>
 
                         </div>
