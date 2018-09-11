@@ -90,6 +90,7 @@ class Ticket
     /**
      * @var \DateTime
      * @ORM\Column(name="birthday", type="date")
+     * @Assert\LessThan("today", groups={"identification_registration"})
      * @Assert\Date(groups={"identification_registration"})
      *
      */
