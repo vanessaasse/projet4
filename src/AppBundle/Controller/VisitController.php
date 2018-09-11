@@ -14,6 +14,7 @@ use AppBundle\Form\VisitTicketsType;
 use AppBundle\Form\VisitType;
 use AppBundle\Manager\VisitManager;
 use AppBundle\Service\EmailService;
+use PHPUnit\Runner\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -146,22 +147,29 @@ class VisitController extends Controller
 
             // paiement
             \Stripe\Stripe::setApiKey($secretkey);
-            \Stripe\Charge::create(array(
-                "amount" => $visitManager->computePrice($visit) * 100,
-                "currency" => "eur",
-                "source" => $token,
-                "description" => "Réservation sur la billetterie du Musée du Louvre"));
+            try{
+                \Stripe\Charge::create(array(
+                    "amount" => $visitManager->computePrice($visit) * 100,
+                    "currency" => "eur",
+                    "source" => $token,
+                    "description" => "Réservation sur la billetterie du Musée du Louvre"));
+                // Création du booking code
+                $visitManager->generateBookingCodeWithEmail($visit);
 
-            // Création du booking code
-            $visitManager->generateBookingCodeWithEmail($visit);
+                // enregistrement dans la base
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($visit);
+                $em->flush();
+                $this->addFlash('notice', 'flash.payment.success');
 
-            // enregistrement dans la base
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($visit);
-            $em->flush();
+                return $this->redirect($this->generateUrl('app_visit_confirmation'));
 
-            $this->addFlash('notice', 'flash.payment.success');
-            return $this->redirect($this->generateUrl('app_visit_confirmation'));
+            }catch(\Exception $e){
+                $this->addFlash('danger', 'flash.payment.error');
+            }
+
+
+
         }
 
         return $this->render('Visit/pay.html.twig', array('visit' => $visit));
