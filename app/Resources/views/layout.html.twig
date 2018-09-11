@@ -72,6 +72,19 @@
     </div>
 
 
+        {% for message in app.flashes('notice') %}
+            <div class="alert alert-success">
+                {{ message | trans}}
+            </div>
+        {% endfor %}
+
+
+        {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger">
+                {{ message | trans}}
+            </div>
+        {% endfor %}
+
         {% block body %}
 
 
