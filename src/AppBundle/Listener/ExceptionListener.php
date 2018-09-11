@@ -43,7 +43,7 @@ class ExceptionListener
 
             $url = $this->router->generate('homepage');
             $message = $this->translator->trans('exception.message_error');
-            $this->session->getFlashBag()->add('error', $message);
+            $this->session->getFlashBag()->add('danger', $message);
             $event->setResponse(new RedirectResponse($url));
         }
 
