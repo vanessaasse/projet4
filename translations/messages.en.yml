@@ -81,6 +81,7 @@ total.invoice: 'Total amount of the order'
 pay.order: "I pay the order"
 louvre.museum: "Louvre Museum"
 ticketing: "Ticketing"
+flash.payment.error: "An error has occured. Please contact our webmaster."
 
 
 #confirmation.html.twig

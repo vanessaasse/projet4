@@ -81,6 +81,7 @@ total.invoice: 'Total de la commande'
 pay.order: "Je paie la commande"
 louvre.museum: "Musée du Louvre"
 ticketing: "Billeterie"
+flash.payment.error: "Une erreur est survenue lors du paiement en ligne. Veuillez contacter notre administrateur."
 
 
 #confirmation.html.twig
@@ -158,3 +159,5 @@ website.unavailable: "Le site est actuellement indisponible. Veuillez vous y con
 
 #exceptionListener
 exception.message_error: "Une erreur s'est produite. Veuillez saisir à nouveau votre commande."
+
+
